@@ -1,0 +1,12 @@
+<h2>New performance for <%= @metric.name  %></h2>
+
+<%= form_for [current_user,@metric, @performance] do |f|  %>
+  <%= f.label :count %>
+  <%= f.text_field :count %>
+
+  <%= f.label :date %>
+  <%= f.date_field :date, :default => Date.today%>
+
+  <%= f.submit "Enter" %>
+
+<% end %>

@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171117183528) do
+ActiveRecord::Schema.define(version: 20171117190412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "metrics", force: :cascade do |t|
+    t.string "name"
+    t.string "unit"
+    t.integer "target"
+    t.boolean "good"
+    t.string "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_metrics_on_user_id"
+  end
+
+  create_table "performances", force: :cascade do |t|
+    t.date "date"
+    t.integer "count"
+    t.boolean "entered"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "metric_id"
+    t.index ["metric_id"], name: "index_performances_on_metric_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -32,4 +54,6 @@ ActiveRecord::Schema.define(version: 20171117183528) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "metrics", "users"
+  add_foreign_key "performances", "metrics"
 end

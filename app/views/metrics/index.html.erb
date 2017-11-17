@@ -1,0 +1,7 @@
+<h2>Metrics:</h2>
+<% for metric in @metrics %>
+  <p><%= link_to metric.name, user_metric_path(current_user, metric) %></p>
+<% end %>
+
+
+<p><%= link_to "New Metric", new_user_metric_path(current_user) %></p>

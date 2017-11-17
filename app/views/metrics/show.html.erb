@@ -1,0 +1,15 @@
+<h2><%= @metric.name %></h2>
+<h2><%= @metric.unit %></h2>
+<h2><%= @metric.target %></h2>
+<h2><%= @metric.good %></h2>
+<h2><%= @metric.duration %></h2>
+
+<h2>Performances:</p>
+<% for performance in @metric.performances %>
+  <p><%= performance.date %></p>
+  <p><%= performance.count %></p>
+  <p><%= performance.entered %></p>
+<% end %>
+<p><%= link_to "Edit Metric", edit_user_metric_path(current_user, @metric) %></p>
+<p><%= link_to "Add Performance", new_user_metric_performance_path(current_user, @metric) %></p>
+<p><%= link_to "All Metric", user_metrics_path(current_user) %></p>

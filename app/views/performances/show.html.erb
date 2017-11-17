@@ -1,0 +1,7 @@
+<h2><%= @performance.count %></h2>
+<h2><%= @performance.date %></h2>
+<h2><%= @performance.entered %></h2>
+<h2><%= @performance.metric.name %></h2>
+
+<p><%= link_to "Edit Performance", edit_user_metric_performance_path(current_user, @performance.metric, @performance) %></p>
+<p><%= link_to "Metric", user_metric_path(current_user, @metric) %></p>
