@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+td,
+th {
+  border: 1px solid black;
+  text-align: center;
+}
+
+.hit {
+  background: green;
+}
+
+.missed {
+  background: red;
+}

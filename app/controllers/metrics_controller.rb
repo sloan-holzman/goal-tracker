@@ -5,6 +5,31 @@ class MetricsController < ApplicationController
 
   def index
     @metrics = current_user.metrics
+    # problem!  performances includes them all...need to only include by metric
+    # performances = []
+    start = Date.today
+    last = Date.parse('2001-01-01')
+    for metric in @metrics
+      for performance in metric.performances
+        # performances.push(performance)
+        if performance.date < start
+          start = performance.date
+        end
+        if performance.date > last
+          last = performance.date
+        end
+      end
+    end
+    # @performances = performances.sort_by { |performance| performance[:date] }
+    @start = start.beginning_of_week(:sunday)
+    @last = [last.end_of_week(:saturday),Date.today].min
+    dates = []
+    day = @start
+    while day < @last
+      dates.push(day)
+      day +=7
+    end
+    @dates = dates
   end
 
   def new
