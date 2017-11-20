@@ -8,17 +8,36 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <heading>
-      <% if !current_user %>
-        <%= link_to "Sign up", new_user_registration_path %>
-        <%= link_to "Sign in", new_user_session_path %>
-      <% else %>
-        <%= current_user.email %>
-        <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-      <% end %>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    </heading>
-    <%= yield %>
+    <nav>
+      <div class="container">
+        <div class="logo">
+          <%= link_to root_path do %>
+            <%= image_tag 'Logo.png' %>
+          <% end %>
+        </div>
+        <div class="links">
+          <a class="nav-link" href="#">PAST PERFORMANCE</a>
+          <a class="nav-link" href="#">ENTER DAILY PERFORMANCE</a>
+          <a class="nav-link" href="#">FIND PARTNERS</a>
+          <div class="dropdown">
+          <button onclick="myFunction()" class="dropbtn"><%= current_user.email %></button>
+            <div id="myDropdown" class="dropdown-content">
+              <a href="#home">PROFILE</a>
+              <% if !current_user %>
+                <%= link_to "SIGN UP", new_user_registration_path %>
+                <%= link_to "SIGN IN", new_user_session_path %>
+              <% else %>
+                <%= link_to "LOG OUT", destroy_user_session_path, :method => :delete %>
+              <% end %>
+            </div>
+          </div>
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+      </div>
+      </div>
+    </nav>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>

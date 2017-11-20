@@ -13,7 +13,10 @@
  *= require_tree .
  *= require_self
  */
-td,
+<link
+  href="https://fonts.googleapis.com/css?family=Nunito+Sans"
+  rel="stylesheet"
+  > td,
 th {
   border: 1px solid black;
   text-align: center;
@@ -25,4 +28,101 @@ th {
 
 .missed {
   background: red;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+nav {
+  background-color: #f3f3f4;
+  flex-grow: 5;
+  height: 120px;
+  font-family: "Nunito Sans", sans-serif !important;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+main {
+  flex-grow: 5;
+  margin: 0 15%;
+}
+
+.container {
+  margin: 0 15% 0 15%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 5;
+}
+
+.logo {
+  flex-grow: 1;
+}
+
+a:hover {
+  color: #4caf50;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  margin: 0 2% 0 2%;
+}
+
+/*below here is the dropdown from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown*/
+.dropbtn {
+  background-color: #4caf50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: #3e8e41;
+}
+
+.dropdown {
+  /*position: relative;*/
+  display: inline-block;
+  margin: 0 2% 0 2%;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {
+  background-color: #f1f1f1;
+}
+
+.show {
+  display: block;
 }
