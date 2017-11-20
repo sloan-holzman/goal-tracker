@@ -39,7 +39,7 @@ class PerformancesController < ApplicationController
 
   # def create_all
   #   for metric in Metric.all
-  #     metric.performances.create!(date: Date.today, count: 0, entered: false)
+  #     metric.performances.create!(date: Date.today, count: 0)
   #   end
   # end
 

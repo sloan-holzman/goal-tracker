@@ -1,4 +1,4 @@
 class Performance < ApplicationRecord
   belongs_to :metric
-  validates :date, :count, :entered, {presence: true}
+  validates :date, :count, {presence: true}
 end

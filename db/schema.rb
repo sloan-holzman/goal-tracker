@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20171117190412) do
   create_table "performances", force: :cascade do |t|
     t.date "date"
     t.integer "count"
-    t.boolean "entered"
+    t.boolean "entered", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "metric_id"
