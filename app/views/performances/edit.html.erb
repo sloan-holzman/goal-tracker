@@ -2,7 +2,7 @@
 
 <%= form_for [current_user,@performance.metric, @performance] do |f|  %>
   <%= f.label :count %>
-  <%= f.text_field :count %>
+  <%= f.number_field :count %>
 
   <%= f.label :date %>
   <%= f.date_field :date, :default => Date.today%>

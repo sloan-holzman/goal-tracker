@@ -50,6 +50,9 @@ nav {
 main {
   flex-grow: 5;
   margin: 0 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .container {
@@ -125,4 +128,8 @@ a:hover {
 
 .show {
   display: block;
+}
+
+table {
+  text-align: center;
 }

@@ -1,0 +1,22 @@
+<%= form_for :performance, :url => update_all_path, :html => { :method => :put } do %>
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Count</th>
+      <th>Entered</th>
+    </tr>
+    <% @performances.each do |performance| %>
+      <%= fields_for "performance[]", performance do |performance_fields| %>
+    <tr>
+      <td><%= performance_fields.date_field :date %></td>
+      <td><%= performance_fields.number_field :count %></td>
+      <td><%= performance_fields.text_field :entered %></td>
+    </tr>
+      <% end %>
+    <% end %>
+  </table>
+
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
+<% end %>

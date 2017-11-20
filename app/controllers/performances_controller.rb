@@ -1,7 +1,9 @@
 class PerformancesController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   # , :except => [:show, :index]
   # load_and_authorize_resource
+
+  attr_accessor :date, :count, :entered
 
   def show
     @metric = current_user.metrics.find(params[:metric_id])
@@ -43,7 +45,33 @@ class PerformancesController < ApplicationController
   #   end
   # end
 
+# learned edit_all and update_all from http://anthonylewis.com/2011/04/15/editing-multiple-records-in-rails/
+
+  def edit_all
+    performances = []
+    for metric in current_user.metrics
+      for performance in metric.performances
+        performances.push(performance)
+      end
+    end
+    @performances = performances
+  end
+
+# overrode authentication error by checking stackoverflow here: https://stackoverflow.com/questions/20156664/saving-multiple-records-with-params-require-in-ruby
+
+  def update_all
+    params['performance'].keys.each do |id|
+      @performance = Performance.find(id.to_i)
+      @performance.update_attributes!(performance_params(id))
+    end
+    redirect_to(root_url)
+  end
+
   private
+  def performance_params(id)
+    params.require(:performance).fetch(id).permit(:date, :count)
+  end
+
   def performance_params
     params.require(:performance).permit(:date, :count)
   end
