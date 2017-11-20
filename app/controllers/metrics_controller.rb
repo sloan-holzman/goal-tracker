@@ -5,8 +5,30 @@ class MetricsController < ApplicationController
 
   def index
     @metrics = current_user.metrics
-    # problem!  performances includes them all...need to only include by metric
-    # performances = []
+
+    target_data = []
+
+    for metric in @metrics
+      array = [metric.name, metric.target]
+      target_data.push(array)
+    end
+
+    actual_data = []
+
+    for metric in @metrics
+      weekly_count = 0
+      for performance in metric.performances
+        if performance.date >= Date.today.beginning_of_week(:sunday) && performance.date < (Date.today.beginning_of_week(:sunday)+7)
+          weekly_count += performance.count
+        end
+      end
+      array = [metric.name, weekly_count]
+      actual_data.push(array)
+      weekly_count = 0
+    end
+
+    @week_data = [{name: "Weekly Goal",data: target_data},{name: "Count so far",data: actual_data}]
+
     start = Date.today
     last = Date.parse('2001-01-01')
     for metric in @metrics
@@ -25,7 +47,7 @@ class MetricsController < ApplicationController
     @last = [last.end_of_week(:saturday),Date.today].min
     dates = []
     day = @start
-    while day < @last
+    while day <= @last
       dates.push(day)
       day +=7
     end

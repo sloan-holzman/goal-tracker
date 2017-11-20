@@ -1,13 +1,18 @@
-<h2>Metrics:</h2>
+<h2>Week of <%= Date.today.beginning_of_week(:sunday) %></h2>
+<!-- <%= Performance.joins(:metric).where('metrics.name = ?', 'Running').group_by_week(:date, last: 1, current: true, title: "asdfads").sum(:count) %> -->
+<%= column_chart @week_data  %>
+
+<h2>Week by week performance</h2>
+
 <table>
-<% for metric in @metrics %>
   <tr>
     <th>Metric</th>
-    <th>Goal</th>
+    <th>Weekly Goal</th>
     <% for date in @dates %>
       <th><%= date %></th>
     <% end %>
   </tr>
+<% for metric in @metrics %>
   <tr>
     <td><%= link_to metric.name, user_metric_path(current_user, metric) %></td>
     <td><%= metric.target %> <%= metric.unit %></td>
