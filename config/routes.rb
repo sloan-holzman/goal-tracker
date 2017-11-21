@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   get 'performances/all/edit' => 'performances#edit_all', :as => :edit_all
   put 'performances/all' => 'performances#update_all', :as => :update_all
   get 'metrics/past' => 'metrics#past', :as => :past
+  get 'performances/day/select' => 'performances#select_day', :as => :select_day
+  get 'performances/:date/edit' => 'performances#edit_day', :as => :edit_day
+  put 'performances/:date' => 'performances#update_day', :as => :update_day
+
 
   resources :users do
     resources :metrics do

@@ -1,36 +1,23 @@
 <% if @performances.length > 0 %>
-  <h2>You have not told how you did on the following days:</h2>
-
-  <%= form_for :performance, :url => update_all_path, :html => { :method => :put } do %>
+  <%= form_for :performance, :url => update_day_path, :html => { :method => :put } do %>
     <table>
       <tr>
         <th>Metric</th>
-        <th>Date</th>
         <th>Count</th>
       </tr>
       <% @performances.each do |performance| %>
         <%= fields_for "performance[]", performance do |performance_fields| %>
       <tr>
         <td><%= performance.metric.name %></td>
-        <td><%= performance.date %></td>
         <td><%= performance_fields.number_field :count %></td>
       </tr>
         <% end %>
       <% end %>
     </table>
-
     <div class="actions">
       <%= submit_tag %>
     </div>
   <% end %>
 <% else %>
-  <h2>Unentered performances:</h2>
-  <h3>You are all up to date!</h3>
-<% end %>
-
-
-<h2>Choose a date to update old performances</h2>
-<%= form_tag '/performances/day/select', method: :get do %>
-  <%= date_field_tag "date", "default info" %>
-  <%= submit_tag "Save" %>
+  <h2>You don't have any history on that day!</h2>
 <% end %>

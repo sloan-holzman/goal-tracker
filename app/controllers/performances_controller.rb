@@ -70,6 +70,36 @@ class PerformancesController < ApplicationController
     redirect_to(root_url)
   end
 
+  def select_day
+    redirect_to "/performances/#{params[:date].to_s}/edit"
+  end
+
+  def edit_day
+    @metrics = current_user.metrics
+    performances = []
+    for metric in @metrics
+      for performance in metric.performances
+        if performance.date == params[:date].to_date
+          performances.push(performance)
+        end
+      end
+    end
+    @performances = performances
+  end
+
+  # overrode authentication error by checking stackoverflow here: https://stackoverflow.com/questions/20156664/saving-multiple-records-with-params-require-in-ruby
+
+  def update_day
+    params['performance'].keys.each do |id|
+      @performance = Performance.find(id.to_i)
+      @performance.update_attributes!(performances_params(id))
+      @performance.update(entered: true)
+    end
+    redirect_to(root_url)
+  end
+
+
+
   private
   def performances_params(id)
     params.require(:performance).fetch(id).permit(:count)
