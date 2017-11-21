@@ -48,11 +48,9 @@ class PerformancesController < ApplicationController
 
   def edit_all
     performances = []
-    for metric in current_user.metrics
-      for performance in metric.performances
-        if !performance.entered
-          performances.push(performance)
-        end
+    for performance in current_user.performances
+      if !performance.entered
+        performances.push(performance)
       end
     end
     @performances = performances
@@ -76,11 +74,9 @@ class PerformancesController < ApplicationController
   def edit_day
     @metrics = current_user.metrics
     performances = []
-    for metric in @metrics
-      for performance in metric.performances
-        if performance.date == params[:date].to_date
-          performances.push(performance)
-        end
+    for performance in current_user.performances
+      if performance.date == params[:date].to_date
+        performances.push(performance)
       end
     end
     @performances = performances

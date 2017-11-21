@@ -1,0 +1,14 @@
+<h2>Groups:</h2>
+<% if @groups.length == 0 %>
+  <h3>You are not currently in any groups</h3>
+<% else %>
+  <% for group in @groups %>
+    <h3><%= group.name %></h3>
+    <% for user in group.users %>
+      <% if user.email != current_user.email %>
+        <h4><%= user.email %></h4>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+<p><%= link_to "Create new group", new_user_group_path(current_user) %></p>

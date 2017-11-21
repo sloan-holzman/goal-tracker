@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
 
   resources :users do
-    resources :memberships
+    resources :groups
     resources :metrics do
       resources :performances
     end

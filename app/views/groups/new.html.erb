@@ -1,0 +1,9 @@
+<h2>New Group</h2>
+
+<%= form_for [current_user,@group] do |f|  %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.submit "Create" %>
+
+<% end %>
