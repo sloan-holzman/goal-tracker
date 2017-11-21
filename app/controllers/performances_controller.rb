@@ -3,7 +3,6 @@ class PerformancesController < ApplicationController
   # , :except => [:show, :index]
   # load_and_authorize_resource
 
-  attr_accessor :date, :count, :entered
 
   def show
     @metric = current_user.metrics.find(params[:metric_id])

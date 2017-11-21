@@ -1,0 +1,6 @@
+<% for group in @groups %>
+  <p><%= group.name %></p>
+  <% for user in group.users %>
+    <p><%= user.email %></p>
+  <% end %>
+<% end %>

@@ -7,9 +7,15 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 sloan = User.create(email: 'sloan.holzman@gmail.com', password: 'password')
-
+bob = User.create(email: 'bob@gmail.com', password: 'password')
 running = sloan.metrics.create(name: 'Running', unit: 'miles', target: 15, good: true, duration: 'week')
 meditation = sloan.metrics.create(name: 'Meditation', unit: 'sessions', target: 6, good: true, duration: 'week')
+running2 = bob.metrics.create(name: 'Running', unit: 'miles', target: 10, good: true, duration: 'week')
+running2.performances.create(date: Date.today, count: 5, entered: true)
+
+group = Group.create(name: 'sloanbob')
+Membership.create(user: sloan, group: group)
+Membership.create(user: bob, group: group)
 
 running.performances.create(date: Date.today, count: 5, entered: false)
 running.performances.create(date: (Date.today-1), count: 0, entered: false)
