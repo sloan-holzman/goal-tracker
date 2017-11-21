@@ -67,6 +67,7 @@ main {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   flex-grow: 5;
 }
 
@@ -102,7 +103,7 @@ a:hover {
 .dropdown {
   /*position: relative;*/
   display: inline-block;
-  margin: 0 2% 0 2%;
+  margin: 0;
 }
 
 .dropdown-content {

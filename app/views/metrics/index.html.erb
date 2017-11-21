@@ -1,33 +1,3 @@
 <h2>Week of <%= Date.today.beginning_of_week(:sunday) %></h2>
 <!-- <%= Performance.joins(:metric).where('metrics.name = ?', 'Running').group_by_week(:date, last: 1, current: true).sum(:count) %> -->
 <%= column_chart @week_data  %>
-
-<h2>Week by week performance</h2>
-
-<table>
-  <tr>
-    <th>Metric</th>
-    <th>Weekly Goal</th>
-    <% for date in @dates %>
-      <th><%= date %></th>
-    <% end %>
-  </tr>
-<% for metric in @metrics %>
-  <tr>
-    <td><%= link_to metric.name, user_metric_path(current_user, metric) %></td>
-    <td><%= metric.target %> <%= metric.unit %></td>
-    <% sorted_performances = metric.performances.sort_by { |performance| performance[:date] } %>
-    <% for date in @dates %>
-      <% weekly_count = 0 %>
-      <% for performance in sorted_performances %>
-        <% if performance.date >= date && performance.date < (date+7)%>
-          <% weekly_count += performance.count %>
-        <% end %>
-      <% end %>
-      <td class=<%= weekly_count > metric.target ? "hit" : "missed" %>><%= weekly_count %></td>
-      <% weekly_count = 0 %>
-    <% end %>
-  </tr>
-<% end %>
-</table>
-<p><%= link_to "New Metric", new_user_metric_path(current_user) %></p>

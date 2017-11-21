@@ -28,7 +28,10 @@ class MetricsController < ApplicationController
     end
 
     @week_data = [{name: "Weekly Goal",data: target_data},{name: "Count so far",data: actual_data}]
+  end
 
+  def past
+    @metrics = current_user.metrics
     start = Date.today
     last = Date.parse('2001-01-01')
     for metric in @metrics

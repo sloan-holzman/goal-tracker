@@ -1,22 +1,28 @@
-<%= form_for :performance, :url => update_all_path, :html => { :method => :put } do %>
-  <table>
-    <tr>
-      <th>Date</th>
-      <th>Count</th>
-      <th>Entered</th>
-    </tr>
-    <% @performances.each do |performance| %>
-      <%= fields_for "performance[]", performance do |performance_fields| %>
-    <tr>
-      <td><%= performance_fields.date_field :date %></td>
-      <td><%= performance_fields.number_field :count %></td>
-      <td><%= performance_fields.text_field :entered %></td>
-    </tr>
-      <% end %>
-    <% end %>
-  </table>
+<% if @performances.length > 0 %>
+  <h2>You have not told how you did on the following days:</h2>
 
-  <div class="actions">
-    <%= submit_tag %>
-  </div>
+  <%= form_for :performance, :url => update_all_path, :html => { :method => :put } do %>
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Date</th>
+        <th>Count</th>
+      </tr>
+      <% @performances.each do |performance| %>
+        <%= fields_for "performance[]", performance do |performance_fields| %>
+      <tr>
+        <td><%= performance.metric.name %></td>
+        <td><%= performance.date %></td>
+        <td><%= performance_fields.number_field :count %></td>
+      </tr>
+        <% end %>
+      <% end %>
+    </table>
+
+    <div class="actions">
+      <%= submit_tag %>
+    </div>
+  <% end %>
+<% else %>
+  <h2>You are all up to date!</h2>
 <% end %>

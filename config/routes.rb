@@ -3,8 +3,12 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'metrics#index'
 
-  match 'performances/all/edit' => 'performances#edit_all', :as => :edit_all, :via => :get
-  match 'performances/all' => 'performances#update_all', :as => :update_all, :via => :put
+  # match 'performances/all/edit' => 'performances#edit_all', :as => :edit_all, :via => :get
+  # match 'performances/all' => 'performances#update_all', :as => :update_all, :via => :put
+
+  get 'performances/all/edit' => 'performances#edit_all', :as => :edit_all
+  put 'performances/all' => 'performances#update_all', :as => :update_all
+  get 'metrics/past' => 'metrics#past', :as => :past
 
   resources :users do
     resources :metrics do

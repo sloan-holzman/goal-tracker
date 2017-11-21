@@ -51,7 +51,9 @@ class PerformancesController < ApplicationController
     performances = []
     for metric in current_user.metrics
       for performance in metric.performances
-        performances.push(performance)
+        if !performance.entered
+          performances.push(performance)
+        end
       end
     end
     @performances = performances
@@ -62,14 +64,15 @@ class PerformancesController < ApplicationController
   def update_all
     params['performance'].keys.each do |id|
       @performance = Performance.find(id.to_i)
-      @performance.update_attributes!(performance_params(id))
+      @performance.update_attributes!(performances_params(id))
+      @performance.update(entered: true)
     end
     redirect_to(root_url)
   end
 
   private
-  def performance_params(id)
-    params.require(:performance).fetch(id).permit(:date, :count)
+  def performances_params(id)
+    params.require(:performance).fetch(id).permit(:count)
   end
 
   def performance_params
