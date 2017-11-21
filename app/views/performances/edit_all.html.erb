@@ -13,7 +13,7 @@
       <tr>
         <td><%= performance.metric.name %></td>
         <td><%= performance.date %></td>
-        <td><%= performance_fields.number_field :count %></td>
+        <td><%= performance_fields.number_field :count, {:min=>"0"} %></td>
       </tr>
         <% end %>
       <% end %>

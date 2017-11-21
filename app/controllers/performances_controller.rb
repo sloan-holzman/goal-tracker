@@ -85,6 +85,7 @@ class PerformancesController < ApplicationController
       end
     end
     @performances = performances
+    @date = params[:date].to_date
   end
 
   # overrode authentication error by checking stackoverflow here: https://stackoverflow.com/questions/20156664/saving-multiple-records-with-params-require-in-ruby
