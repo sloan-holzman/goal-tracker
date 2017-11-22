@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171121192251) do
+ActiveRecord::Schema.define(version: 20171122221338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20171121192251) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.bigint "group_id"
+    t.boolean "admin", default: false, null: false
     t.index ["group_id"], name: "index_memberships_on_group_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
   end
@@ -34,7 +35,7 @@ ActiveRecord::Schema.define(version: 20171121192251) do
     t.string "name"
     t.string "unit"
     t.integer "target"
-    t.boolean "good"
+    t.boolean "good", default: true, null: false
     t.string "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -50,6 +51,16 @@ ActiveRecord::Schema.define(version: 20171121192251) do
     t.datetime "updated_at", null: false
     t.bigint "metric_id"
     t.index ["metric_id"], name: "index_performances_on_metric_id"
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "group_id"
+    t.boolean "approved", default: false, null: false
+    t.index ["group_id"], name: "index_requests_on_group_id"
+    t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -73,4 +84,6 @@ ActiveRecord::Schema.define(version: 20171121192251) do
   add_foreign_key "memberships", "users"
   add_foreign_key "metrics", "users"
   add_foreign_key "performances", "metrics"
+  add_foreign_key "requests", "groups"
+  add_foreign_key "requests", "users"
 end

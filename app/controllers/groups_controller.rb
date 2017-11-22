@@ -13,7 +13,7 @@ class GroupsController < ApplicationController
     @group = Group.find_or_create_by(name: @name)
     if current_user.groups.find_by(name: @name)
     else
-      Membership.create(user: current_user, group: @group)
+      Membership.create(user: current_user, group: @group, admin: true)
     end
     redirect_to user_groups_path(current_user)
   end
