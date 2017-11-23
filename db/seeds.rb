@@ -18,6 +18,9 @@ group = Group.create(name: 'sloanbob')
 Membership.create(user: sloan, group: group, admin: true)
 Membership.create(user: bob, group: group, admin: false)
 Request.create(user: billy, group: group, approved: false)
+group2 = Group.create(name: 'private', private: true)
+group3 = Group.create(name: 'public')
+
 
 running.performances.create(date: Date.today, count: 5, entered: false)
 running.performances.create(date: (Date.today-1), count: 0, entered: false)

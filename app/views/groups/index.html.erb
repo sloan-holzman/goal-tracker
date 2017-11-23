@@ -1,4 +1,4 @@
-<h2>Groups:</h2>
+<h2>Your groups:</h2>
 <% if @groups.length == 0 %>
   <h3>You are not currently in any groups</h3>
 <% else %>
@@ -11,5 +11,15 @@
     <% end %>
   <% end %>
 <% end %>
+<% if @your_requests.length > 0 %>
+  <h2>Your outstanding requests:</h2>
+  <% for request in @your_requests %>
+    <p><%= request.group.name %></p>
+    <p><%= request.created_at %></p>
+  <% end %>
+<% end %>
 <p><%= link_to "Create new group", new_user_group_path(current_user) %></p>
 <p><%= link_to "See all groups", groups_all_path %></p>
+<% if @approval_requests.length > 0 %>
+  <p><%= link_to "Approve outstanding requests", request_all_path %></p>
+<% end %>

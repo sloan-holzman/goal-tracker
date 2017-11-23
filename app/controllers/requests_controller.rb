@@ -1,6 +1,5 @@
 class RequestsController < ApplicationController
   def all
-    @your_requests = current_user.requests
     @admin_memberships = current_user.memberships.where(admin: true)
     groups = []
     for membership in @admin_memberships

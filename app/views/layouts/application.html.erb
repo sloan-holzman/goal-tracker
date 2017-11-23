@@ -18,7 +18,11 @@
         <div class="links">
           <a class="nav-link" href="/metrics/past">PAST PERFORMANCE</a>
           <a class="nav-link" href="/performances/all/edit">ENTER DAILY PERFORMANCE</a>
-          <a class="nav-link" href="/groups/all">ACCOUNTABILITY GROUPS</a>
+          <% if !current_user %>
+            <a class="nav-link" href="/groups/all">ACCOUNTABILITY GROUPS</a>
+          <% else %>
+            <a class="nav-link" href="/users/<%= current_user.id %>/groups">ACCOUNTABILITY GROUPS</a>
+          <% end %>
           <div class="dropdown">
           <button onclick="myFunction()" class="dropbtn">blah blah</button>
             <div id="myDropdown" class="dropdown-content">
@@ -31,12 +35,12 @@
               <% end %>
             </div>
           </div>
-          <p class="notice"><%= notice %></p>
-          <p class="alert"><%= alert %></p>
         </div>
       </div>
     </nav>
     <main>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
       <%= yield %>
     </main>
   </body>
