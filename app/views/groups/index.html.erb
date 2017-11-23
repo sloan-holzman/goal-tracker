@@ -11,6 +11,20 @@
     <% end %>
   <% end %>
 <% end %>
+<% if @your_invitations.length > 0 %>
+  <h2>Your invitations:</h2>
+  <% for invitation in @your_invitations %>
+    <p>Group name: <%= invitation.group.name %></p>
+    <p>Group members: <%= invitation.group.users.count %></p>
+      <ul>
+        <% for user in invitation.group.users %>
+          <li><%= user.email %></li>
+        <% end %>
+      </ul>
+    <p><%= link_to "Accept invitation", "/users/#{current_user.id}/groups/#{invitation.group.id}/invitations/#{invitation.id}/accept", method: :post %></p>
+    <p><%= link_to "Reject invitation", "/users/#{current_user.id}/groups/#{invitation.group.id}/invitations/#{invitation.id}/reject", method: :delete %></p>
+  <% end %>
+<% end %>
 <% if @your_requests.length > 0 %>
   <h2>Your outstanding requests:</h2>
   <% for request in @your_requests %>

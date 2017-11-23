@@ -4,6 +4,7 @@ class GroupsController < ApplicationController
     @groups = current_user.groups
     @your_requests = current_user.requests
     @admin_memberships = current_user.memberships.where(admin: true)
+    @your_invitations = Invitation.where(email: current_user.email)
     groups = []
     for membership in @admin_memberships
       groups.push(membership.group)

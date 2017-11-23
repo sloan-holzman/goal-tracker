@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   get 'groups/all' => 'groups#all'
   post 'users/:user_id/groups/:group_id/requests/:id/approve' => 'requests#approve'
   delete 'users/:user_id/groups/:group_id/requests/:id/reject' => 'requests#reject'
+  post 'users/:user_id/groups/:group_id/invitations/:id/accept' => 'invitations#accept'
+  delete 'users/:user_id/groups/:group_id/invitations/:id/reject' => 'invitations#reject'
+
+
 
   resources :users do
     resources :groups do
