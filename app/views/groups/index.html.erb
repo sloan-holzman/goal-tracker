@@ -3,7 +3,7 @@
   <h3>You are not currently in any groups</h3>
 <% else %>
   <% for group in @groups %>
-    <h3><%= group.name %></h3>
+    <h3><%= link_to group.name, user_group_path(current_user, group) %></h3>
     <% for user in group.users %>
       <% if user.email != current_user.email %>
         <h4><%= user.email %></h4>

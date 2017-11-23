@@ -19,7 +19,6 @@ class RequestsController < ApplicationController
   end
 
   def create
-    # must define user and group
     @group = Group.find(params[:group_id])
     Request.create(user: current_user, group: @group)
     redirect_to request_all_path

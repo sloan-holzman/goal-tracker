@@ -25,10 +25,9 @@ ActiveRecord::Schema.define(version: 20171123173428) do
   create_table "invitations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.string "email"
     t.bigint "group_id"
     t.index ["group_id"], name: "index_invitations_on_group_id"
-    t.index ["user_id"], name: "index_invitations_on_user_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -90,7 +89,6 @@ ActiveRecord::Schema.define(version: 20171123173428) do
   end
 
   add_foreign_key "invitations", "groups"
-  add_foreign_key "invitations", "users"
   add_foreign_key "memberships", "groups"
   add_foreign_key "memberships", "users"
   add_foreign_key "metrics", "users"

@@ -1,4 +1,3 @@
-class Request < ApplicationRecord
-  belongs_to :user
+class Invitation < ApplicationRecord
   belongs_to :group
 end

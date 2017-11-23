@@ -1,0 +1,8 @@
+<h2><%= @group.name %> Page</h2>
+<h3>Members:</h3>
+<% for user in @group.users %>
+  <% if user.email != current_user.email %>
+    <h4><%= user.email %></h4>
+  <% end %>
+<% end %>
+<h3><%= link_to "Invite new members", new_user_group_invitation_path(current_user, @group) %></h3>
