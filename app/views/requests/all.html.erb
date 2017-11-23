@@ -1,0 +1,12 @@
+<h2>Your outstanding requests</h2>
+<% for request in @your_requests %>
+  <p><%= request.group.name %></p>
+  <p><%= request.created_at %></p>
+<% end %>
+<h2>Outstanding requests to approve</h2>
+<% for request in @approval_requests %>
+  <p><%= request.user.email %></p>
+  <p><%= request.group.name %></p>
+  <p><%= link_to "Approve request", "/users/#{request.user.id}/groups/#{request.group.id}/requests/#{request.id}/approve", method: :post %></p>
+  <p><%= link_to "Reject request", "/users/#{request.user.id}/groups/#{request.group.id}/requests/#{request.id}/reject", method: :delete  %></p>
+<% end %>

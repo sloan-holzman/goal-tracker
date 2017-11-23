@@ -12,10 +12,15 @@ Rails.application.routes.draw do
   get 'performances/day/select' => 'performances#select_day', :as => :select_day
   get 'performances/:date/edit' => 'performances#edit_day', :as => :edit_day
   put 'performances/:date' => 'performances#update_day', :as => :update_day
-
+  get 'request/all' => 'requests#all'
+  get 'groups/all' => 'groups#all'
+  post 'users/:user_id/groups/:group_id/requests/:id/approve' => 'requests#approve'
+  delete 'users/:user_id/groups/:group_id/requests/:id/reject' => 'requests#reject'
 
   resources :users do
-    resources :groups
+    resources :groups do
+      resources :requests
+    end
     resources :metrics do
       resources :performances
     end

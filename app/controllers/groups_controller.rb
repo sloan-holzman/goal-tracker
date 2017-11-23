@@ -4,6 +4,10 @@ class GroupsController < ApplicationController
     @groups = current_user.groups
   end
 
+  def all
+    @groups = Group.all
+  end
+
   def new
     @group = Group.new
   end

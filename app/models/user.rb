@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :performances, through: :metrics
   has_many :memberships
   has_many :groups, through: :memberships
+  has_many :requests
 end

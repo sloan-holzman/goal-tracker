@@ -1,0 +1,10 @@
+<h2>Groups:</h2>
+<% if @groups.length == 0 %>
+  <h3>There aren't any public groups</h3>
+<% else %>
+  <% for group in @groups %>
+    <h3><%= link_to "Request to join #{group.name}", user_group_requests_path(current_user, group), method: :post %></h3>
+  <% end %>
+<% end %>
+<p><%= link_to "Create new group", new_user_group_path(current_user) %></p>
+<p><%= link_to "Approve outstanding requests", request_all_path %></p>
