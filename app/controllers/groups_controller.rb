@@ -46,6 +46,7 @@ class GroupsController < ApplicationController
       week_data = [{name: "Weekly Goal",data: target_data},{name: "Count so far",data: actual_data}]
       @group_week_data.push(week_data)
     end
+    @membership = Membership.find_by(group: @group, user: current_user)
   end
 
   def all
@@ -63,6 +64,12 @@ class GroupsController < ApplicationController
     else
       Membership.create(user: current_user, group: @group, admin: true)
     end
+    redirect_to user_groups_path(current_user)
+  end
+
+  def destroy
+    @group = Group.find(params[:id])
+    @group.destroy
     redirect_to user_groups_path(current_user)
   end
 

@@ -14,3 +14,6 @@
 <% end %>
 <h3><%= link_to "Invite new members", new_user_group_invitation_path(current_user, @group) %></h3>
 <h3><%= link_to "Leave group", leave_group_path(current_user, @group), method: :delete %></h3>
+<% if @membership.admin %>
+  <h3><%= link_to "Delete group", "/users/#{current_user.id}/groups/#{@group.id}", method: :delete %></h3>
+<% end %>
