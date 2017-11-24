@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   delete 'users/:user_id/groups/:group_id/requests/:id/reject' => 'requests#reject'
   post 'users/:user_id/groups/:group_id/invitations/:id/accept' => 'invitations#accept'
   delete 'users/:user_id/groups/:group_id/invitations/:id/reject' => 'invitations#reject'
-
+  delete 'users/:user_id/groups/:group_id/memberships/destroy' => 'memberships#destroy', :as => :leave_group
 
 
   resources :users do
