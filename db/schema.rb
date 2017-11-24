@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20171123173428) do
     t.string "name"
     t.string "unit"
     t.integer "target"
-    t.boolean "good", default: true, null: false
+    t.boolean "good", default: true
     t.string "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

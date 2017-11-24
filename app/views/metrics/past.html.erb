@@ -20,7 +20,11 @@
           <% weekly_count += performance.count %>
         <% end %>
       <% end %>
-      <td class=<%= weekly_count > metric.target ? "hit" : "missed" %>><%= weekly_count %></td>
+      <% if metric.good %>
+        <td class=<%= weekly_count >= metric.target ? "hit" : "missed" %>><%= weekly_count %></td>
+      <% else %>
+        <td class=<%= weekly_count <= metric.target ? "hit" : "missed" %>><%= weekly_count %></td>
+      <% end %>
       <% weekly_count = 0 %>
     <% end %>
   </tr>
