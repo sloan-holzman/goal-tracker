@@ -6,3 +6,10 @@
   <% end %>
 <% end %>
 <h3><%= link_to "Invite new members", new_user_group_invitation_path(current_user, @group) %></h3>
+<h2>Week of <%= Date.today.beginning_of_week(:sunday) %></h2>
+<% i=0 %>
+<% for user in @group.users %>
+  <h4><%= user.email %></h4>
+  <%= column_chart @group_week_data[i]  %>
+  <% i+=1 %>
+<% end %>
