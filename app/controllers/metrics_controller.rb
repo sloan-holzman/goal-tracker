@@ -4,17 +4,23 @@ class MetricsController < ApplicationController
   # load_and_authorize_resource
 
   def index
+    @performances = current_user.performances
     @metrics = current_user.metrics
 
-    target_data = []
+    @all_data = []
+    for metric in @metrics
+      performances = metric.performances
+      set = {name: metric.name,data: performances.group_by_day(:date).sum(:count)}
+      @all_data.push(set)
+    end
 
+    target_data = []
     for metric in @metrics
       array = [metric.name, metric.target]
       target_data.push(array)
     end
 
     actual_data = []
-
     for metric in @metrics
       weekly_count = 0
       for performance in metric.performances
@@ -63,6 +69,8 @@ class MetricsController < ApplicationController
 
   def show
     @metric = current_user.metrics.find(params[:id])
+    @performances = @metric.performances
+    @all_data = [{name: @metric.name,data: @performances.group_by_day(:date).sum(:count)}]
   end
 
   def create

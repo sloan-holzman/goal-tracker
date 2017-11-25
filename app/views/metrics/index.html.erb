@@ -1,3 +1,4 @@
 <h2>Week of <%= Date.today.beginning_of_week(:sunday) %></h2>
 <!-- <%= Performance.joins(:metric).where('metrics.name = ?', 'Running').group_by_week(:date, last: 1, current: true).sum(:count) %> -->
 <%= column_chart @week_data  %>
+<%= line_chart @all_data %>

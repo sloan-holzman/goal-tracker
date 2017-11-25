@@ -4,6 +4,9 @@
 <h2><%= @metric.good %></h2>
 <h2><%= @metric.duration %></h2>
 
+<%= line_chart @all_data %>
+
+
 <h2>Performances:</p>
 <% for performance in @metric.performances %>
   <p><%= performance.date %></p>
