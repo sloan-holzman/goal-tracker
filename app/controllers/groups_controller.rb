@@ -64,11 +64,13 @@ class GroupsController < ApplicationController
     else
       Membership.create(user: current_user, group: @group, admin: true)
     end
+    flash[:notice] = "Group #{@group.name} created successfully"
     redirect_to user_groups_path(current_user)
   end
 
   def destroy
     @group = Group.find(params[:id])
+    flash[:notice] = "Group #{@group.name} deleted successfully"
     @group.destroy
     redirect_to user_groups_path(current_user)
   end

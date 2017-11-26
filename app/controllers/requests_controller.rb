@@ -21,6 +21,7 @@ class RequestsController < ApplicationController
   def create
     @group = Group.find(params[:group_id])
     Request.create(user: current_user, group: @group)
+    flash[:notice] = "Your request to join group #{@group.name} has been sent"
     redirect_to request_all_path
   end
 
@@ -30,13 +31,14 @@ class RequestsController < ApplicationController
     @user = @request.user
     @group = @request.group
     Membership.create(user: @user, group: @group, admin: false)
+    flash[:notice] = "#{@user.email} was successfully added to group #{@group.name}"
     @request.destroy
     redirect_to request_all_path
   end
 
   def reject
-    # must define request and add a redirect_to
     @request = Request.find(params[:id])
+    flash[:notice] = "Request was successfully rejected"
     @request.destroy
     redirect_to request_all_path
   end

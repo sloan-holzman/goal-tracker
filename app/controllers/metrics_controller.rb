@@ -75,6 +75,7 @@ class MetricsController < ApplicationController
 
   def create
     @metric = current_user.metrics.create!(metric_params)
+    flash[:notice] = "Goal #{@metric.name} created successfully"
     redirect_to user_metric_path(current_user,@metric)
   end
 
@@ -85,11 +86,13 @@ class MetricsController < ApplicationController
   def update
     @metric = current_user.metrics.find(params[:id])
     @metric.update(metric_params.merge(user: current_user))
+    flash[:notice] = "Goal #{@metric.name} updated successfully"
     redirect_to user_metric_path(current_user,@metric)
   end
 
   def destroy
     @metric = current_user.metrics.find(params[:id])
+    flash[:notice] = "Goal #{@metric.name} deleted successfully"
     @metric.destroy
     redirect_to user_path(current_user)
   end
