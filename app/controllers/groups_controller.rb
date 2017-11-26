@@ -59,11 +59,11 @@ class GroupsController < ApplicationController
 
   def create
     @name = group_params[:name].titleize
-    @group = Group.find_or_create_by(name: @name)
-    if current_user.groups.find_by(name: @name)
-    else
-      Membership.create(user: current_user, group: @group, admin: true)
-    end
+    @group = Group.create(name: @name, private: group_params[:private])
+    # if current_user.groups.find_by(name: @name)
+    # else
+    Membership.create(user: current_user, group: @group, admin: true)
+    # end
     flash[:notice] = "Group #{@group.name} created successfully"
     redirect_to user_groups_path(current_user)
   end
@@ -75,9 +75,20 @@ class GroupsController < ApplicationController
     redirect_to user_groups_path(current_user)
   end
 
+  def edit
+    @group = Group.find(params[:id])
+  end
+
+  def update
+    @group = Group.find(params[:id])
+    @group.update(group_params)
+    flash[:notice] = "Group #{@group.name} updated successfully"
+    redirect_to user_group_path(current_user,@group)
+  end
+
   private
   def group_params
-    params.require(:group).permit(:name)
+    params.require(:group).permit(:name, :private)
   end
 
 end
