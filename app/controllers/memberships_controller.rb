@@ -4,7 +4,7 @@ class MembershipsController < ApplicationController
     @membership = Membership.find_by(user: current_user, group: @group)
     @membership.destroy
     flash[:notice] = "You successfully left the group #{@group.name}"
-    if @group.users.length == 1
+    if @group.users.length == 1 || @group.memberships.where(admin: true).count == 0
       @admin = @group.users.first
       @membership = Membership.where(group: @group, user: @admin)
       @membership.update(admin: true)

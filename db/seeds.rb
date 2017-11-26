@@ -16,6 +16,7 @@ running2 = bob.metrics.create(name: 'Running', unit: 'miles', target: 10, good: 
 group = Group.create(name: 'sloanbob')
 Membership.create(user: sloan, group: group, admin: true)
 Membership.create(user: bob, group: group, admin: false)
+Membership.create(user: billy, group: group, admin: false)
 Request.create(user: billy, group: group)
 group2 = Group.create(name: 'private', private: true)
 group3 = Group.create(name: 'public')
