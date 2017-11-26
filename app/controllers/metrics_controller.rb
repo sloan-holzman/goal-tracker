@@ -74,7 +74,9 @@ class MetricsController < ApplicationController
   end
 
   def create
-    @metric = current_user.metrics.create!(metric_params)
+    @name = metric_params[:name].titleize
+    @unit = metric_params[:unit].titleize
+    @metric = current_user.metrics.create!(name: @name, unit: @unit, target: metric_params[:target], good: metric_params[:good], duration: metric_params[:duration])
     flash[:notice] = "Goal #{@metric.name} created successfully"
     redirect_to user_metric_path(current_user,@metric)
   end
@@ -84,8 +86,10 @@ class MetricsController < ApplicationController
   end
 
   def update
+    @name = metric_params[:name].titleize
+    @unit = metric_params[:unit].titleize
     @metric = current_user.metrics.find(params[:id])
-    @metric.update(metric_params.merge(user: current_user))
+    @metric.update(name: @name, unit: @unit, target: metric_params[:target], good: metric_params[:good], duration: metric_params[:duration])
     flash[:notice] = "Goal #{@metric.name} updated successfully"
     redirect_to user_metric_path(current_user,@metric)
   end
