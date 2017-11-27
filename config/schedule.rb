@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.minute do
+every 1.day, :at => '1:00 am' do
   rake 'create_daily_performances', :environment => 'development'
 end
