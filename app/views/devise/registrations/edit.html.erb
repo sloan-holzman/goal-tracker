@@ -18,6 +18,11 @@
     <%= f.email_field :email%>
   </div>
 
+  <div class="field">
+    <%= f.label "Weekly reminders" %><br />
+    <%=  f.select :reminder, [['Reminder emails on', true], ['Reminder emails off', false]]%>
+  </div>
+
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>

@@ -8,4 +8,13 @@ class User < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships
   has_many :requests, dependent: :destroy
+
+  before_save do |user|
+    user.last_name = user.last_name.downcase.titleize
+  end
+
+  before_save do |user|
+    user.first_name = user.first_name.downcase.titleize
+  end
+
 end

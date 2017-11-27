@@ -59,8 +59,7 @@ class GroupsController < ApplicationController
 
   def create
     @user = current_user
-    @name = group_params[:name].titleize
-    @group = Group.create(name: @name, private: group_params[:private])
+    @group = Group.create(group_params)
     Membership.create(user: current_user, group: @group, admin: true)
     flash[:notice] = "Group #{@group.name} created successfully"
     GoalMailer.new_group_email(@user, @group).deliver

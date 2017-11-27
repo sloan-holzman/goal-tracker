@@ -19,6 +19,12 @@
   </div>
 
   <div class="field">
+    <%= f.label "Weekly reminders" %><br />
+    <%=  f.select :reminder, [['Reminder emails on', true], ['Reminder emails off', false]]%>
+  </div>
+
+
+  <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
