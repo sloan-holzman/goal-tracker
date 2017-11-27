@@ -9,6 +9,7 @@ gem 'chartkick'
 gem 'groupdate'
 gem 'whenever', :require => false
 gem 'devise'
+gem 'figaro'
 
 gem 'cancancan', '~> 1.10'
 

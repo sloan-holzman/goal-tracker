@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ExampleMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "sloan.holzman@gmail.com"
 
   def sample_email(user)
     @user = user
