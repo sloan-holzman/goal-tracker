@@ -1,33 +1,36 @@
-<h2>Week by week performance</h2>
-
-<table>
-  <tr>
-    <th>Metric</th>
-    <th>Weekly Goal</th>
-    <% for date in @dates %>
-      <th><%= date %></th>
-    <% end %>
-  </tr>
-<% for metric in @metrics %>
-  <tr>
-    <td><%= link_to metric.name, user_metric_path(current_user, metric) %></td>
-    <td><%= metric.target %> <%= metric.unit %></td>
-    <% sorted_performances = metric.performances.sort_by { |performance| performance[:date] } %>
-    <% for date in @dates %>
-      <% weekly_count = 0 %>
-      <% for performance in sorted_performances %>
-        <% if performance.date >= date && performance.date < (date+7)%>
-          <% weekly_count += performance.count %>
+<% if @metrics.length > 0 %>
+  <h2>Week by week performance</h2>
+  <table>
+    <tr>
+      <th>Metric</th>
+      <th>Weekly Goal</th>
+      <% for date in @dates %>
+        <th><%= date %></th>
+      <% end %>
+    </tr>
+  <% for metric in @metrics %>
+    <tr>
+      <td><%= link_to metric.name, user_metric_path(current_user, metric) %></td>
+      <td><%= metric.target %> <%= metric.unit %></td>
+      <% sorted_performances = metric.performances.sort_by { |performance| performance[:date] } %>
+      <% for date in @dates %>
+        <% weekly_count = 0 %>
+        <% for performance in sorted_performances %>
+          <% if performance.date >= date && performance.date < (date+7)%>
+            <% weekly_count += performance.count %>
+          <% end %>
         <% end %>
+        <% if metric.good %>
+          <td class=<%= weekly_count >= metric.target ? "hit" : "missed" %>><%= weekly_count %></td>
+        <% else %>
+          <td class=<%= weekly_count <= metric.target ? "hit" : "missed" %>><%= weekly_count %></td>
+        <% end %>
+        <% weekly_count = 0 %>
       <% end %>
-      <% if metric.good %>
-        <td class=<%= weekly_count >= metric.target ? "hit" : "missed" %>><%= weekly_count %></td>
-      <% else %>
-        <td class=<%= weekly_count <= metric.target ? "hit" : "missed" %>><%= weekly_count %></td>
-      <% end %>
-      <% weekly_count = 0 %>
-    <% end %>
-  </tr>
+    </tr>
+  <% end %>
+  </table>
+<% else %>
+   <h2>You have no metrics</h2>
 <% end %>
-</table>
 <p><%= link_to "New Metric", new_user_metric_path(current_user) %></p>

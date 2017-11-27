@@ -4,7 +4,22 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <p>You have <%= @number_unentered %> performances to enter!</p>
-    <p>Click <%= link_to "here", "http://localhost:3000/performances/all/edit" %> to enter your info</p>
+    <% if @metrics.length == 0 %>
+    <p>Click <%= link_to "here", "http://localhost:3000/users/#{@user.id}/metrics/new" %> to start setting goals</p>
+    <% else %>
+      <% if @number_unentered > 0 %>
+        <h2>You have <%= @number_unentered %> performances to enter!</h2>
+        <p>You must enter information for <%= @unentered_dates.join(", ") %></p>
+        <p>Click <%= link_to "here", "http://localhost:3000/performances/all/edit" %> to enter your info</p>
+      <% end %>
+      <% i = 0 %>
+      <% for metric in @metrics %>
+        <h2><%= metric.name %></h2>
+        <p>Goal: <%= metric.target %> <%= metric.unit %> per <%= metric.duration %></p>
+        <p>Weekly total: <%= @weekly_totals[i] %> <%= metric.unit %> so far</p>
+        <% i+= 1 %>
+      <% end %>
+      <p>Remember...you have just <%= @days_remaining %> days left to hit your goals!  Keep it up!</p>
+    <% end %>
   </body>
 </html>
