@@ -4,9 +4,9 @@ task send_weekly_reminders: :environment do
     if user.reminder
       if user.reminder_frequency == 'Daily' || user.reminder_day == Time.now.strftime("%A")
         GoalMailer.reminder_email(user).deliver
-        puts "#{user.name} reminded!"
+        puts "#{user.email} reminded!"
       else
-        puts "#{user.name} not reminded!"
+        puts "#{user.email} not reminded!"
       end
     end
   end
