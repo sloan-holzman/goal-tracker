@@ -46,7 +46,6 @@ running.performances.create(date: (Date.today-20), count: 5, entered: true)
 running.performances.create(date: (Date.today-21), count: 5, entered: true)
 
 
-meditation.performances.create(date: Date.today, count: 4, entered: true)
 meditation.performances.create(date: (Date.today-1), count: 0, entered: true)
 meditation.performances.create(date: (Date.today-2), count: 3, entered: true)
 meditation.performances.create(date: (Date.today-3), count: 4, entered: true)
