@@ -1,6 +1,4 @@
-require 'test_helper'
-
-class ExampleMailer < ActionMailer::Base
+class GroupMailer < ActionMailer::Base
   default from: "sloan.holzman@gmail.com"
 
   def group_email(user, group)
@@ -9,3 +7,6 @@ class ExampleMailer < ActionMailer::Base
     mail(to: @user.email, subject: "Group '#{@group.name}' created!")
   end
 end
+
+
+# used https://launchschool.com/blog/handling-emails-in-rails to make this
