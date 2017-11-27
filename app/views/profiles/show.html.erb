@@ -1,12 +1,7 @@
 <h2>Your profile</h2>
 <p>Name: <%= @user.first_name %> <% @user.last_name %></p>
 <p>Email: <%= @user.email %></p>
-<p>Reminders: <%= @user.reminder ? "On" : "Off" %></p>
-<% if @user.reminder %>
-  <p>(Every thursday morning you will receive an email outlining your weekly progress towards your goals and reminding you to enter any outstanding daily performances)</p>
-<% else %>
-  <p>(Turn 'On' to receive an email every thursday morning outlining your weekly progress towards your goals and reminding you to enter any outstanding daily performances)</p>
-<% end %>
+<p>Reminder emails: <%= @user.reminder ? @message : "Off" %></p>
 <p>Member since: <%= @user.created_at %></p>
 <br>
 <p><%= link_to "Edit profile", edit_user_registration_path %></p>

@@ -19,10 +19,19 @@
   </div>
 
   <div class="field">
-    <%= f.label "Weekly reminders" %><br />
+    <%= f.label "Reminder emails" %><br />
     <%=  f.select :reminder, [['Reminder emails on', true], ['Reminder emails off', false]]%>
   </div>
 
+    <div class="field">
+      <%= f.label "Reminder frequency" %><br />
+      <%=  f.select :reminder_frequency, ['weekly', 'daily']%>
+    </div>
+
+    <div class="field">
+      <%= f.label "Reminder day (Only relevant if 'weekly' selected for frequency)" %><br />
+      <%=  f.select :reminder_day, ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']%>
+    </div>
 
   <div class="field">
     <%= f.label :password %>
