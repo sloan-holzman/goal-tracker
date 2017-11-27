@@ -22,3 +22,7 @@
 every 1.day, :at => '1:00 am' do
   rake 'create_daily_performances', :environment => 'development'
 end
+
+every :sunday, :at => '1:00am' do
+  rake 'send_weekly_reminders', :environment => 'development'
+end

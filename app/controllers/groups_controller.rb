@@ -61,10 +61,7 @@ class GroupsController < ApplicationController
     @user = current_user
     @name = group_params[:name].titleize
     @group = Group.create(name: @name, private: group_params[:private])
-    # if current_user.groups.find_by(name: @name)
-    # else
     Membership.create(user: current_user, group: @group, admin: true)
-    # end
     flash[:notice] = "Group #{@group.name} created successfully"
     GoalMailer.new_group_email(@user, @group).deliver
     redirect_to user_groups_path(current_user)
