@@ -66,7 +66,7 @@ class GroupsController < ApplicationController
     Membership.create(user: current_user, group: @group, admin: true)
     # end
     flash[:notice] = "Group #{@group.name} created successfully"
-    GroupMailer.group_email(@user, @group).deliver
+    GoalMailer.new_group_email(@user, @group).deliver
     redirect_to user_groups_path(current_user)
   end
 
