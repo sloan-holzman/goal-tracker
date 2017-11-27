@@ -11,7 +11,7 @@ class GoalMailer < ActionMailer::Base
     @user = user
     @unentered_performances = @user.performances.where(entered: false)
     @number_unentered = @unentered_performances.length
-    mail(to: @user.email, subject: "You have '#{@number_unentered}' performances to enter!")
+    mail(to: @user.email, subject: "You have #{@number_unentered} performances to enter!")
   end
 
 end
