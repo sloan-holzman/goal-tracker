@@ -20,5 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 
 every 1.minute do
-  rake 'create_daily_performances'
+  rake 'create_daily_performances', :environment => 'development'
 end

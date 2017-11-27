@@ -24,7 +24,8 @@ default: &default
 development:
   <<: *default
   database: Project-2_development
-
+  username: <%= ENV['project_username'] %>
+  password: <%= ENV['project_password'] %>
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
@@ -80,5 +81,5 @@ test:
 production:
   <<: *default
   database: Project-2_production
-  username: Project-2
-  password: <%= ENV['PROJECT-2_DATABASE_PASSWORD'] %>
+  username: <%= ENV['project_username'] %>
+  password: <%= ENV['project_password'] %>
