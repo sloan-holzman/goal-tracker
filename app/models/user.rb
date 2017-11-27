@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships
   has_many :requests, dependent: :destroy
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true, uniqueness: true
 
   before_save do |user|
     user.last_name = user.last_name.downcase.titleize

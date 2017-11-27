@@ -74,8 +74,6 @@ class MetricsController < ApplicationController
   end
 
   def create
-    # @name = metric_params[:name].titleize
-    # @unit = metric_params[:unit].titleize
     @metric = current_user.metrics.create!(metric_params)
     flash[:notice] = "Goal #{@metric.name} created successfully"
     redirect_to user_metric_path(current_user,@metric)
@@ -86,8 +84,6 @@ class MetricsController < ApplicationController
   end
 
   def update
-    # @name = metric_params[:name].titleize
-    # @unit = metric_params[:unit].titleize
     @metric = current_user.metrics.find(params[:id])
     @metric.update(metric_params)
     flash[:notice] = "Goal #{@metric.name} updated successfully"
