@@ -27,7 +27,7 @@
           <div class="dropdown">
           <button onclick="myFunction()" class="dropbtn">blah blah</button>
             <div id="myDropdown" class="dropdown-content">
-              <a href="/users/edit">PROFILE</a>
+              <a href="/profiles/show">PROFILE</a>
               <% if !current_user %>
                 <%= link_to "SIGN UP", new_user_registration_path %>
                 <%= link_to "SIGN IN", new_user_session_path %>

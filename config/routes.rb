@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   # match 'performances/all/edit' => 'performances#edit_all', :as => :edit_all, :via => :get
   # match 'performances/all' => 'performances#update_all', :as => :update_all, :via => :put
 
+  get 'profiles/show' => 'profiles#show', :as => :profile
   get 'performances/all/edit' => 'performances#edit_all', :as => :edit_all
   put 'performances/all' => 'performances#update_all', :as => :update_all
   get 'metrics/past' => 'metrics#past', :as => :past
