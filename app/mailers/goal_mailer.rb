@@ -36,7 +36,11 @@ class GoalMailer < ActionMailer::Base
         end
         @unentered_dates = @unentered_dates.uniq
         @unentered_dates.sort!
-        mail(to: @user.email, subject: "Please enter your daily performance for #{@unentered_dates.length} days")
+        if @number_unentered == 1
+          mail(to: @user.email, subject: "Please enter your daily performance for #{@unentered_dates[0]}")
+        else
+          mail(to: @user.email, subject: "Please enter your daily performance for #{@unentered_dates.length} days")
+        end
       else
         mail(to: @user.email, subject: "Just #{@days_remaining} days left in the week.  Keep it up!")
       end

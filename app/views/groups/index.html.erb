@@ -4,9 +4,10 @@
 <% else %>
   <% for group in @groups %>
     <h3><%= link_to group.name, user_group_path(current_user, group) %></h3>
+    <h4>Members:</h4>
     <% for user in group.users %>
       <% if user.email != current_user.email %>
-        <h4><%= user.email %></h4>
+        <h5><%= user.email %></h5>
       <% end %>
     <% end %>
   <% end %>

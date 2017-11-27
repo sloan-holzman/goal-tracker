@@ -9,16 +9,11 @@ class GroupsController < ApplicationController
     for membership in @admin_memberships
       groups.push(membership.group)
     end
-    approval_requests = []
+    @approval_requests = []
     for group in groups
       for request in group.requests
-        approval_requests.push(request)
+        @approval_requests.push(request)
       end
-    end
-    if approval_requests.length > 0
-      @approval_requests = approval_requests
-    else
-      @approval_requests = []
     end
   end
 
