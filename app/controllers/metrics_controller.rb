@@ -99,7 +99,7 @@ class MetricsController < ApplicationController
 
   private
   def metric_params
-    params.require(:metric).permit(:name, :unit, :target, :good, :duration)
+    params.require(:metric).permit(:name, :unit, :target, :good, :duration, :start_date)
   end
 
 end
