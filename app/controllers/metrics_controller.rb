@@ -139,7 +139,7 @@ class MetricsController < ApplicationController
       week_streak = 0
       weeks = rows[metric_index].length - 1
       (1..weeks).each do |weeks_back|
-        if rows[metric_index][weeks - weeks_back].to_i >= metric.target
+        if (metric.good && rows[metric_index][weeks - weeks_back].to_i >= metric.target) || (metric.good == false && rows[metric_index][weeks - weeks_back].to_i <= metric.target)
           week_streak += 1
         else
           break

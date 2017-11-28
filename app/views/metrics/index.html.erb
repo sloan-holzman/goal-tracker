@@ -1,7 +1,7 @@
 <% if @metrics.length > 0 %>
   <h2>Week of <%= Date.today.beginning_of_week(:sunday) %></h2>
   <% for streak in @day_streaks %>
-    <p><%= streak[0].name%>: You've done it <%= streak[1] %> days in a row.  Keep it up!</p>
+    <p><%= streak[0].name%>: You've <%= streak[0].good ? "" : "not" %> done it <%= streak[1] %> days in a row.  Keep it up!</p>
   <% end %>
   <%= column_chart @week_data  %>
   <h2>All time</h2>
