@@ -2,7 +2,7 @@
 
 
 class GoalMailer < ActionMailer::Base
-  default from: "sloan.holzman@gmail.com"
+  default from: "goaltracker2000@gmail.com"
 
   def new_group_email(user, group)
     @user = user
