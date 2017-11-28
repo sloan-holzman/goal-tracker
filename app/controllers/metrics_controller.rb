@@ -7,6 +7,30 @@ class MetricsController < ApplicationController
     @performances = current_user.performances
     @metrics = current_user.metrics
 
+    # check if the user has any active streaks going
+    @day_streaks = []
+    for metric in @metrics
+      duration = Date.today - metric.start_date + 1
+      streak = 0
+      (1..duration).each do |i|
+        if (metric.good && metric.performances.find_by(date: (Date.today - i)).count > 0) || (metric.good == false && metric.performances.find_by(date: (Date.today - i)).count == 0)
+          streak += 1
+        else
+          break
+        end
+      end
+      if streak >= 2
+        @day_streaks.push([metric, streak])
+      end
+    end
+
+
+
+
+
+
+
+
     # all_data will be fed into a line graph
     @all_data = []
     for metric in @metrics
@@ -46,7 +70,6 @@ class MetricsController < ApplicationController
     for metric in @metrics
       start_dates.push(metric.start_date)
     end
-    start = start_dates.min
     # last = Date.parse('2001-01-01')
     # for metric in @metrics
     #   for performance in metric.performances
@@ -60,16 +83,14 @@ class MetricsController < ApplicationController
     #   end
     # end
     # @performances = performances.sort_by { |performance| performance[:date] }
-    @start = start.beginning_of_week(:sunday)
-    # @last = [last.end_of_week(:saturday),Date.today].min
+    @start = start_dates.min.beginning_of_week(:sunday)
     @last = Date.today.end_of_week(:saturday)
-    dates = []
+    @dates = []
     day = @start
     while day <= @last
-      dates.push(day)
+      @dates.push(day)
       day +=7
     end
-    @dates = dates
   end
 
   def new
