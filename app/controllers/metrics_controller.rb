@@ -7,6 +7,7 @@ class MetricsController < ApplicationController
     @performances = current_user.performances
     @metrics = current_user.metrics
 
+    # all_data will be fed into a line graph
     @all_data = []
     for metric in @metrics
       if Date.today >= metric.start_date
@@ -16,12 +17,13 @@ class MetricsController < ApplicationController
       end
     end
 
+    # target data is the goal/target for each metric and then actual data is how much we have done this week.
+    # These are then put into an array called @week_data which can be fed into a graph
     target_data = []
     for metric in @metrics
       array = [metric.name, metric.target]
       target_data.push(array)
     end
-
     actual_data = []
     for metric in @metrics
       weekly_count = 0
@@ -82,6 +84,7 @@ class MetricsController < ApplicationController
 
   def create
     @metric = current_user.metrics.create!(metric_params)
+    # automatically create performances for every day since the start date
     if Date.today > @metric.start_date
       (@metric.start_date..Date.today).each do |date|
         @metric.performances.create!(count: 0, date: date, entered: false)
@@ -98,11 +101,18 @@ class MetricsController < ApplicationController
   def update
     @metric = current_user.metrics.find(params[:id])
     @metric.update(metric_params)
+    # automatically create performances for every day since the start date
     if Date.today > @metric.start_date
       (@metric.start_date..Date.today).each do |date|
         if !@metric.performances.exists?(date: date)
           @metric.performances.create!(count: 0, date: date, entered: false)
         end
+      end
+    end
+    # if there are old, unentered performances from before the start date, just delete them
+    for performance in @metric.performances
+      if performance.date < @metric.start_date && performance.entered == false
+        performance.destroy!
       end
     end
     flash[:notice] = "Goal #{@metric.name} updated successfully"
