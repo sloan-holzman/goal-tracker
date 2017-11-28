@@ -10,26 +10,24 @@ class MetricsController < ApplicationController
     # check if the user has any active streaks going
     @day_streaks = []
     for metric in @metrics
-      duration = Date.today - metric.start_date + 1
-      streak = 0
-      (1..duration).each do |i|
-        if (metric.good && metric.performances.find_by(date: (Date.today - i)).count > 0) || (metric.good == false && metric.performances.find_by(date: (Date.today - i)).count == 0)
-          streak += 1
-        else
-          break
+      if metric.start_date <= Date.today
+        duration = Date.today - metric.start_date + 1
+        streak = 0
+        (1..duration).each do |i|
+          if metric.performances.find_by(date: (Date.today - i)) == nil
+            break
+          end
+          if (metric.good && metric.performances.find_by(date: (Date.today - i)).count > 0) || (metric.good == false && metric.performances.find_by(date: (Date.today - i)).count == 0)
+            streak += 1
+          else
+            break
+          end
+        end
+        if streak >= 2
+          @day_streaks.push([metric, streak])
         end
       end
-      if streak >= 2
-        @day_streaks.push([metric, streak])
-      end
     end
-
-
-
-
-
-
-
 
     # all_data will be fed into a line graph
     @all_data = []
@@ -62,10 +60,6 @@ class MetricsController < ApplicationController
     end
 
     @week_data = [{name: "Weekly Goal",data: target_data},{name: "Count so far",data: actual_data}]
-  end
-
-  def past
-    @metrics = current_user.metrics
     start_dates = []
     for metric in @metrics
       start_dates.push(metric.start_date)
@@ -99,6 +93,26 @@ class MetricsController < ApplicationController
       end
       @rows.push(row)
     end
+
+    @week_streaks = []
+    metric_index = 0
+    for metric in @metrics
+      week_streak = 0
+      weeks = @rows[metric_index].length - 1
+      (1..weeks).each do |weeks_back|
+        if @rows[metric_index][weeks - weeks_back].to_i >= metric.target
+          week_streak += 1
+        else
+          break
+        end
+      end
+      if week_streak >= 2
+        @week_streaks.push([metric, week_streak])
+      end
+      metric_index += 1
+    end
+
+
   end
 
   def new

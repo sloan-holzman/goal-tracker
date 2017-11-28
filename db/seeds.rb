@@ -5,6 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Performance.destroy_all
+Metric.destroy_all
+Request.destroy_all
+Membership.destroy_all
+Invitation.destroy_all
+Group.destroy_all
+User.destroy_all
+
 
 sloan = User.new(email: 'sloan.holzman@gmail.com', password: 'password', first_name: 'sloan', last_name: 'holzman', reminder_frequency: "Daily")
 sloan.skip_confirmation!
@@ -54,18 +62,18 @@ running.performances.create(date: (Date.today-21), count: 5, entered: true)
 meditation.performances.create(date: (Date.today-1), count: 1, entered: true)
 meditation.performances.create(date: (Date.today-2), count: 0, entered: true)
 meditation.performances.create(date: (Date.today-3), count: 1, entered: true)
-meditation.performances.create(date: (Date.today-4), count: 0, entered: true)
+meditation.performances.create(date: (Date.today-4), count: 1, entered: true)
 meditation.performances.create(date: (Date.today-5), count: 1, entered: true)
 meditation.performances.create(date: (Date.today-6), count: 1, entered: true)
 meditation.performances.create(date: (Date.today-7), count: 1, entered: true)
-meditation.performances.create(date: (Date.today-8), count: 0, entered: true)
+meditation.performances.create(date: (Date.today-8), count: 1, entered: true)
 meditation.performances.create(date: (Date.today-9), count: 1, entered: true)
 meditation.performances.create(date: (Date.today-10), count: 1, entered: true)
-meditation.performances.create(date: (Date.today-11), count: 0, entered: true)
+meditation.performances.create(date: (Date.today-11), count: 1, entered: true)
 meditation.performances.create(date: (Date.today-12), count: 1, entered: true)
 meditation.performances.create(date: (Date.today-13), count: 1, entered: true)
 meditation.performances.create(date: (Date.today-14), count: 1, entered: true)
-meditation.performances.create(date: (Date.today-15), count: 0, entered: true)
+meditation.performances.create(date: (Date.today-15), count: 1, entered: true)
 meditation.performances.create(date: (Date.today-16), count: 1, entered: true)
 meditation.performances.create(date: (Date.today-17), count: 1, entered: true)
 meditation.performances.create(date: (Date.today-18), count: 1, entered: true)
