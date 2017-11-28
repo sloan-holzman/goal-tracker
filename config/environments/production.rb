@@ -103,5 +103,5 @@ Rails.application.configure do
    :enable_starttls_auto => true
   }
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { :host => 'goaltracker2000.heroku.com' }
+  config.action_mailer.default_url_options = { :host => 'https://goaltracker2000.heroku.com' }
 end
