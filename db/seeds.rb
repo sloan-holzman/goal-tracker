@@ -6,9 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-sloan = User.create(email: 'sloan.holzman@gmail.com', password: 'password', first_name: 'sloan', last_name: 'holzman', reminder_frequency: "Daily")
-bob = User.create(email: 'bob@gmail.com', password: 'password', first_name: 'bob', last_name: 'johnson')
-billy = User.create(email: 'billy@gmail.com', password: 'password', first_name: 'billy', last_name: 'johnson', reminder_day: "Monday")
+sloan = User.new(email: 'sloan.holzman@gmail.com', password: 'password', first_name: 'sloan', last_name: 'holzman', reminder_frequency: "Daily")
+sloan.skip_confirmation!
+sloan.save!
+bob = User.new(email: 'bob@gmail.com', password: 'password', first_name: 'bob', last_name: 'johnson')
+bob.skip_confirmation!
+bob.save!
+billy = User.new(email: 'billy@gmail.com', password: 'password', first_name: 'billy', last_name: 'johnson', reminder_day: "Monday")
+billy.skip_confirmation!
+billy.save!
 running = sloan.metrics.create(name: 'Running', unit: 'miles', target: 15, good: true, duration: 'week')
 meditation = sloan.metrics.create(name: 'Meditation', unit: 'sessions', target: 6, good: true, duration: 'week')
 running2 = bob.metrics.create(name: 'Running', unit: 'miles', target: 10, good: true, duration: 'week')
