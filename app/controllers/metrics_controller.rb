@@ -70,19 +70,6 @@ class MetricsController < ApplicationController
     for metric in @metrics
       start_dates.push(metric.start_date)
     end
-    # last = Date.parse('2001-01-01')
-    # for metric in @metrics
-    #   for performance in metric.performances
-    #     # performances.push(performance)
-    #     if performance.date < start
-    #       start = performance.date
-    #     end
-    #     if performance.date > last
-    #       last = performance.date
-    #     end
-    #   end
-    # end
-    # @performances = performances.sort_by { |performance| performance[:date] }
     @start = start_dates.min.beginning_of_week(:sunday)
     @last = Date.today.end_of_week(:saturday)
     @dates = []
@@ -90,6 +77,27 @@ class MetricsController < ApplicationController
     while day <= @last
       @dates.push(day)
       day +=7
+    end
+    @rows = []
+    for metric in @metrics
+      row = []
+      performances = metric.performances.select {|performance| performance.date >= metric.start_date}
+      sorted_performances = performances.sort_by { |performance| performance[:date] }
+      for date in @dates
+        weekly_count = 0
+        for performance in sorted_performances
+          if performance.date >= date && performance.date < (date+7)
+            weekly_count += performance.count
+          end
+        end
+        if (date+6)<metric.start_date
+          row.push("")
+        else
+          row.push(weekly_count)
+        end
+        weekly_count = 0
+      end
+      @rows.push(row)
     end
   end
 
