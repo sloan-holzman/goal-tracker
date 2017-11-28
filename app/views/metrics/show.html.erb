@@ -1,5 +1,6 @@
 <h2><%= @metric.name %></h2>
 <h2>Goal: <%= @metric.target %> <%= @metric.unit %> per <%= @metric.duration %></h2>
+<p>Start date: <%= @metric.start_date %></p>
 <p>(It's a <%= @metric.good ? 'good' : 'bad' %> thing i.e. you are trying to <%= @metric.good ? 'more' : 'less' %> of it)</p>
 
 <%= line_chart @all_data %>

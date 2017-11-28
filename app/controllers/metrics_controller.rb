@@ -91,6 +91,13 @@ class MetricsController < ApplicationController
   def update
     @metric = current_user.metrics.find(params[:id])
     @metric.update(metric_params)
+    if Date.today > @metric.start_date
+      (@metric.start_date..Date.today).each do |date|
+        if !@metric.performances.exists?(date: date)
+          @metric.performances.create!(count: 0, date: date, entered: false)
+        end
+      end
+    end
     flash[:notice] = "Goal #{@metric.name} updated successfully"
     redirect_to user_metric_path(current_user,@metric)
   end
