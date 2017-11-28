@@ -3,7 +3,9 @@
 <p>Start date: <%= @metric.start_date %></p>
 <p>(It's a <%= @metric.good ? 'good' : 'bad' %> thing i.e. you are trying to <%= @metric.good ? 'more' : 'less' %> of it)</p>
 
-<%= line_chart @all_data %>
+<% if @metric.start_date <= Date.today %>
+  <%= line_chart @all_data %>
+<% end %>
 
 <p><%= link_to "Edit Metric", edit_user_metric_path(current_user, @metric) %></p>
 <p><%= link_to "Delete Metric", user_metric_path(current_user, @metric), method: :delete %></p>

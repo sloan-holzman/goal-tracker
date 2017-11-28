@@ -9,9 +9,11 @@ class MetricsController < ApplicationController
 
     @all_data = []
     for metric in @metrics
-      performances = metric.performances
-      set = {name: metric.name,data: performances.group_by_day(:date).sum(:count)}
-      @all_data.push(set)
+      if Date.today >= metric.start_date
+        performances = metric.performances
+        set = {name: metric.name,data: performances.group_by_day(:date, week_start: metric.start_date).sum(:count)}
+        @all_data.push(set)
+      end
     end
 
     target_data = []
