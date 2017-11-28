@@ -75,6 +75,11 @@ class MetricsController < ApplicationController
 
   def create
     @metric = current_user.metrics.create!(metric_params)
+    if Date.today > @metric.start_date
+      (@metric.start_date..Date.today).each do |date|
+        @metric.performances.create!(count: 0, date: date, entered: false)
+      end
+    end
     flash[:notice] = "Goal #{@metric.name} created successfully"
     redirect_to user_metric_path(current_user,@metric)
   end
