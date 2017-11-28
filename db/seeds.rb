@@ -15,9 +15,9 @@ bob.save!
 billy = User.new(email: 'billy@gmail.com', password: 'password', first_name: 'billy', last_name: 'johnson', reminder_day: "Monday")
 billy.skip_confirmation!
 billy.save!
-running = sloan.metrics.create(name: 'Running', unit: 'miles', target: 15, good: true, duration: 'week')
-meditation = sloan.metrics.create(name: 'Meditation', unit: 'sessions', target: 6, good: true, duration: 'week')
-running2 = bob.metrics.create(name: 'Running', unit: 'miles', target: 10, good: true, duration: 'week')
+running = sloan.metrics.create(name: 'Running', unit: 'miles', target: 15, good: true, duration: 'week', start_date: (Date.today-21))
+meditation = sloan.metrics.create(name: 'Meditation', unit: 'sessions', target: 6, good: true, duration: 'week', start_date: (Date.today-21))
+running2 = bob.metrics.create(name: 'Running', unit: 'miles', target: 10, good: true, duration: 'week', start_date: (Date.today-8))
 
 group = Group.create(name: 'sloanbob')
 Membership.create(user: sloan, group: group, admin: true)

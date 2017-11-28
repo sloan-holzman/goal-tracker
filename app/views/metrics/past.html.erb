@@ -14,7 +14,8 @@
       <td><%= link_to metric.name, user_metric_path(current_user, metric) %></td>
       <td><%= metric.target %> <%= metric.unit %></td>
       <td><%= metric.start_date %></td>
-      <% sorted_performances = metric.performances.sort_by { |performance| performance[:date] } %>
+      <% performances = metric.performances.select {|performance| performance.date >= metric.start_date} %>
+      <% sorted_performances = performances.sort_by { |performance| performance[:date] } %>
       <% for date in @dates %>
         <% weekly_count = 0 %>
         <% for performance in sorted_performances %>
@@ -22,7 +23,9 @@
             <% weekly_count += performance.count %>
           <% end %>
         <% end %>
-        <% if metric.good %>
+        <% if (date+6)<metric.start_date %>
+        <td class="prior"></td>
+        <% elsif metric.good %>
           <td class=<%= weekly_count >= metric.target ? "hit" : "missed" %>><%= weekly_count %></td>
         <% else %>
           <td class=<%= weekly_count <= metric.target ? "hit" : "missed" %>><%= weekly_count %></td>

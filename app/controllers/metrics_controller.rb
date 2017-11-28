@@ -38,22 +38,27 @@ class MetricsController < ApplicationController
 
   def past
     @metrics = current_user.metrics
-    start = Date.today
-    last = Date.parse('2001-01-01')
+    start_dates = []
     for metric in @metrics
-      for performance in metric.performances
-        # performances.push(performance)
-        if performance.date < start
-          start = performance.date
-        end
-        if performance.date > last
-          last = performance.date
-        end
-      end
+      start_dates.push(metric.start_date)
     end
+    start = start_dates.min
+    # last = Date.parse('2001-01-01')
+    # for metric in @metrics
+    #   for performance in metric.performances
+    #     # performances.push(performance)
+    #     if performance.date < start
+    #       start = performance.date
+    #     end
+    #     if performance.date > last
+    #       last = performance.date
+    #     end
+    #   end
+    # end
     # @performances = performances.sort_by { |performance| performance[:date] }
     @start = start.beginning_of_week(:sunday)
-    @last = [last.end_of_week(:saturday),Date.today].min
+    # @last = [last.end_of_week(:saturday),Date.today].min
+    @last = Date.today.end_of_week(:saturday)
     dates = []
     day = @start
     while day <= @last
