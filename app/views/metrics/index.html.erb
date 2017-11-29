@@ -4,7 +4,7 @@
     <p><%= streak[0].name%>: You've <%= streak[0].good ? "" : "not" %> done it <%= streak[1] %> days in a row.  Keep it up!</p>
   <% end %>
   <%= column_chart @week_data, colors: ["#4caf50", "#999"] %>
-  <h2>All time</h2>
+  <h2>Last 10 weeks</h2>
   <% for streak in @week_streaks %>
     <p><%= streak[0].name%>: You've hit your weekly goal the previous <%= streak[1] %> weeks.  Keep it up!</p>
   <% end %>
@@ -40,6 +40,7 @@
     <% i+=1 %>
   <% end %>
   </table>
+  <h2>All time</h2>
   <%= line_chart @all_data, colors: ["#4CAF50", "#FF0000", "#CA9CE1", "#F4E04D", "#1C3144", "#58B09C"] %>
 <% else %>
    <h2>You have no metrics</h2>

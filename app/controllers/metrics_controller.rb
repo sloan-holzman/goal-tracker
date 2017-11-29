@@ -21,7 +21,8 @@ class MetricsController < ApplicationController
   def show
     @metric = current_user.metrics.find(params[:id])
     @performances = @metric.performances
-    @all_data = [{name: @metric.name,data: @performances.group_by_day(:date).sum(:count)}]
+    @daily_data = [{name: @metric.name,data: @performances.group_by_day(:date).sum(:count)}]
+    @weekly_data = [{name: @metric.name,data: @performances.group_by_week(:date).sum(:count)}]
   end
 
   def create

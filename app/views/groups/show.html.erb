@@ -1,29 +1,27 @@
 <h2><%= @group.name %> Page</h2>
-<h3>Members:</h3>
-<% for user in @group.users %>
-  <% if user.email != current_user.email %>
-    <h4><%= user.email %></h4>
-  <% end %>
-<% end %>
+<h4>Members:</h4>
+  <p><%= @members.join(", ") %></p>
 <h2>Week of <%= Date.today.beginning_of_week(:sunday) %></h2>
 <% i=0 %>
 <% for user in @group.users %>
-  <h4><%= user.email %></h4>
+  <p><%= user.first_name %> <%= user.last_name %></p>
   <%= column_chart @group_week_data[i]  %>
   <% i+=1 %>
 <% end %>
-<h3><%= link_to "Invite new members", new_user_group_invitation_path(current_user, @group) %></h3>
-<h3><%= link_to "Leave group", leave_group_path(current_user, @group), method: :delete %></h3>
-<% if @membership.admin %>
-  <h3><%= link_to "Edit group", edit_user_group_path(current_user, @group)%></h3>
-<% end %>
-<% if @membership.admin %>
-  <h3><%= link_to "Delete group", "/users/#{current_user.id}/groups/#{@group.id}", method: :delete %></h3>
-<% end %>
-<% if @group.competitions.length > 0 %>
+<div class="links">
+  <%= link_to "Invite new members", new_user_group_invitation_path(current_user, @group) %>
+  <%= link_to "Leave group", leave_group_path(current_user, @group), method: :delete %>
+  <% if @membership.admin %>
+    <%= link_to "Edit group", edit_user_group_path(current_user, @group)%>
+  <% end %>
+  <% if @membership.admin %>
+    <%= link_to "Delete group", "/users/#{current_user.id}/groups/#{@group.id}", method: :delete %>
+  <% end %>
+  <% if @group.competitions.length > 0 %>
 <h2>Competitions:</h2>
   <% for competition in @group.competitions %>
-    <p><%= link_to competition.metric_name, user_group_competition_path(current_user, @group, competition) %></p>
+    <h4><%= link_to competition.metric_name, user_group_competition_path(current_user, @group, competition) %></h4>
   <% end %>
 <% end %>
-<h3><%= link_to "Create new competition", new_user_group_competition_path(current_user, @group)%></h3>
+  <%= link_to "Create new competition", new_user_group_competition_path(current_user, @group)%>
+</div>

@@ -1,24 +1,39 @@
 <h2><%= @metric.name  %></h2>
-
+<br>
+<section class="form-section">
 <%= form_for [current_user,@metric] do |f|  %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <table class="metric-table" style="width:100%">
+    <th>Field</th>
+    <th>Value</th>
+    <tr>
+      <td><%= f.label :name %></td>
+      <td><%= f.text_field :name, class: "field" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :unit %></td>
+      <td><%= f.text_field :unit, class: "field" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :target %></td>
+      <td><%= f.number_field :target, class: "field", min: "0"  %></td>
+    </tr>
 
-  <%= f.label :unit %>
-  <%= f.text_field :unit %>
+    <tr>
+      <td><%= f.label "Start Date" %></td>
+      <td><%= f.date_field :start_date, class: "field date"%></td>
+    </tr>
 
-  <%= f.label :target %>
-  <%= f.number_field :target, {:min=>"0"} %>
+    <tr>
+      <td><%= f.label "Metric type" %></td>
+      <td><%=  f.select :good, [['Good metric', true], ['Bad metric', false]]%></td>
+    </tr>
 
-  <%= f.label "Start Date" %>
-  <%= f.date_field :start_date %>
-
-  <%= f.label "Metric type" %>
-  <%=  f.select :good, [['Good metric', true], ['Bad metric', false]]%>
-
-  <%= f.label "Per" %>
-  <%=  f.select :duration, [['Week','Week']]%>
-
-  <%= f.submit "Update" %>
-
+    <tr>
+      <td><%= f.label "Per" %></td>
+      <td><%=  f.select :duration, [['Week','Week']]%></td>
+    </tr>
+  </table>
+  <br>
+  <%= f.submit "Update", class: "button wide short" %>
 <% end %>
+</section>

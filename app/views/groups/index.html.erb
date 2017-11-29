@@ -3,13 +3,10 @@
   <h3>You are not currently in any groups</h3>
 <% else %>
   <% for group in @groups %>
+  <div class="links">
     <h3><%= link_to group.name, user_group_path(current_user, group) %></h3>
-    <h4>Members:</h4>
-    <% for user in group.users %>
-      <% if user.email != current_user.email %>
-        <h5><%= user.email %></h5>
-      <% end %>
-    <% end %>
+    <p>Members: <%= group.users.count %></p>
+  </div>
   <% end %>
 <% end %>
 <% if @your_invitations.length > 0 %>

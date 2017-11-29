@@ -22,6 +22,7 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @group_week_data = []
+    @members = member_list(@group.users)
     for user in @group.users
       target_data = []
       for metric in user.metrics
@@ -84,6 +85,14 @@ class GroupsController < ApplicationController
   private
   def group_params
     params.require(:group).permit(:name, :private)
+  end
+
+  def member_list(members)
+    member_list = []
+    for member in members
+      member_list.push("#{member.first_name} #{member.last_name}")
+    end
+    return member_list
   end
 
 end
