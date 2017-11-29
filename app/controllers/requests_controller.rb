@@ -1,4 +1,7 @@
 class RequestsController < ApplicationController
+  before_action :authenticate_user!
+
+
   def all
     @admin_memberships = current_user.memberships.where(admin: true)
     groups = []

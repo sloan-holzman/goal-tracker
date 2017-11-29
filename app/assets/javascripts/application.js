@@ -14,6 +14,7 @@
 //= require turbolinks
 //= require_tree .
 //= require chartkick
+//= require jquery.slick
 
 // Below is the dropdown taken from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown
 // When the user clicks on the button, toggle between hiding and showing the dropdown content
@@ -34,3 +35,15 @@ window.onclick = function(event) {
     }
   }
 };
+
+$(".autoplay").slick({
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  dots: true,
+  infinite: true,
+  speed: 500,
+  fade: true,
+  cssEase: "linear"
+});
