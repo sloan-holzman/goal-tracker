@@ -2,10 +2,7 @@ Rails.application.routes.draw do
   # learned how to update users from: https://jacopretorius.net/2014/03/adding-custom-fields-to-your-devise-user-model-in-rails-4.html
   devise_for :users, :controllers => { registrations: 'registrations' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: 'metrics#index'
-
-  # match 'performances/all/edit' => 'performances#edit_all', :as => :edit_all, :via => :get
-  # match 'performances/all' => 'performances#update_all', :as => :update_all, :via => :put
+  root to: 'demos#index'
 
   get 'demos' => 'demos#index', :as => :demo
   get 'profiles/show' => 'profiles#show', :as => :profile

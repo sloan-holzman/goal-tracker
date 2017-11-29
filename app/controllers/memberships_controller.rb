@@ -1,4 +1,7 @@
 class MembershipsController < ApplicationController
+  before_action :authenticate_user!
+
+
   def destroy
     @group = Group.find(params[:group_id])
     @membership = Membership.find_by(user: current_user, group: @group)

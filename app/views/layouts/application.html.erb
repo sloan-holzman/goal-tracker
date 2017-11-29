@@ -8,6 +8,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag asset_path('Logo.png'), :rel => 'icon', :type =>  'image/png' %>
     <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Nunito+Sans' %>
+
   </head>
   <body>
     <nav>
@@ -18,8 +19,12 @@
           <% end %>
         </div>
         <div class="links">
+          <% if current_user %>
+            <a class="nav-link" href="/users/<%= current_user.id %>/metrics">PAST PERFORMANCE</a>
+          <% else %>
           <a class="nav-link" href="/">PAST PERFORMANCE</a>
-          <a class="nav-link" href="/performances/all/edit">ENTER DAILY PERFORMANCE</a>
+          <% end %>
+            <a class="nav-link" href="/performances/all/edit">ENTER DAILY PERFORMANCE</a>
           <% if !current_user %>
             <a class="nav-link" href="/groups/all">ACCOUNTABILITY GROUPS</a>
           <% else %>
