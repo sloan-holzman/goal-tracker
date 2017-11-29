@@ -2,17 +2,21 @@
 <html>
   <head>
     <title>Goal Tracker</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
     <%= csrf_meta_tags %>
     <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
     <%= stylesheet_link_tag     'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag asset_path('Logo.png'), :rel => 'icon', :type =>  'image/png' %>
     <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Nunito+Sans' %>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
     <nav>
-      <div class="container">
+      <div class="nav-container">
         <div class="logo">
           <%= link_to root_path do %>
             <%= image_tag 'Logo.png' %>
@@ -31,7 +35,11 @@
             <a class="nav-link" href="/users/<%= current_user.id %>/groups">ACCOUNTABILITY GROUPS</a>
           <% end %>
           <div class="dropdown">
+          <% if !current_user %>
+          <%= button_to "Add", new_admin_course_path%>
+          <% else %>
           <button onclick="myFunction()" class="dropbtn">blah blah</button>
+          <% end %>
             <div id="myDropdown" class="dropdown-content">
               <a href="/profiles/show">PROFILE</a>
               <% if !current_user %>

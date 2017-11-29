@@ -13,8 +13,6 @@
  *= require_tree .
  *= require_self
  */
-@import "slick";
-@import "slick-theme";
 
 // td,
 // th {
@@ -89,7 +87,7 @@ main {
   font-family: "Nunito Sans", sans-serif !important;
 }
 
-.container {
+.nav-container {
   margin: 0 15% 0 15%;
   display: flex;
   flex-direction: row;
@@ -175,51 +173,14 @@ table {
   text-align: center;
 }
 
-// everything below is for the carousel slider, adapted from https://github.com/bodrovis/jquery-slick-rails-demo
-
-@import "slick";
-@import "slick-theme";
-
-// .scroller {
-//   overflow: hidden;
-// }
-//
-// .scroller:nth-child(n + 1) {
-//   display: none;
-// }
-//
-// .slick-initialized,
-// .scroller:first-child {
-//   display: block;
-// }
-
-.scroller {
-  visibility: hidden;
-}
-//
-.slick-initialized,
-.scroller {
-  visibility: visible;
+.carousel-inner {
+  text-align: center;
+  font-size: 30px;
+  width: 60vw;
+  height: 400px;
 }
 
-.scroller {
-  div {
-    text-align: center;
-    font-size: 30px;
-    width: 60vw;
-    height: 400px;
-  }
-}
-
-.slick-prev::before,
-.slick-next::before {
-  color: #000;
-}
-
-.slick-next {
-  right: -25px;
-}
-
-.slick-prev {
-  left: -25px;
+.carousel-caption {
+  top: 0;
+  bottom: auto;
 }
