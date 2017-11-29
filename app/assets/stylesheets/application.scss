@@ -14,12 +14,6 @@
  *= require_self
  */
 
-// td,
-// th {
-//   border: 1px solid black;
-//   text-align: center;
-// }
-
 // table styles taken from https://www.w3schools.com/css/tryit.asp?filename=trycss_table_fancy
 
 .metric_table {
@@ -49,17 +43,32 @@
   color: white;
 }
 
+.metric_table td {
+  color: #999;
+}
+
 .hit {
   background: #4caf50;
+  color: white !important;
 }
 
 .missed {
   background: red;
+  color: white !important;
 }
 
 // .prior {
 //   background: #f5f5f5;
 // }
+
+html,
+body {
+  height: 100%; /* needed for proper layout */
+}
+
+html {
+  overflow: hidden;
+}
 
 body {
   display: flex;
@@ -69,22 +78,30 @@ body {
 
 nav {
   background-color: #f3f3f4;
-  flex-grow: 5;
+  // flex-grow: 5;
   height: 120px;
   font-family: "Nunito Sans", sans-serif !important;
   font-size: 14px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  flex: 0 0 auto;
 }
 
 main {
-  flex-grow: 5;
-  margin: 0 15%;
+  padding: 0 15%;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: "Nunito Sans", sans-serif !important;
+  flex: 1 1 auto;
+  position: relative; /* need this to position inner content */
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+  width: 0px; /* remove scrollbar space */
+  background: transparent; /* make scrollbar invisible */
 }
 
 .nav-container {
@@ -95,7 +112,7 @@ main {
   justify-content: space-between;
 }
 
-.links {
+.nav-links {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -104,8 +121,8 @@ main {
 }
 
 a:link {
+  color: black !important;
   text-decoration: none;
-  color: black;
   font-weight: bold;
 }
 
@@ -183,4 +200,25 @@ table {
 .carousel-caption {
   top: 0;
   bottom: auto;
+}
+
+.links a {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: #74776b !important;
+  font-weight: bold;
+}
+
+.links a:hover {
+  color: #3e8e41 !important;
+}
+
+.metric_table a {
+  color: #74776b !important;
+  font-weight: bold;
+}
+
+.metric_table a:hover {
+  color: #3e8e41 !important;
 }

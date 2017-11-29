@@ -22,7 +22,7 @@
             <%= image_tag 'Logo.png' %>
           <% end %>
         </div>
-        <div class="links">
+        <div class="nav-links">
           <% if current_user %>
             <a class="nav-link" href="/users/<%= current_user.id %>/metrics">PAST PERFORMANCE</a>
           <% else %>
@@ -36,9 +36,10 @@
           <% end %>
           <div class="dropdown">
           <% if !current_user %>
-          <%= button_to "Add", new_admin_course_path%>
+          <button class="dropbtn" href="/users/sign_up">SIGN UP</a>
+          <!-- <%= button_to "Register", new_user_registration_path%> -->
           <% else %>
-          <button onclick="myFunction()" class="dropbtn">blah blah</button>
+          <button onclick="myFunction()" class="dropbtn">Hi, <%= current_user.first_name %></button>
           <% end %>
             <div id="myDropdown" class="dropdown-content">
               <a href="/profiles/show">PROFILE</a>

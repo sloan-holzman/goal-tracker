@@ -8,6 +8,8 @@
   <% for streak in @week_streaks %>
     <p><%= streak[0].name%>: You've hit your weekly goal the previous <%= streak[1] %> weeks.  Keep it up!</p>
   <% end %>
+  <br>
+  <br>
   <table class="metric_table">
     <tr>
       <th>Metric</th>
@@ -38,8 +40,10 @@
     <% i+=1 %>
   <% end %>
   </table>
-  <%= line_chart @all_data %>
+  <%= line_chart @all_data, colors: ["#4CAF50", "#FF0000", "#CA9CE1", "#F4E04D", "#1C3144", "#58B09C"] %>
 <% else %>
    <h2>You have no metrics</h2>
 <% end %>
-<p><%= link_to "Create New Metric", new_user_metric_path(current_user) %></p>
+<div class="links">
+  <%= link_to "Create New Metric", new_user_metric_path(current_user) %>
+</div>

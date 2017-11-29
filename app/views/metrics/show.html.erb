@@ -4,10 +4,12 @@
 <p>(It's a <%= @metric.good ? 'good' : 'bad' %> thing i.e. you are trying to <%= @metric.good ? 'more' : 'less' %> of it)</p>
 
 <% if @metric.start_date <= Date.today %>
-  <%= line_chart @all_data %>
+  <%= line_chart @all_data, colors: ["#4caf50"] %>
 <% end %>
 
-<p><%= link_to "Edit Metric", edit_user_metric_path(current_user, @metric) %></p>
-<p><%= link_to "Delete Metric", user_metric_path(current_user, @metric), method: :delete %></p>
-<p><%= link_to "Add Performance", new_user_metric_performance_path(current_user, @metric) %></p>
-<p><%= link_to "All Metrics", user_metrics_path(current_user) %></p>
+<div class="links">
+  <%= link_to "Edit Metric", edit_user_metric_path(current_user, @metric) %>
+  <%= link_to "Delete Metric", user_metric_path(current_user, @metric), method: :delete %>
+  <%= link_to "Add Performance", new_user_metric_performance_path(current_user, @metric) %>
+  <%= link_to "All Metrics", user_metrics_path(current_user) %>
+</div>
