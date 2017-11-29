@@ -16,7 +16,7 @@
       <th>Weekly Goal</th>
       <th>Start Date</th>
       <% for date in @dates %>
-        <th><%= date %></th>
+        <th><%= date.strftime("%m/%d") %></th>
       <% end %>
     </tr>
   <% i = 0 %>

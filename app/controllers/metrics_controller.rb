@@ -158,7 +158,7 @@ class MetricsController < ApplicationController
     for metric in metrics
       start_dates.push(metric.start_date)
     end
-    start = start_dates.min.beginning_of_week(:sunday)
+    start = [start_dates.min.beginning_of_week(:sunday),(Date.today - 63).beginning_of_week(:sunday)].max
     last = Date.today.end_of_week(:saturday)
     dates = []
     day = start
