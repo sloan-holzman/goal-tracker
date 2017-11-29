@@ -17,13 +17,15 @@
 // table styles taken from https://www.w3schools.com/css/tryit.asp?filename=trycss_table_fancy
 
 .metric-table {
-  border-collapse: collapse;
-  width: 80%;
+  // border-collapse: collapse;
+  width: 90%;
+  border: 1px solid #ddd;
 }
 
 .metric-table td,
 .metric-table th {
-  border: 1px solid #ddd;
+  // border-top: 1px solid #ddd;
+  // border-bottom: 1px solid #ddd;
   padding: 8px;
 }
 
@@ -31,8 +33,18 @@
   background-color: #f2f2f2;
 }
 
+.metric-table tr:first-child {
+  opacity: 1;
+}
+
+.metric-table tr {
+  background-color: #ddd;
+  opacity: 0.8;
+}
+
 .metric-table tr:hover {
   background-color: #ddd;
+  opacity: 1;
 }
 
 .metric-table th {
@@ -41,6 +53,7 @@
   text-align: center;
   background-color: #4caf50;
   color: white;
+  opacity: 1;
 }
 
 .metric-table td {
@@ -57,9 +70,9 @@
   color: white !important;
 }
 
-.prior {
-  background: #f2f2f2;
-}
+// .prior {
+//   background: #f2f2f2;
+// }
 
 html,
 body {
@@ -219,8 +232,8 @@ table {
 }
 
 .metric-table a {
-  color: #74776b !important;
-  font-weight: bold;
+  color: #4c4e46 !important;
+  font-weight: 1000;
 }
 
 .metric-table a:hover {
