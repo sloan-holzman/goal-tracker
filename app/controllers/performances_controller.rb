@@ -17,6 +17,7 @@ class PerformancesController < ApplicationController
   def create
     @metric = current_user.metrics.find(params[:metric_id])
     @performance = @metric.performances.create!(performance_params.merge(entered: true))
+    flash[:notice] = "Metric #{@metric.name} created successfully"
     redirect_to user_metric_performance_path(current_user,@metric, @performance)
   end
 
@@ -28,6 +29,7 @@ class PerformancesController < ApplicationController
   def update
     @metric = current_user.metrics.find(params[:metric_id])
     @performance = @metric.performances.update(performance_params.merge(entered: true))
+    flash[:notice] = "Metric #{@metric.name} updated successfully"
     redirect_to user_metric_performance_path(current_user,@metric, @performance)
   end
 
@@ -37,12 +39,6 @@ class PerformancesController < ApplicationController
     @performance.destroy
     redirect_to user_metric_path(current_user, @metric)
   end
-
-  # def create_all
-  #   for metric in Metric.all
-  #     metric.performances.create!(date: Date.today, count: 0)
-  #   end
-  # end
 
 # learned edit_all and update_all from http://anthonylewis.com/2011/04/15/editing-multiple-records-in-rails/
 
@@ -64,6 +60,7 @@ class PerformancesController < ApplicationController
       @performance.update_attributes!(performances_params(id))
       @performance.update(entered: true)
     end
+    flash[:notice] = "Performances updated successfully"
     redirect_to(user_metrics_path(current_user))
   end
 
@@ -91,6 +88,7 @@ class PerformancesController < ApplicationController
       @performance.update_attributes!(performances_params(id))
       @performance.update(entered: true)
     end
+    flash[:notice] = "Performances updated successfully"
     redirect_to(user_metrics_path(current_user))
   end
 

@@ -7,7 +7,7 @@ class MetricsController < ApplicationController
     @performances = current_user.performances
     @metrics = current_user.metrics
     @day_streaks = calculate_day_streak(@metrics)
-    @all_data = create_date_for_line_graph(@metrics)
+    @all_data = create_data_for_line_graph(@metrics)
     @week_data = create_data_for_current_week_graph(@metrics)
     @dates = create_array_of_weeks(@metrics)
     @rows = create_table_of_weekly_performances(@metrics, @dates)
@@ -21,8 +21,8 @@ class MetricsController < ApplicationController
   def show
     @metric = current_user.metrics.find(params[:id])
     @performances = @metric.performances
-    @daily_data = [{name: @metric.name,data: @performances.group_by_day(:date).sum(:count)}]
-    @weekly_data = [{name: @metric.name,data: @performances.group_by_week(:date).sum(:count)}]
+    @daily_data = [{name: @metric.name,data: @performances.where("date >= ?",@metric.start_date).group_by_day(:date).sum(:count)}]
+    @weekly_data = [{name: @metric.name,data: @performances.where("date >= ?",@metric.start_date).group_by_week(:date).sum(:count)}]
   end
 
   def create
@@ -74,12 +74,12 @@ class MetricsController < ApplicationController
     params.require(:metric).permit(:name, :unit, :target, :good, :duration, :start_date)
   end
 
-  def create_date_for_line_graph(metrics)
+  def create_data_for_line_graph(metrics)
     all_data = []
     for metric in metrics
       if Date.today >= metric.start_date
         performances = metric.performances
-        set = {name: metric.name,data: performances.group_by_day(:date, week_start: metric.start_date).sum(:count)}
+        set = {name: metric.name,data: performances.where("date >= ?",metric.start_date).group_by_day(:date).sum(:count)}
         all_data.push(set)
       end
     end
