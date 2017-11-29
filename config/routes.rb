@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :groups do
       resources :requests
       resources :invitations
+      resources :competitions
     end
     resources :metrics do
       resources :performances

@@ -1,0 +1,25 @@
+<h2><%= @competition.metric_name %></h2>
+<p>Unit: <%= @competition.metric_unit %></p>
+<p>Start date: <%= @competition.start_date %></p>
+<p>End date: <%= @competition.end_date %></p>
+<% if Date.today >= @competition.start_date %>
+  <h3>Leaderboard: </h3>
+  <% place = 1 %>
+  <table>
+    <tr>
+      <th>Ranking</th>
+      <th>Competitor</th>
+      <th>Total <%= @competition.metric_unit %></th>
+    </tr>
+    <% for competitor in @running_totals %>
+      <tr>
+        <td><%= place %></td>
+        <td><%= competitor[:name] %></td>
+        <td><%= competitor[:total] %></td>
+      </tr>
+      <% place += 1 %>
+    <% end %>
+  </table>
+
+<% end %>
+<p><%= link_to "Back to Group '#{@group.name}'", user_group_path(current_user, @group) %></p>

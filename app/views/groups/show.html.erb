@@ -20,3 +20,10 @@
 <% if @membership.admin %>
   <h3><%= link_to "Delete group", "/users/#{current_user.id}/groups/#{@group.id}", method: :delete %></h3>
 <% end %>
+<% if @group.competitions.length > 0 %>
+<h2>Competitions:</h2>
+  <% for competition in @group.competitions %>
+    <p><%= link_to competition.metric_name, user_group_competition_path(current_user, @group, competition) %></p>
+  <% end %>
+<% end %>
+<h3><%= link_to "Create new competition", new_user_group_competition_path(current_user, @group)%></h3>

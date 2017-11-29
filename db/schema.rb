@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171128141128) do
+ActiveRecord::Schema.define(version: 20171129013002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "competitions", force: :cascade do |t|
+    t.bigint "group_id"
+    t.date "start_date", default: "2017-11-28"
+    t.date "end_date", default: "2017-11-28"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "metric_name"
+    t.string "metric_unit"
+    t.index ["group_id"], name: "index_competitions_on_group_id"
+  end
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
@@ -43,9 +54,9 @@ ActiveRecord::Schema.define(version: 20171128141128) do
   create_table "metrics", force: :cascade do |t|
     t.string "name"
     t.string "unit"
-    t.integer "target"
+    t.integer "target", default: 5
     t.boolean "good", default: true
-    t.string "duration"
+    t.string "duration", default: "Week"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -96,6 +107,7 @@ ActiveRecord::Schema.define(version: 20171128141128) do
     t.string "unconfirmed_email"
   end
 
+  add_foreign_key "competitions", "groups"
   add_foreign_key "invitations", "groups"
   add_foreign_key "memberships", "groups"
   add_foreign_key "memberships", "users"
