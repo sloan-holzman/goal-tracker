@@ -6,8 +6,10 @@ class InvitationsController < ApplicationController
   end
 
   def create
+    @user = current_user
     @group = Group.find(params[:group_id])
     @invitation = Invitation.create(invitation_params.merge(group: @group))
+    GoalMailer.invitation_email(@user, @group, invitation_params[:email]).deliver
     flash[:notice] = "Invitation to #{@invitation.email} for group #{@group.name} created successfully"
     redirect_to user_group_path(current_user,@group)
   end

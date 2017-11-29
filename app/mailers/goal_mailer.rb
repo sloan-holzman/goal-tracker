@@ -10,6 +10,13 @@ class GoalMailer < ActionMailer::Base
     mail(to: @user.email, subject: "Group '#{@group.name}' created!")
   end
 
+  def invitation_email(user, group, email)
+    @user = user
+    @group = group
+    @email = email
+    mail(to: @email, subject: "You were invited to join Accountability Group '#{@group.name}'")
+  end
+
   def reminder_email(user)
     @user = user
     @metrics = @user.metrics
