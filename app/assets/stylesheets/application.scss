@@ -16,26 +16,26 @@
 
 // table styles taken from https://www.w3schools.com/css/tryit.asp?filename=trycss_table_fancy
 
-.metric_table {
+.metric-table {
   border-collapse: collapse;
   width: 80%;
 }
 
-.metric_table td,
-.metric_table th {
+.metric-table td,
+.metric-table th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-.metric_table tr:nth-child(even) {
+.metric-table tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-.metric_table tr:hover {
+.metric-table tr:hover {
   background-color: #ddd;
 }
 
-.metric_table th {
+.metric-table th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
@@ -43,7 +43,7 @@
   color: white;
 }
 
-.metric_table td {
+.metric-table td {
   color: #999;
 }
 
@@ -141,7 +141,7 @@ a:hover {
 }
 
 /*below here is the dropdown from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown*/
-.dropbtn {
+.button {
   background-color: #4caf50;
   color: white;
   padding: 16px;
@@ -150,8 +150,8 @@ a:hover {
   cursor: pointer;
 }
 
-.dropbtn:hover,
-.dropbtn:focus {
+.button:hover,
+.button:focus {
   background-color: #3e8e41;
 }
 
@@ -214,11 +214,46 @@ table {
   color: #3e8e41 !important;
 }
 
-.metric_table a {
+.metric-table a {
   color: #74776b !important;
   font-weight: bold;
 }
 
-.metric_table a:hover {
+.metric-table a:hover {
   color: #3e8e41 !important;
+}
+
+form-table {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.field {
+  text-align: center;
+  width: 50%;
+}
+
+.wide {
+  width: 150px;
+}
+
+.short {
+  height: 30px;
+  padding: 0px !important;
+}
+
+select,
+select:active,
+select:hover {
+  outline-color: #4caf50;
+}
+
+select option,
+select option:hover {
+  box-shadow: inset 20px 20px #4caf50;
 }

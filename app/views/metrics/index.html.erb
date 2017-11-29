@@ -10,7 +10,7 @@
   <% end %>
   <br>
   <br>
-  <table class="metric_table">
+  <table class="metric-table">
     <tr>
       <th>Metric</th>
       <th>Weekly Goal</th>
@@ -44,6 +44,7 @@
 <% else %>
    <h2>You have no metrics</h2>
 <% end %>
+<br>
 <div class="links">
-  <%= link_to "Create New Metric", new_user_metric_path(current_user) %>
+  <%= link_to "Create New Metric", new_user_metric_path(current_user)%>
 </div>

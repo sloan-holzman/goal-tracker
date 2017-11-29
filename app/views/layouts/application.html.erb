@@ -36,10 +36,10 @@
           <% end %>
           <div class="dropdown">
           <% if !current_user %>
-          <button class="dropbtn" href="/users/sign_up">SIGN UP</a>
+          <button href="/users/sign_up" class="button dropbtn">SIGN UP</a>
           <!-- <%= button_to "Register", new_user_registration_path%> -->
           <% else %>
-          <button onclick="myFunction()" class="dropbtn">Hi, <%= current_user.first_name %></button>
+          <button onclick="myFunction()" class="button dropbtn">Hi, <%= current_user.first_name %></button>
           <% end %>
             <div id="myDropdown" class="dropdown-content">
               <a href="/profiles/show">PROFILE</a>

@@ -33,8 +33,10 @@
     <p><%= request.created_at %></p>
   <% end %>
 <% end %>
-<p><%= link_to "Create new group", new_user_group_path(current_user) %></p>
-<p><%= link_to "See all groups", groups_all_path %></p>
-<% if @approval_requests.length > 0 %>
-  <p><%= link_to "Approve outstanding requests", request_all_path %></p>
-<% end %>
+<div class="links">
+  <%= link_to "Create new group", new_user_group_path(current_user) %>
+  <%= link_to "See all groups", groups_all_path %>
+  <% if @approval_requests.length > 0 %>
+    <%= link_to "Approve outstanding requests", request_all_path %>
+  <% end %>
+</div>

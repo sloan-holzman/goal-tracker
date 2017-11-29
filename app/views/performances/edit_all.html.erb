@@ -1,8 +1,8 @@
 <% if @performances.length > 0 %>
   <h2>You have not told how you did on the following days:</h2>
 
-  <%= form_for :performance, :url => update_all_path, :html => { :method => :put } do %>
-    <table>
+  <%= form_for :performance, :url => update_all_path, :html => { :method => :put} do %>
+    <table class="metric-table">
       <tr>
         <th>Metric</th>
         <th>Date</th>
@@ -13,15 +13,13 @@
       <tr>
         <td><%= performance.metric.name %></td>
         <td><%= performance.date %></td>
-        <td><%= performance_fields.number_field :count, {:min=>"0"} %></td>
+        <td><%= performance_fields.number_field :count, class: "field", min: "0" %></td>
       </tr>
         <% end %>
       <% end %>
     </table>
-
-    <div class="actions">
-      <%= submit_tag %>
-    </div>
+    <br>
+    <%= submit_tag("Save", :class => "button wide short" ) %>
   <% end %>
 <% else %>
   <h2>Unentered performances:</h2>
@@ -29,8 +27,9 @@
 <% end %>
 
 
-<h2>Choose a date to update old performances</h2>
+<h2>Choose a date to update old performances:</h2>
 <%= form_tag '/performances/day/select', method: :get do %>
   <%= date_field_tag "date", "default info" %>
-  <%= submit_tag "Save" %>
+  <br>
+  <%= submit_tag("Jump to day", :class => "button wide short" ) %>
 <% end %>

@@ -65,7 +65,7 @@ class MetricsController < ApplicationController
     @metric = current_user.metrics.find(params[:id])
     flash[:notice] = "Goal #{@metric.name} deleted successfully"
     @metric.destroy
-    redirect_to root_path
+    redirect_to user_metrics_path(current_user)
   end
 
   private

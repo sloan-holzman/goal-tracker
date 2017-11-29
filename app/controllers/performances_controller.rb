@@ -64,7 +64,7 @@ class PerformancesController < ApplicationController
       @performance.update_attributes!(performances_params(id))
       @performance.update(entered: true)
     end
-    redirect_to(root_url)
+    redirect_to(user_metrics_path(current_user))
   end
 
   def select_day
@@ -91,7 +91,7 @@ class PerformancesController < ApplicationController
       @performance.update_attributes!(performances_params(id))
       @performance.update(entered: true)
     end
-    redirect_to(root_url)
+    redirect_to(user_metrics_path(current_user))
   end
 
 
