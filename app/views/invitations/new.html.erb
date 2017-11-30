@@ -3,7 +3,7 @@
 <%= form_for [current_user,@group, @invitation] do |f|  %>
   <%= f.label :email %>
   <%= f.text_field :email %>
-
-  <%= f.submit "Invite" %>
+  <br>
+  <%= f.submit "Invite", class: "button wide short" %>
 
 <% end %>

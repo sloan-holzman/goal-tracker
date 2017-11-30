@@ -8,5 +8,6 @@
     <p><%= link_to "Request to join", user_group_requests_path(current_user, group), method: :post %></p>
   <% end %>
 <% end %>
-<p><%= link_to "See your groups", user_groups_path(current_user) %></p>
-<p><%= link_to "Create new group", new_user_group_path(current_user) %></p>
+<div class="links">
+  <%= link_to "Create new group", new_user_group_path(current_user) %>
+</div>

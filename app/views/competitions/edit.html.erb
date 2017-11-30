@@ -1,12 +1,22 @@
 <h2>Update competition for <%= @competition.metric_name %></h2>
+<section class="form-section">
+  <%= form_for [current_user, @group, @competition] do |f|  %>
+  <table class="metric-table">
+    <tr>
+      <th>Field</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td><%= f.label "Start Date" %></td>
+      <td><%= f.date_field :start_date %></td>
+    </tr>
+    <tr>
+      <td><%= f.label "End Date" %></td>
+      <td><%= f.date_field :end_date %></td>
+    </tr>
+  </table>
+<br>
+    <%= f.submit "Update" , class: "button wide short"%>
 
-<%= form_for [current_user,@group, @competition] do |f|  %>
-  <%= f.label "Start Date" %>
-  <%= f.date_field :start_date %>
-
-  <%= f.label "Start Date" %>
-  <%= f.date_field :end_date %>
-
-  <%= f.submit "Update" %>
-
-<% end %>
+  <% end %>
+</section>

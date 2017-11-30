@@ -1,11 +1,10 @@
 <h2><%= @competition.metric_name %></h2>
 <p>Unit: <%= @competition.metric_unit %></p>
-<p>Start date: <%= @competition.start_date %></p>
-<p>End date: <%= @competition.end_date %></p>
+<p>Timeframe: <%= @competition.start_date %> - <%= @competition.end_date %></p>
 <% if Date.today >= @competition.start_date %>
   <h3>Leaderboard: </h3>
   <% place = 1 %>
-  <table>
+  <table class="metric-table">
     <tr>
       <th>Ranking</th>
       <th>Competitor</th>
@@ -22,4 +21,9 @@
   </table>
 
 <% end %>
-<p><%= link_to "Back to Group '#{@group.name}'", user_group_path(current_user, @group) %></p>
+<br>
+<div class="links">
+  <%= link_to "Edit Competition", edit_user_group_competition_path(current_user, @group, @competition) %>
+  <%= link_to "Delete Competition", user_group_competition_path(current_user, @group, @competition), method: :delete %>
+  <%= link_to "Back to Group '#{@group.name}'", user_group_path(current_user, @group) %>
+</div>

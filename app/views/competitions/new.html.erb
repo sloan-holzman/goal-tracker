@@ -1,18 +1,30 @@
 <h2>New Competition</h2>
+<section class="form-section">
+  <%= form_for [current_user,@group, @competition] do |f|  %>
+  <table class="metric-table">
+    <tr>
+      <th>Field</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+    <td><%= f.label "Metric" %></td>
+    <td><%= f.text_field :metric_name %></td>
+  </tr>
+  <tr>
+    <td><%= f.label "Unit" %></td>
+    <td><%= f.text_field :metric_unit %></td>
+  </tr>
+  <tr>
+    <td><%= f.label "Start Date" %></td>
+    <td><%= f.date_field :start_date %></td>
+  </tr>
+  <tr>
+    <td><%= f.label "End Date" %></td>
+    <td><%= f.date_field :end_date %></td>
+  </tr>
+</table>
+<br>
+    <%= f.submit "Create" , class: "button wide short"%>
 
-<%= form_for [current_user,@group, @competition] do |f|  %>
-  <%= f.label "Metric" %>
-  <%= f.text_field :metric_name %>
-
-  <%= f.label "Unit" %>
-  <%= f.text_field :metric_unit %>
-
-  <%= f.label "Start Date" %>
-  <%= f.date_field :start_date %>
-
-  <%= f.label "End Date" %>
-  <%= f.date_field :end_date %>
-
-  <%= f.submit "Create" %>
-
-<% end %>
+  <% end %>
+</section>

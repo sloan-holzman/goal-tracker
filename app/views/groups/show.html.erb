@@ -5,7 +5,7 @@
 <% i=0 %>
 <% for user in @group.users %>
   <p><%= user.first_name %> <%= user.last_name %></p>
-  <%= column_chart @group_week_data[i]  %>
+  <%= column_chart @group_week_data[i], colors: ["#4caf50", "#999"]  %>
   <% i+=1 %>
 <% end %>
 <div class="links">

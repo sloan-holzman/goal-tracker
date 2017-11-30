@@ -19,6 +19,8 @@ class CompetitionsController < ApplicationController
   end
 
   def edit
+    @user = current_user
+    @group = Group.find(params[:group_id])
     @competition = Competition.find(params[:id])
   end
 
@@ -26,9 +28,9 @@ class CompetitionsController < ApplicationController
     @user = current_user
     @group = Group.find(params[:group_id])
     @competition = Competition.find(params[:id])
-    @competion.update(competition_update_params)
+    @competition.update(competition_update_params)
     flash[:notice] = "Competition for #{@competition.metric_name} updated successfully"
-    redirect_to user_group_path(@user, @group)
+    redirect_to user_group_competition_path(@user, @group, @competition)
   end
 
   def show
@@ -38,11 +40,24 @@ class CompetitionsController < ApplicationController
     running_totals = []
     for user in @group.users
       metric = user.metrics.find_by(name: @competition.metric_name, unit: @competition.metric_unit)
-      running_total = metric.performances.where("date >= ? AND date <= ?", @competition.start_date, @competition.end_date).sum(:count)
-      user_total = { name: "#{user.first_name} #{user.last_name}", total: running_total }
+      if metric != nil
+        running_total = metric.performances.where("date >= ? AND date <= ?", @competition.start_date, @competition.end_date).sum(:count)
+        user_total = { name: "#{user.first_name} #{user.last_name}", total: running_total }
+      else
+        user_total = { name: "#{user.first_name} #{user.last_name}", total: 0 }
+      end
       running_totals.push(user_total)
     end
     @running_totals = running_totals.sort_by{|hash| hash[:total]}.reverse
+  end
+
+  def destroy
+    @user = current_user
+    @group = Group.find(params[:group_id])
+    @competition = Competition.find(params[:id])
+    flash[:notice] = "Competition for #{@competition.metric_name} deleted successfully"
+    @competition.destroy
+    redirect_to user_group_path(current_user, @group  )
   end
 
   private
