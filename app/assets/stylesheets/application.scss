@@ -14,10 +14,78 @@
  *= require_self
  */
 
-// table styles taken from https://www.w3schools.com/css/tryit.asp?filename=trycss_table_fancy
+html,
+body {
+  height: 100%; /* needed for proper layout */
+}
+
+html {
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+nav {
+  background-color: #f3f3f4;
+  height: 120px;
+  font-family: "Nunito Sans", sans-serif !important;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+main {
+  padding: 2% 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Nunito Sans", sans-serif !important;
+  flex: 1 1 auto;
+  position: relative;
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+  width: 0px; /* remove scrollbar space */
+  background: transparent; /* make scrollbar invisible */
+}
+
+.nav-container {
+  margin: 0 15% 0 15%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 5;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  margin: 0 2% 0 2%;
+}
+
+.logo {
+  flex-grow: 1;
+}
+
+/* below are the table styles
+table styles modified from from https://www.w3schools.com/css/tryit.asp?filename=trycss_table_fancy */
 
 .metric-table {
-  // border-collapse: collapse;
   width: 90%;
   border: 1px solid #ddd;
   text-align: center;
@@ -25,8 +93,6 @@
 
 .metric-table td,
 .metric-table th {
-  // border-top: 1px solid #ddd;
-  // border-bottom: 1px solid #ddd;
   padding: 8px;
 }
 
@@ -71,90 +137,32 @@
   color: white !important;
 }
 
-// .prior {
-//   background: #f2f2f2;
-// }
-
-html,
-body {
-  height: 100%; /* needed for proper layout */
-}
-
-html {
-  overflow: hidden;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-}
-
-nav {
-  background-color: #f3f3f4;
-  // flex-grow: 5;
-  height: 120px;
-  font-family: "Nunito Sans", sans-serif !important;
-  font-size: 14px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex: 0 0 auto;
-}
-
-main {
-  padding: 2% 15%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: "Nunito Sans", sans-serif !important;
-  flex: 1 1 auto;
-  position: relative;
-  overflow-y: auto;
-}
-
-::-webkit-scrollbar {
-  width: 0px; /* remove scrollbar space */
-  background: transparent; /* make scrollbar invisible */
-}
-
-.nav-container {
-  margin: 0 15% 0 15%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.nav-links {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  flex-grow: 5;
-}
-
 a:link {
   color: black !important;
   text-decoration: none;
   font-weight: bold;
 }
 
-.logo {
-  flex-grow: 1;
-}
-
 a:hover {
   color: #4caf50;
 }
 
-.nav-link {
-  text-decoration: none;
-  color: black;
-  margin: 0 2% 0 2%;
+table {
+  text-align: center;
 }
 
-/*below here is the dropdown from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown*/
+.metric-table a {
+  color: #4c4e46 !important;
+  font-weight: 999;
+}
+
+.metric-table a:hover {
+  color: #3e8e41 !important;
+}
+
+/*below is for the dropdown button
+dropdown styles modified from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown*/
+
 .button {
   background-color: #4caf50;
   color: white;
@@ -200,9 +208,8 @@ a:hover {
   display: block;
 }
 
-table {
-  text-align: center;
-}
+/*below is for the bootstrap carousel
+it was modified from https://www.w3schools.com/bootstrap/bootstrap_carousel.asp */
 
 .carousel-inner {
   text-align: center;
@@ -224,6 +231,8 @@ table {
   height: 250px;
 }
 
+/* below is styling for the links at the bottom of most pages */
+
 .links {
   text-align: center;
 }
@@ -240,17 +249,16 @@ table {
   color: #3e8e41 !important;
 }
 
-.metric-table a {
-  color: #4c4e46 !important;
-  font-weight: 1000;
-}
-
-.metric-table a:hover {
-  color: #3e8e41 !important;
-}
+/* below is extra code for the form tables */
 
 form-table {
   text-align: center;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 form {
@@ -268,6 +276,7 @@ form {
   min-width: 150px;
 }
 
+/* ..and form buttons */
 .wide {
   width: 150px;
 }
@@ -277,31 +286,26 @@ form {
   padding: 0px !important;
 }
 
+/* below is adapted from https://stackoverflow.com/questions/19388011/how-to-change-colour-of-blue-highlight-on-select-box-dropdown */
+
 select,
 select:active,
 select:hover {
   outline-color: #4caf50;
 }
 
-// adapted from https://stackoverflow.com/questions/19388011/how-to-change-colour-of-blue-highlight-on-select-box-dropdown
 select option,
 select option:hover {
   box-shadow: inset 20px 20px #4caf50;
 }
 
+/* for the flash notice and alerts */
 .notice,
 .alert {
-  // background-color: #f3f3f4;
-  // border-style: solid;
-  // border-width: 2px;
   padding: 2%;
 }
 
-.form-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+/* for the layout of the demo#index page */
 
 .overview {
   margin: 5% 0 0 0;
