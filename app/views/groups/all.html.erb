@@ -5,7 +5,9 @@
   <% for group in @groups %>
     <h3><%= group.name %></h3>
     <p>Members: <%= group.users.length  %></p>
-    <p><%= link_to "Request to join", user_group_requests_path(current_user, group), method: :post %></p>
+    <div class="links">
+      <%= link_to "Request to join", user_group_requests_path(current_user, group), method: :post %>
+    </div>
   <% end %>
 <% end %>
 <div class="links">

@@ -1,13 +1,20 @@
 <h2>Requests to approve:</h2>
 <% if @approval_requests.length > 0 %>
   <% for request in @approval_requests %>
-    <p>User email: <%= request.user.email %></p>
+    <p>Requester's name: <%= request.user.first_name %> <%= request.user.last_name %></p>
+    <p>Requester's email: <%= request.user.email %></p>
     <p>Group name: <%= request.group.name %></p>
-    <p><%= link_to "Approve request", "/users/#{request.user.id}/groups/#{request.group.id}/requests/#{request.id}/approve", method: :post %></p>
-    <p><%= link_to "Reject request", "/users/#{request.user.id}/groups/#{request.group.id}/requests/#{request.id}/reject", method: :delete  %></p>
+    <div class="links">
+      <%= link_to "Approve request", "/users/#{request.user.id}/groups/#{request.group.id}/requests/#{request.id}/approve", method: :post %>
+      <%= link_to "Reject request", "/users/#{request.user.id}/groups/#{request.group.id}/requests/#{request.id}/reject", method: :delete  %>
+    </div>
+    <br>
+    <br>
   <% end %>
 <% else %>
   <p>You have no requests to approve</p>
 <% end %>
-<p><%= link_to "Create new group", new_user_group_path(current_user) %></p>
-<h3><%= link_to "See all groups", groups_all_path%></h3>
+<div class="links">
+  <%= link_to "Create new group", new_user_group_path(current_user) %>
+  <%= link_to "See all groups", groups_all_path%>
+</div>

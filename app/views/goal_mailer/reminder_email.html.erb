@@ -9,7 +9,7 @@
     <% else %>
       <% if @number_unentered > 0 %>
         <h2>You have <%= @number_unentered %> performance(s) to enter!</h2>
-        <p>You must enter information for <%= @unentered_dates.join(", ") %></p>
+        <p>You must enter information for the dates <%= @unentered_dates.join(", ") %></p>
         <p>Click <%= link_to "here", "https://goaltracker2000.herokuapp.com/performances/all/edit" %> to enter your info</p>
       <% end %>
       <% i = 0 %>
