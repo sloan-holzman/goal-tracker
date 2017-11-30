@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
-
+  include GraphMaker
 
   def index
     @groups = current_user.groups
@@ -24,24 +24,7 @@ class GroupsController < ApplicationController
     @group_week_data = []
     @members = member_list(@group.users)
     for user in @group.users
-      target_data = []
-      for metric in user.metrics
-        array = [metric.name, metric.target]
-        target_data.push(array)
-      end
-      actual_data = []
-      for metric in user.metrics
-        weekly_count = 0
-        for performance in metric.performances
-          if performance.date >= Date.today.beginning_of_week(:sunday) && performance.date < (Date.today.beginning_of_week(:sunday)+7)
-            weekly_count += performance.count
-          end
-        end
-        array = [metric.name, weekly_count]
-        actual_data.push(array)
-        weekly_count = 0
-      end
-      week_data = [{name: "Weekly Goal",data: target_data},{name: "Count so far",data: actual_data}]
+      week_data = create_data_for_current_week_graph(user.metrics)
       @group_week_data.push(week_data)
     end
     @membership = Membership.find_by(group: @group, user: current_user)
