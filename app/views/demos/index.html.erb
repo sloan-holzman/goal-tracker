@@ -1,46 +1,111 @@
 <h2>Welcome to Goal Tracker!</h2>
+<h4>To acheive all your goals</h4>
 <br>
 <!-- code taken from https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_carousel&stacked=h -->
 <div class="carousel">
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
+      <!-- <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+      <li data-target="#myCarousel" data-slide-to="5"></li>
+      <li data-target="#myCarousel" data-slide-to="6"></li>
+      <li data-target="#myCarousel" data-slide-to="7"></li>
+      <li data-target="#myCarousel" data-slide-to="8"></li> -->
+
     </ol>
-    <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
-        <img src="https://hoopshabit.com/wp-content/uploads/getty-images/2017/09/610525858-2016-2017-new-york-knicks-media-day.jpg.jpg" alt="Los Angeles" style="width:100%;">Picture 1
+        <img class="carousel-image" src="<%= asset_path( 'all_time_daily.png' ) %>"  alt="Daily performance" style="width:100%;">
+      </div>
+
+      <div class="item">
+        <img class="carousel-image" src="<%= asset_path( 'metric_table.png' ) %>" alt="Weekly track record" style="width:100%;">
+      </div>
+
+      <div class="item">
+        <img class="carousel-image" src="<%= asset_path( 'weekly_bar_chart.png' ) %>" alt="This week's performance" style="width:100%;">
+      </div>
+<!--
+      <div class="item">
+        <img class="carousel-image" src="<%= asset_path( 'sign_up.png' ) %>" alt="4. Track progress against your goals each week..." style="width:100%;">
         <div class="carousel-caption">
-          <h3>Picture 1</h3>
+          <h3>4. Track progress against your goals each week...</h3>
         </div>
       </div>
 
       <div class="item">
-        <img src="https://imagesvc.timeincapp.com/v3/fan/image?url=https://dailyknicks.com/wp-content/uploads/getty-images/2017/11/876859958-los-angeles-clippers-v-new-york-knicks.jpg.jpg&" alt="Chicago" style="width:100%;">
+        <img class="carousel-image" src="<%= asset_path( 'sign_up.png' ) %>" alt="5. ...and over time" style="width:100%;">
         <div class="carousel-caption">
-          <h3>Picture 2</h3>
+          <h3>5. ...and over time</h3>
         </div>
       </div>
 
       <div class="item">
-        <img src="https://thenypost.files.wordpress.com/2017/11/knicks9.jpg?quality=90&strip=all&w=1200" alt="New york" style="width:100%;">
+        <img class="carousel-image" src="<%= asset_path( 'sign_up.png' ) %>" alt="6. Receive optional reminder" style="width:100%;">
         <div class="carousel-caption">
-          <h3>Picture 3</h3>
+          <h3>6. Receive optional reminder</h3>
         </div>
       </div>
+
+      <div class="item">
+        <img class="carousel-image" src="<%= asset_path( 'sign_up.png' ) %>" alt="7. Form accountability groups to keep you honest" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>7. Form accountability groups to keep you honest</h3>
+        </div>
+      </div>
+
+      <div class="item">
+        <img class="carousel-image" src="<%= asset_path( 'sign_up.png' ) %>" alt="8. Create mini-competitions within your groups" style="width:100%;">
+        <div class="carousel-caption">
+          <h3>8. Create mini-competitions within your groups</h3>
+        </div>
+      </div> -->
+
     </div>
 
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="background:none !important">
       <span class="glyphicon glyphicon-chevron-left"></span>
       <span class="sr-only">Previous</span>
     </a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <a class="right carousel-control" href="#myCarousel" data-slide="next" style="background:none !important">
       <span class="glyphicon glyphicon-chevron-right"></span>
       <span class="sr-only">Next</span>
     </a>
   </div>
 </div>
+
+
+<section class="overview">
+  <div class="overview-row">
+    <div class="overview-cell">1. Sign up</div>
+    <div class="overview-cell">
+      <img src="<%= asset_path( 'sign_up.png' ) %>"  alt="1. Sign up">
+    </div>
+  </div>
+  <div class="overview-row">
+    <div class="overview-cell">2. Add weekly goals (aka metrics)</div>
+    <div class="overview-cell"><img src="<%= asset_path( 'create_metric.png' ) %>"  alt="2. Add weekly goals (aka metrics)"></div>
+  </div>
+  <div class="overview-row">
+    <h4>3. Enter daily performance</h4>
+    <img src="<%= asset_path( 'enter_daily_performance.png' ) %>"  alt="1. Sign up">
+  </div>
+  <div class="overview-row">
+    <h4>4. Track progress against your goals each week...</h4>
+  </div>
+  <div class="overview-row">
+    <h4>5. ...and over time</h4>
+  </div>
+  <div class="overview-row">
+    <h4>6. Receive optional reminder</h4>
+  </div>
+  <div class="overview-row">
+    <h4>7. Form accountability groups to keep you honest</h4>
+  </div>
+  <div class="overview-row">
+    <h4>8. Create mini-competitions within your groups</h4>
+</div>
+</section>

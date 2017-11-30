@@ -35,10 +35,3 @@ window.onclick = function(event) {
     }
   }
 };
-
-// below is for the carousel
-$(function() {
-  $(".carousel").carousel({
-    interval: 2000
-  });
-});

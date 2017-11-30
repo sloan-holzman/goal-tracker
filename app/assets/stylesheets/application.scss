@@ -212,8 +212,13 @@ table {
 }
 
 .carousel-caption {
+  text-align: left;
   top: 0;
-  bottom: auto;
+  color: black;
+}
+
+.item {
+  opacity: 0.8;
 }
 
 .links {
@@ -293,4 +298,20 @@ select option:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.overview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.overview-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.overview-cell {
+  flex: 1;
 }
