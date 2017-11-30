@@ -2,68 +2,64 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email%>
-  </div>
-
-  <div class="field">
-    <%= f.label "Reminder emails" %><br />
-    <%=  f.select :reminder, [['Reminder emails on', true], ['Reminder emails off', false]]%>
-  </div>
-
-  <div class="field">
-    <%= f.label "Reminder frequency" %><br />
-    <%=  f.select :reminder_frequency, ['Weekly', 'Daily']%>
-  </div>
-
-  <div class="field">
-    <%= f.label "Reminder day (Only relevant if 'weekly' selected for frequency)" %><br />
-    <%=  f.select :reminder_day, ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']%>
-  </div>
-
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+  <table class="metric-table">
+    <tr>
+      <th>Field</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+    <td><%= f.label :first_name %><br /></td>
+    <td><%= f.text_field :first_name, autofocus: true %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :last_name %></td>
+    <td><%= f.text_field :last_name %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :email %></td>
+    <td><%= f.email_field :email, autofocus: true %></td>
+  </tr>
+  <tr>
+    <td><%= f.label "Reminder emails" %></td>
+    <td><%=  f.select :reminder, [['Reminder emails on', true], ['Reminder emails off', false]]%></td>
+  </tr>
+  <tr>
+    <td><%= f.label "Reminder frequency" %></td>
+    <td><%=  f.select :reminder_frequency, ['Weekly', 'Daily']%></td>
+  </tr>
+  <tr>
+    <td><%= f.label "Reminder day (Only relevant if 'Weekly' selected for frequency)" %></td>
+    <td><%=  f.select :reminder_day, ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']%></td>
+  </tr>
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
     <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
+    <tr>
+      <td><%= f.label :password %> <i>(leave blank if you don't want to change it)</i></td>
+      <td><%= f.password_field :password, autocomplete: "off" %></td>
+      <% if @minimum_password_length %>
+        <em><%= @minimum_password_length %> characters minimum</em>
+      <% end %>
+    </tr>
+    <tr>
+      <td><%= f.label :password_confirmation %></td>
+      <td><%= f.password_field :password_confirmation, autocomplete: "off" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :current_password %> <i>(needed to confirm your changes)</i></td>
+      <td><%= f.password_field :current_password, autocomplete: "off" %></td>
+    </tr>
+  </table>
+  <br>
+    <%= f.submit "Update", class: "button wide short" %>
 <% end %>
 
-<h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
-<%= link_to "Back", :back %>
+
+
+<br>
+<%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete,  class: "button wide short" %></p>
+<div class="links">
+  <%= link_to "Back", :back %>
+</div>

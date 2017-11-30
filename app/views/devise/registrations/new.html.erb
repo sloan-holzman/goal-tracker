@@ -1,54 +1,53 @@
 <h2>Sign up</h2>
-
+<section class="form-section">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label "Reminder emails" %><br />
-    <%=  f.select :reminder, [['Reminder emails on', true], ['Reminder emails off', false]]%>
-  </div>
-
-  <div class="field">
-    <%= f.label "Reminder frequency" %><br />
-    <%=  f.select :reminder_frequency, ['Weekly', 'Daily']%>
-  </div>
-
-  <div class="field">
-    <%= f.label "Reminder day (Only relevant if 'Weekly' selected for frequency)" %><br />
-    <%=  f.select :reminder_day, ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']%>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
+  <table class="metric-table">
+    <tr>
+      <th>Field</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+    <td><%= f.label :first_name %><br /></td>
+    <td><%= f.text_field :first_name, autofocus: true %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :last_name %></td>
+    <td><%= f.text_field :last_name %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :email %></td>
+    <td><%= f.email_field :email, autofocus: true %></td>
+  </tr>
+  <tr>
+    <td><%= f.label "Reminder emails" %></td>
+    <td><%=  f.select :reminder, [['Reminder emails on', true], ['Reminder emails off', false]]%></td>
+  </tr>
+  <tr>
+    <td><%= f.label "Reminder frequency" %></td>
+    <td><%=  f.select :reminder_frequency, ['Weekly', 'Daily']%></td>
+  </tr>
+  <tr>
+    <td><%= f.label "Reminder day (Only relevant if 'Weekly' selected for frequency)" %></td>
+    <td><%=  f.select :reminder_day, ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']%></td>
+  </tr>
+  <tr>
+    <td><%= f.label :password %></td>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
+    <td><%= f.password_field :password, autocomplete: "off" %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :password_confirmation %><br />
+    <td><%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </tr>
+  <tr>
+  </table>
+  <br>
+    <%= f.submit "Sign up", class: "button wide short" %>
 <% end %>
-
-<%= render "devise/shared/links" %>
+<br>
+<div class="links">
+  <%= render "devise/shared/links" %>
+</div>
