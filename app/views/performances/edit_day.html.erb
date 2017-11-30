@@ -1,3 +1,5 @@
+<!-- # learned how to update multiple instances at once from from http://anthonylewis.com/2011/04/15/editing-multiple-records-in-rails/ -->
+
 <% if @performances.length > 0 %>
   <h2>Update performance count on <%= @date %></h2>
   <%= form_for :performance, :url => update_day_path, :html => { :method => :put } do %>
