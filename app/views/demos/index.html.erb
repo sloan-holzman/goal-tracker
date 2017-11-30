@@ -1,6 +1,11 @@
-<h2>Welcome to Goal Tracker!</h2>
-<h4>To acheive all your goals</h4>
-<br>
+<section class="index">
+
+<section>
+<div class="center">
+  <h2>Welcome to Goal Tracker!</h2>
+  <h4>The app to acheive all your goals</h4>
+  <br>
+</div>
 <!-- code taken from https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_carousel&stacked=h -->
 <div class="carousel">
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -39,37 +44,39 @@
     </a>
   </div>
 </div>
-
-<br>
-
-<h2>Lots of functions</h2>
+</section>
+<section class="bottom">
+<div class="center">
+  <h2>Lots of functions</h2>
 <section class="overview">
-  <div class="overview-column">
+  <div class="overview-column left">
     <div class="overview-row">
-      <div class="overview-cell">1. Add weekly goals (aka metrics)</div>
+      <div class="overview-cell">1. Add weekly goals <br><span class="example">I want to run 15 miles a week<span></div>
       <img class="overview-cell" src="<%= asset_path( 'bullseye.png' ) %>"  alt="1. Add weekly goals">
     </div>
     <div class="overview-row">
-      <div class="overview-cell">2. Enter daily performance</div>
+      <div class="overview-cell">2. Enter daily performance <br><span class="example">I ran 5 miles today<span></div>
       <img class="overview-cell" src="<%= asset_path( 'enter.png' ) %>"  alt="2. Enter daily performance">
     </div>
     <div class="overview-row">
-      <div class="overview-cell">3. Track progress against your goals over time</div>
+      <div class="overview-cell">3. Track progress against your goals over time <br><span class="example">you've hit your goal three weeks in a row!<span></div>
       <img class="overview-cell" src="<%= asset_path( 'barchart.png' ) %>"  alt="3. Track progress against your goals">
     </div>
   </div>
-  <div class="overview-column">
+  <div class="overview-column right">
     <div class="overview-row">
-      <div class="overview-cell">4. Receive optional reminder emails</div>
+      <div class="overview-cell">4. Receive optional daily or weekly reminder emails <br><span class="example">you have not told us how many miles you ran for 3 days<span></div>
       <img class="overview-cell" src="<%= asset_path( 'email.png' ) %>"  alt="4. Receive optional reminder emails">
     </div>
     <div class="overview-row">
-      <div class="overview-cell">5. Form accountability groups to keep you honest</div>
+      <div class="overview-cell">5. Form accountability groups to keep you honest <br><span class="example">your friend invited you to share histories<span></div>
       <img class="overview-cell" src="<%= asset_path( 'handshake.png' ) %>"  alt="5. Form accountability groups to keep you honest">
     </div>
     <div class="overview-row">
-      <div class="overview-cell">6. Create mini-competitions within your groups</div>
+      <div class="overview-cell">6. Create mini-competitions within your groups <br><span class="example">let's see who can run the most miles this month!<span></div>
       <img class="overview-cell" src="<%= asset_path( 'competition.png' ) %>"  alt="6. Create mini-competitions within your groups">
     </div>
   </div>
+</section>
+</section>
 </section>

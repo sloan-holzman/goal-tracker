@@ -208,7 +208,6 @@ table {
   text-align: center;
   font-size: 30px;
   width: 60vw;
-  height: 400px;
 }
 
 .carousel-caption {
@@ -309,7 +308,6 @@ select option:hover {
   margin: 5% 0 0 0;
   display: flex;
   flex-direction: row;
-  align-items: center;
 }
 
 .overview-column {
@@ -331,4 +329,38 @@ select option:hover {
   text-align: left;
   max-width: 150px;
   max-height: 150px;
+  font-weight: bold;
+}
+
+.index {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6% 0 0 0;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.example {
+  font-style: italic;
+  font-size: 12px;
+}
+
+.left {
+  margin: 0 3% 0 0;
+}
+
+.right {
+  margin: 0 0 0 3%;
 }
