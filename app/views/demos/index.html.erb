@@ -8,13 +8,7 @@
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
-      <!-- <li data-target="#myCarousel" data-slide-to="3"></li>
-      <li data-target="#myCarousel" data-slide-to="4"></li>
-      <li data-target="#myCarousel" data-slide-to="5"></li>
-      <li data-target="#myCarousel" data-slide-to="6"></li>
-      <li data-target="#myCarousel" data-slide-to="7"></li>
-      <li data-target="#myCarousel" data-slide-to="8"></li> -->
-
+      <li data-target="#myCarousel" data-slide-to="3"></li>
     </ol>
     <div class="carousel-inner">
       <div class="item active">
@@ -28,41 +22,10 @@
       <div class="item">
         <img class="carousel-image" src="<%= asset_path( 'weekly_bar_chart.png' ) %>" alt="This week's performance" style="width:100%;">
       </div>
-<!--
-      <div class="item">
-        <img class="carousel-image" src="<%= asset_path( 'sign_up.png' ) %>" alt="4. Track progress against your goals each week..." style="width:100%;">
-        <div class="carousel-caption">
-          <h3>4. Track progress against your goals each week...</h3>
-        </div>
-      </div>
 
       <div class="item">
-        <img class="carousel-image" src="<%= asset_path( 'sign_up.png' ) %>" alt="5. ...and over time" style="width:100%;">
-        <div class="carousel-caption">
-          <h3>5. ...and over time</h3>
-        </div>
+        <img class="carousel-image" src="<%= asset_path( 'leaderboard.png' ) %>" alt="Friendly competition" style="width:100%;">
       </div>
-
-      <div class="item">
-        <img class="carousel-image" src="<%= asset_path( 'sign_up.png' ) %>" alt="6. Receive optional reminder" style="width:100%;">
-        <div class="carousel-caption">
-          <h3>6. Receive optional reminder</h3>
-        </div>
-      </div>
-
-      <div class="item">
-        <img class="carousel-image" src="<%= asset_path( 'sign_up.png' ) %>" alt="7. Form accountability groups to keep you honest" style="width:100%;">
-        <div class="carousel-caption">
-          <h3>7. Form accountability groups to keep you honest</h3>
-        </div>
-      </div>
-
-      <div class="item">
-        <img class="carousel-image" src="<%= asset_path( 'sign_up.png' ) %>" alt="8. Create mini-competitions within your groups" style="width:100%;">
-        <div class="carousel-caption">
-          <h3>8. Create mini-competitions within your groups</h3>
-        </div>
-      </div> -->
 
     </div>
 
@@ -77,35 +40,36 @@
   </div>
 </div>
 
+<br>
 
+<h2>Lots of functions</h2>
 <section class="overview">
-  <div class="overview-row">
-    <div class="overview-cell">1. Sign up</div>
-    <div class="overview-cell">
-      <img src="<%= asset_path( 'sign_up.png' ) %>"  alt="1. Sign up">
+  <div class="overview-column">
+    <div class="overview-row">
+      <div class="overview-cell">1. Add weekly goals (aka metrics)</div>
+      <img class="overview-cell" src="<%= asset_path( 'bullseye.png' ) %>"  alt="1. Add weekly goals">
+    </div>
+    <div class="overview-row">
+      <div class="overview-cell">2. Enter daily performance</div>
+      <img class="overview-cell" src="<%= asset_path( 'enter.png' ) %>"  alt="2. Enter daily performance">
+    </div>
+    <div class="overview-row">
+      <div class="overview-cell">3. Track progress against your goals over time</div>
+      <img class="overview-cell" src="<%= asset_path( 'barchart.png' ) %>"  alt="3. Track progress against your goals">
     </div>
   </div>
-  <div class="overview-row">
-    <div class="overview-cell">2. Add weekly goals (aka metrics)</div>
-    <div class="overview-cell"><img src="<%= asset_path( 'create_metric.png' ) %>"  alt="2. Add weekly goals (aka metrics)"></div>
+  <div class="overview-column">
+    <div class="overview-row">
+      <div class="overview-cell">4. Receive optional reminder emails</div>
+      <img class="overview-cell" src="<%= asset_path( 'email.png' ) %>"  alt="4. Receive optional reminder emails">
+    </div>
+    <div class="overview-row">
+      <div class="overview-cell">5. Form accountability groups to keep you honest</div>
+      <img class="overview-cell" src="<%= asset_path( 'handshake.png' ) %>"  alt="5. Form accountability groups to keep you honest">
+    </div>
+    <div class="overview-row">
+      <div class="overview-cell">6. Create mini-competitions within your groups</div>
+      <img class="overview-cell" src="<%= asset_path( 'competition.png' ) %>"  alt="6. Create mini-competitions within your groups">
+    </div>
   </div>
-  <div class="overview-row">
-    <h4>3. Enter daily performance</h4>
-    <img src="<%= asset_path( 'enter_daily_performance.png' ) %>"  alt="1. Sign up">
-  </div>
-  <div class="overview-row">
-    <h4>4. Track progress against your goals each week...</h4>
-  </div>
-  <div class="overview-row">
-    <h4>5. ...and over time</h4>
-  </div>
-  <div class="overview-row">
-    <h4>6. Receive optional reminder</h4>
-  </div>
-  <div class="overview-row">
-    <h4>7. Form accountability groups to keep you honest</h4>
-  </div>
-  <div class="overview-row">
-    <h4>8. Create mini-competitions within your groups</h4>
-</div>
 </section>

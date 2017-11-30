@@ -109,7 +109,7 @@ main {
   align-items: center;
   font-family: "Nunito Sans", sans-serif !important;
   flex: 1 1 auto;
-  position: relative; /* need this to position inner content */
+  position: relative;
   overflow-y: auto;
 }
 
@@ -219,6 +219,11 @@ table {
 
 .item {
   opacity: 0.8;
+  border-top: solid;
+  border-bottom: solid;
+  border-width: 3px;
+  border-color: #f3f3f4;
+  height: 250px;
 }
 
 .links {
@@ -301,17 +306,29 @@ select option:hover {
 }
 
 .overview {
+  margin: 5% 0 0 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.overview-column {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .overview-row {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: flex-start;
   flex-shrink: 0;
 }
 .overview-cell {
   flex: 1;
+  text-align: left;
+  max-width: 150px;
+  max-height: 150px;
 }
