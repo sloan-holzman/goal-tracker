@@ -1,5 +1,6 @@
+<section>
+
 <h2>Edit group <%= @group.name %></h2>
-<section class="form-section">
 <%= form_for [current_user,@group] do |f|  %>
 <table class="metric-table">
   <tr>
@@ -19,3 +20,4 @@
   <%= f.submit "Update", class: "button wide short" %>
 
 <% end %>
+</section>

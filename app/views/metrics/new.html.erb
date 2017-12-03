@@ -1,6 +1,6 @@
+<section>
 <h2>New Metric</h2>
 <br>
-<section class="form-section">
 <%= form_for [current_user,@metric] do |f|  %>
   <table class="metric-table">
     <th>Field</th>
@@ -34,6 +34,6 @@
     </tr>
   </table>
   <br>
-  <%= f.submit "Create", class: "button wide short" %>
+  <%= f.submit "Create", class: "button" %>
 <% end %>
 </section>
