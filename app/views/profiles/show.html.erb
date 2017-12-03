@@ -4,4 +4,6 @@
 <p>Reminder emails: <%= @user.reminder ? @message : "Off" %></p>
 <p>Member since: <%= @user.created_at %></p>
 <br>
-<p><%= link_to "Edit profile", edit_user_registration_path %></p>
+<div class="links">
+  <%= link_to "Edit profile", edit_user_registration_path %>
+</div>

@@ -1,5 +1,4 @@
 <h2>Sign up</h2>
-<section class="form-section">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
   <table class="metric-table">
@@ -8,46 +7,49 @@
       <th>Value</th>
     </tr>
     <tr>
-    <td><%= f.label :first_name %><br /></td>
-    <td><%= f.text_field :first_name, autofocus: true %></td>
-  </tr>
-  <tr>
-    <td><%= f.label :last_name %></td>
-    <td><%= f.text_field :last_name %></td>
-  </tr>
-  <tr>
-    <td><%= f.label :email %></td>
-    <td><%= f.email_field :email, autofocus: true %></td>
-  </tr>
-  <tr>
-    <td><%= f.label "Reminder emails" %></td>
-    <td><%=  f.select :reminder, [['Reminder emails on', true], ['Reminder emails off', false]]%></td>
-  </tr>
-  <tr>
-    <td><%= f.label "Reminder frequency" %></td>
-    <td><%=  f.select :reminder_frequency, ['Weekly', 'Daily']%></td>
-  </tr>
-  <tr>
-    <td><%= f.label "Reminder day (Only relevant if 'Weekly' selected for frequency)" %></td>
-    <td><%=  f.select :reminder_day, ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']%></td>
-  </tr>
-  <tr>
-    <td><%= f.label :password %></td>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <td><%= f.password_field :password, autocomplete: "off" %></td>
-  </tr>
-  <tr>
-    <td><%= f.label :password_confirmation %><br />
-    <td><%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </tr>
-  <tr>
+      <td><%= f.label :first_name %><br /></td>
+      <td><%= f.text_field :first_name, autofocus: true %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :last_name %></td>
+      <td><%= f.text_field :last_name %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :email %></td>
+      <td><%= f.email_field :email, autofocus: true %></td>
+    </tr>
+    <tr>
+      <td><%= f.label "Reminder emails" %></td>
+      <td><%=  f.select :reminder, [['Reminder emails on', true], ['Reminder emails off', false]]%></td>
+    </tr>
+    <tr>
+      <td><%= f.label "Reminder frequency" %></td>
+      <td><%=  f.select :reminder_frequency, ['Weekly', 'Daily']%></td>
+    </tr>
+    <tr>
+      <td><%= f.label "Reminder day (Only relevant if 'Weekly' selected for frequency)" %></td>
+      <td><%=  f.select :reminder_day, ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']%></td>
+    </tr>
+    <tr>
+      <td><%= f.label :password %></td>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <td><%= f.password_field :password, autocomplete: "off" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :password_confirmation %><br />
+      <td><%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </tr>
   </table>
   <br>
+  <div class="">
     <%= f.submit "Sign up", class: "button wide short" %>
+  </div>
 <% end %>
 <br>
 <div class="links">
-  <%= render "devise/shared/links" %>
+  <%= link_to "Log in", user_session_path %>
+  <%= link_to "Didn't receive confirmation instructions?", new_user_confirmation_path %>
+  <!-- <%= render "devise/shared/links" %> -->
 </div>
