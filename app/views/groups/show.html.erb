@@ -25,11 +25,11 @@
       <% week = 0 %>
       <% for weekly_count in @group_rows[i][j] %>
         <% if (@group_dates[i][week]+6)<metric.start_date %>
-          <td class="prior"><%= weekly_count %></td>
+          <td class="metric-table__prior"><%= weekly_count %></td>
         <% elsif metric.good %>
-          <td class=<%= weekly_count >= metric.target ? "hit" : "missed" %>><%= weekly_count %></td>
+          <td class=<%= weekly_count >= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= weekly_count %></td>
         <% else %>
-          <td class=<%= weekly_count <= metric.target ? "hit" : "missed" %>><%= weekly_count %></td>
+          <td class=<%= weekly_count <= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= weekly_count %></td>
         <% end %>
         <% week += 1 %>
       <% end %>

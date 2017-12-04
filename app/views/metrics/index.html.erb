@@ -6,7 +6,7 @@
   <%= column_chart @week_data, colors: ["#4caf50", "#999"] %>
   <h2>Recent Weeks</h2>
   <% for streak in @week_streaks %>
-    <p><%= streak[0].name%>: You've hit your weekly goal the previous <%= streak[1] %> weeks.  Keep it up!</p>
+    <p><%= streak[0].name%>: You've metric-table__hit your weekly goal the previous <%= streak[1] %> weeks.  Keep it up!</p>
   <% end %>
   <br>
   <br>
@@ -28,11 +28,11 @@
       <% week = 0 %>
       <% for weekly_count in @rows[i] %>
         <% if (@dates[week]+6)<metric.start_date %>
-          <td class="prior"><%= weekly_count %></td>
+          <td class="metric-table__prior"><%= weekly_count %></td>
         <% elsif metric.good %>
-          <td class=<%= weekly_count >= metric.target ? "hit" : "missed" %>><%= weekly_count %></td>
+          <td class=<%= weekly_count >= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= weekly_count %></td>
         <% else %>
-          <td class=<%= weekly_count <= metric.target ? "hit" : "missed" %>><%= weekly_count %></td>
+          <td class=<%= weekly_count <= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= weekly_count %></td>
         <% end %>
         <% week += 1 %>
       <% end %>

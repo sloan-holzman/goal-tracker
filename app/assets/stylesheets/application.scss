@@ -39,6 +39,31 @@ nav {
   padding: 0 15%;
 }
 
+.nav__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav__container__links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 5;
+}
+
+.nav__container__link {
+  text-decoration: none;
+  color: black;
+  margin: 0 2% 0 2%;
+}
+
+.nav__logo {
+  flex-grow: 1;
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -54,31 +79,6 @@ main {
 ::-webkit-scrollbar {
   width: 0px; /* remove scrollbar space */
   background: transparent; /* make scrollbar invisible */
-}
-
-.nav-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.nav-links {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  flex-grow: 5;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: black;
-  margin: 0 2% 0 2%;
-}
-
-.logo {
-  flex-grow: 1;
 }
 
 /* below are the table styles
@@ -126,24 +126,14 @@ table styles modified from from https://www.w3schools.com/css/tryit.asp?filename
   color: #999;
 }
 
-.hit {
+.metric-table__hit {
   background: #4caf50;
   color: white !important;
 }
 
-.missed {
+.metric-table__missed {
   background: red;
   color: white !important;
-}
-
-a:link {
-  color: black !important;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-a:hover {
-  color: #4caf50;
 }
 
 table {
@@ -157,6 +147,16 @@ table {
 
 .metric-table a:hover {
   color: #3e8e41 !important;
+}
+
+a:link {
+  color: black !important;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #4caf50;
 }
 
 /*below is for the dropdown button
@@ -177,12 +177,11 @@ dropdown styles modified from https://www.w3schools.com/howto/tryit.asp?filename
 }
 
 .dropdown {
-  /*position: relative;*/
   display: inline-block;
   margin: 0;
 }
 
-.dropdown-content {
+.dropdown__dropbtn__content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
@@ -192,7 +191,7 @@ dropdown styles modified from https://www.w3schools.com/howto/tryit.asp?filename
   z-index: 1;
 }
 
-.dropdown-content a {
+.dropdown__dropbtn__content a {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
@@ -312,21 +311,21 @@ select option:hover {
   flex-direction: row;
 }
 
-.overview-column {
+.overview__column {
   display: flex;
   flex-direction: column;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.overview-row {
+.overview__row {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   flex-shrink: 0;
 }
-.overview-cell {
+.overview__row__cell {
   flex: 1;
   text-align: left;
   max-width: 150px;
@@ -347,6 +346,8 @@ select option:hover {
   align-items: center;
   padding: 6% 0 0 0;
 }
+
+/*Other minor styles to the demo#index sheet*/
 
 .center {
   display: flex;

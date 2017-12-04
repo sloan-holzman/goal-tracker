@@ -16,40 +16,38 @@
   </head>
   <body>
     <nav>
-      <div class="nav-container">
-        <div class="logo">
+      <div class="nav__container">
+        <div class="nav__logo">
           <%= link_to root_path do %>
             <%= image_tag 'Logo.png' %>
           <% end %>
         </div>
-        <div class="nav-links">
+        <div class="nav__container__links">
           <% if current_user %>
-            <a class="nav-link" href="/users/<%= current_user.id %>/metrics">PAST PERFORMANCE</a>
+            <a class="nav__container__link" href="/users/<%= current_user.id %>/metrics">PAST PERFORMANCE</a>
           <% else %>
-          <a class="nav-link" href="/">PAST PERFORMANCE</a>
+          <a class="nav__container__link" href="/">PAST PERFORMANCE</a>
           <% end %>
-            <a class="nav-link" href="/performances/all/edit">ENTER DAILY PERFORMANCE</a>
+            <a class="nav__container__link" href="/performances/all/edit">ENTER DAILY PERFORMANCE</a>
           <% if !current_user %>
-            <a class="nav-link" href="/groups/all">ACCOUNTABILITY GROUPS</a>
+            <a class="nav__container__link" href="/groups/all">ACCOUNTABILITY GROUPS</a>
           <% else %>
-            <a class="nav-link" href="/users/<%= current_user.id %>/groups">ACCOUNTABILITY GROUPS</a>
+            <a class="nav__container__link" href="/users/<%= current_user.id %>/groups">ACCOUNTABILITY GROUPS</a>
           <% end %>
           <div class="dropdown">
-          <% if !current_user %>
-          <a href="/users/sign_in"><button class="button dropbtn">SIGN IN</button></a>
-          <!-- <button href="/users/sign_up" class="button dropbtn">SIGN IN</a> -->
-          <!-- <%= button_to "Register", new_user_registration_path%> -->
-          <% else %>
-          <button onclick="myFunction()" class="button dropbtn">Hi, <%= current_user.first_name %></button>
-          <% end %>
-            <div id="myDropdown" class="dropdown-content">
-              <a href="/profiles/show">PROFILE</a>
-              <% if !current_user %>
-                <%= link_to "SIGN UP", new_user_registration_path %>
-                <%= link_to "SIGN IN", new_user_session_path %>
-              <% else %>
-                <%= link_to "LOG OUT", destroy_user_session_path, :method => :delete %>
-              <% end %>
+            <% if !current_user %>
+            <a href="/users/sign_in"><button class="button dropdown__dropbtn">SIGN IN</button></a>
+            <% else %>
+            <button onclick="myFunction()" class="button dropdown__dropbtn">Hi, <%= current_user.first_name %></button>
+            <% end %>
+              <div id="myDropdown" class="dropdown__dropbtn__content">
+                <a href="/profiles/show">PROFILE</a>
+                <% if !current_user %>
+                  <%= link_to "SIGN UP", new_user_registration_path %>
+                  <%= link_to "SIGN IN", new_user_session_path %>
+                <% else %>
+                  <%= link_to "LOG OUT", destroy_user_session_path, :method => :delete %>
+                <% end %>
             </div>
           </div>
         </div>
