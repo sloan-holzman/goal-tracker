@@ -20,7 +20,7 @@
         <% end %>
       </ul>
     <p><%= link_to "Accept invitation", "/users/#{current_user.id}/groups/#{invitation.group.id}/invitations/#{invitation.id}/accept", method: :post %></p>
-    <p><%= link_to "Reject invitation", "/users/#{current_user.id}/groups/#{invitation.group.id}/invitations/#{invitation.id}/reject", method: :delete %></p>
+    <p><%= link_to "Reject invitation", "/users/#{current_user.id}/groups/#{invitation.group.id}/invitations/#{invitation.id}/reject", method: :delete, data: {confirm: "Are you sure you want to reject this invitation?"} %></p>
   <% end %>
 <% end %>
 <% if @your_requests.length > 0 %>

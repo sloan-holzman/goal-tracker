@@ -6,7 +6,7 @@
     <p>Group name: <%= request.group.name %></p>
     <div class="links">
       <%= link_to "Approve request", "/users/#{request.user.id}/groups/#{request.group.id}/requests/#{request.id}/approve", method: :post %>
-      <%= link_to "Reject request", "/users/#{request.user.id}/groups/#{request.group.id}/requests/#{request.id}/reject", method: :delete  %>
+      <%= link_to "Reject request", "/users/#{request.user.id}/groups/#{request.group.id}/requests/#{request.id}/reject", method: :delete, data: {confirm: "Are you sure you want to reject this request?"}  %>
     </div>
     <br>
     <br>
