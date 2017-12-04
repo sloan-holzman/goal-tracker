@@ -333,6 +333,14 @@ select option:hover {
   font-weight: bold;
 }
 
+.overview__column--left {
+  margin: 0 3% 0 0;
+}
+
+.overview__column--right {
+  margin: 0 0 0 3%;
+}
+
 .index {
   display: flex;
   flex-direction: row;
@@ -347,9 +355,7 @@ select option:hover {
   padding: 6% 0 0 0;
 }
 
-/*Other minor styles to the demo#index sheet*/
-
-.center {
+.bottom__center {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -358,12 +364,4 @@ select option:hover {
 .example {
   font-style: italic;
   font-size: 12px;
-}
-
-.left {
-  margin: 0 3% 0 0;
-}
-
-.right {
-  margin: 0 0 0 3%;
 }
