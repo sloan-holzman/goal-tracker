@@ -3,8 +3,9 @@ class MembershipsController < ApplicationController
 
 
   def destroy
+    @user = User.find(params[:user_id])
     @group = Group.find(params[:group_id])
-    @membership = Membership.find_by(user: current_user, group: @group)
+    @membership = Membership.find_by(user: @user, group: @group)
     @membership.destroy
     flash[:notice] = "You successfully left the group #{@group.name}"
     if @group.users.length == 1 || @group.memberships.where(admin: true).count == 0
@@ -14,6 +15,6 @@ class MembershipsController < ApplicationController
     else @group.users.length == 0
       @group.destroy
     end
-    redirect_to user_groups_path(current_user)
+    redirect_to user_groups_path(@user)
   end
 end

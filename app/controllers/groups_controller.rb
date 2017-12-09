@@ -3,10 +3,11 @@ class GroupsController < ApplicationController
   include GraphMaker
 
   def index
-    @groups = current_user.groups
-    @your_requests = current_user.requests
-    @admin_memberships = current_user.memberships.where(admin: true)
-    @your_invitations = Invitation.where(email: current_user.email)
+    @user = User.find(params[:user_id])
+    @groups = @user.groups
+    @your_requests = @user.requests
+    @admin_memberships = @user.memberships.where(admin: true)
+    @your_invitations = Invitation.where(email: @user.email)
     groups = []
     for membership in @admin_memberships
       groups.push(membership.group)
@@ -20,6 +21,7 @@ class GroupsController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:user_id])
     @group = Group.find(params[:id])
     @group_week_data = []
     @group_dates = []
@@ -33,11 +35,11 @@ class GroupsController < ApplicationController
       rows = create_table_of_weekly_performances(user.metrics, dates)
       @group_rows.push(rows)
     end
-    @membership = Membership.find_by(group: @group, user: current_user)
+    @membership = Membership.find_by(group: @group, user: @user)
   end
 
   def all
-    @groups = Group.all.where(private: false) - current_user.groups
+    @groups = Group.all.where(private: false)
   end
 
   def new
@@ -45,19 +47,20 @@ class GroupsController < ApplicationController
   end
 
   def create
-    @user = current_user
+    @user = User.find(params[:user_id])
     @group = Group.create(group_params)
-    Membership.create(user: current_user, group: @group, admin: true)
+    Membership.create(user: @user, group: @group, admin: true)
     flash[:notice] = "Group #{@group.name} created successfully"
     GoalMailer.new_group_email(@user, @group).deliver
-    redirect_to user_groups_path(current_user)
+    redirect_to user_groups_path(@user)
   end
 
   def destroy
+    @user = User.find(params[:user_id])
     @group = Group.find(params[:id])
     flash[:notice] = "Group #{@group.name} deleted successfully"
     @group.destroy
-    redirect_to user_groups_path(current_user)
+    redirect_to user_groups_path(@user)
   end
 
   def edit
@@ -65,10 +68,11 @@ class GroupsController < ApplicationController
   end
 
   def update
+    @user = User.find(params[:user_id])
     @group = Group.find(params[:id])
     @group.update(group_params)
     flash[:notice] = "Group #{@group.name} updated successfully"
-    redirect_to user_group_path(current_user,@group)
+    redirect_to user_group_path(@user,@group)
   end
 
   private

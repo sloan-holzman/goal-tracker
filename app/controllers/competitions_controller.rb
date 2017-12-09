@@ -2,13 +2,13 @@ class CompetitionsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @user = current_user
+    @user = User.find(params[:user_id])
     @group = Group.find(params[:group_id])
     @competition = Competition.new
   end
 
   def create
-    @user = current_user
+    @user = User.find(params[:user_id])
     @group = Group.find(params[:group_id])
     @competition = Competition.create(competition_params.merge(group: @group))
     for user in @group.users
@@ -19,13 +19,13 @@ class CompetitionsController < ApplicationController
   end
 
   def edit
-    @user = current_user
+    @user = User.find(params[:user_id])
     @group = Group.find(params[:group_id])
     @competition = Competition.find(params[:id])
   end
 
   def update
-    @user = current_user
+    @user = User.find(params[:user_id])
     @group = Group.find(params[:group_id])
     @competition = Competition.find(params[:id])
     @competition.update(competition_update_params)
@@ -34,7 +34,7 @@ class CompetitionsController < ApplicationController
   end
 
   def show
-    @user = current_user
+    @user = User.find(params[:user_id])
     @group = Group.find(params[:group_id])
     @competition = Competition.find(params[:id])
     running_totals = []
@@ -52,12 +52,12 @@ class CompetitionsController < ApplicationController
   end
 
   def destroy
-    @user = current_user
+    @user = User.find(params[:user_id])
     @group = Group.find(params[:group_id])
     @competition = Competition.find(params[:id])
     flash[:notice] = "Competition for #{@competition.metric_name} deleted successfully"
     @competition.destroy
-    redirect_to user_group_path(current_user, @group  )
+    redirect_to user_group_path(@user, @group)
   end
 
   private

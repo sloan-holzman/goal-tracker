@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'demos#index'
 
+
+  get 'metrics/all' => 'metrics#all', :as => :all_metrics
   get 'demos' => 'demos#index', :as => :demo
   get 'profiles/show' => 'profiles#show', :as => :profile
   get 'performances/all/edit' => 'performances#edit_all', :as => :edit_all

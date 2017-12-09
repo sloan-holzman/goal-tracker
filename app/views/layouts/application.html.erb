@@ -23,12 +23,8 @@
           <% end %>
         </div>
         <div class="nav__container__links">
-          <% if current_user %>
-            <a class="nav__container__link" href="/users/<%= current_user.id %>/metrics">PAST PERFORMANCE</a>
-          <% else %>
-          <a class="nav__container__link" href="/">PAST PERFORMANCE</a>
-          <% end %>
-            <a class="nav__container__link" href="/performances/all/edit">ENTER DAILY PERFORMANCE</a>
+          <a class="nav__container__link" href="/metrics/all">PAST PERFORMANCE</a>
+          <a class="nav__container__link" href="/performances/all/edit">ENTER DAILY PERFORMANCE</a>
           <% if !current_user %>
             <a class="nav__container__link" href="/groups/all">ACCOUNTABILITY GROUPS</a>
           <% else %>

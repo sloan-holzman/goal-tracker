@@ -5,39 +5,45 @@ class PerformancesController < ApplicationController
 
 
   def show
-    @metric = current_user.metrics.find(params[:metric_id])
+    @user = User.find(params[:user_id])
+    @metric = @user.metrics.find(params[:metric_id])
     @performance = Performance.find(params[:id])
   end
 
   def new
-    @metric = current_user.metrics.find(params[:metric_id])
+    @user = User.find(params[:user_id])
+    @metric = @user.metrics.find(params[:metric_id])
     @performance = @metric.performances.new
   end
 
   def create
-    @metric = current_user.metrics.find(params[:metric_id])
+    @user = User.find(params[:user_id])
+    @metric = @user.metrics.find(params[:metric_id])
     @performance = @metric.performances.create!(performance_params.merge(entered: true))
     flash[:notice] = "Metric #{@metric.name} created successfully"
-    redirect_to user_metric_performance_path(current_user,@metric, @performance)
+    redirect_to user_metric_performance_path(@user,@metric, @performance)
   end
 
   def edit
-    @metric = current_user.metrics.find(params[:metric_id])
+    @user = User.find(params[:user_id])
+    @metric = @user.metrics.find(params[:metric_id])
     @performance = Performance.find(params[:id])
   end
 
   def update
-    @metric = current_user.metrics.find(params[:metric_id])
+    @user = User.find(params[:user_id])
+    @metric = @user.metrics.find(params[:metric_id])
     @performance = @metric.performances.update(performance_params.merge(entered: true))
     flash[:notice] = "Metric #{@metric.name} updated successfully"
-    redirect_to user_metric_performance_path(current_user,@metric, @performance)
+    redirect_to user_metric_performance_path(@user,@metric, @performance)
   end
 
   def destroy
-    @metric = current_user.metrics.find(params[:metric_id])
+    @user = User.find(params[:user_id])
+    @metric = @user.metrics.find(params[:metric_id])
     @performance = Performance.find(params[:id])
     @performance.destroy
-    redirect_to user_metric_path(current_user, @metric)
+    redirect_to user_metric_path(@user, @metric)
   end
 
 # learned edit_all and update_all from http://anthonylewis.com/2011/04/15/editing-multiple-records-in-rails/
