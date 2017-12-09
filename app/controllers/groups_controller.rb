@@ -28,11 +28,15 @@ class GroupsController < ApplicationController
     @group_rows = []
     @members = member_list(@group.users)
     for user in @group.users
-      week_data = create_data_for_current_week_graph(user.metrics)
-      @group_week_data.push(week_data)
-      dates = create_array_of_weeks(user.metrics)
-      @group_dates.push(dates)
-      rows = create_table_of_weekly_performances(user.metrics, dates)
+      if user.metrics.length > 0
+        week_data = create_data_for_current_week_graph(user.metrics)
+        @group_week_data.push(week_data)
+        dates = create_array_of_weeks(user.metrics)
+        @group_dates.push(dates)
+        rows = create_table_of_weekly_performances(user.metrics, dates)
+      else
+        rows=[]
+      end
       @group_rows.push(rows)
     end
     @membership = Membership.find_by(group: @group, user: @user)

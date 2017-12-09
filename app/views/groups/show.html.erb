@@ -4,42 +4,47 @@
 <% i=0 %>
 <% for user in @group.users %>
   <h3>Member <%= i+1 %>: <%= user.first_name %> <%= user.last_name %></h3>
-  <p>Week of <%= Date.today.beginning_of_week(:sunday) %></p>
-  <%= column_chart @group_week_data[i], colors: ["#4caf50", "#999"]  %>
-  <p>Recent Weeks</p>
-  <table class="metric-table">
-    <tr>
-      <th>Metric</th>
-      <th>Weekly Goal</th>
-      <th>Start Date</th>
-      <% for date in @group_dates[i] %>
-        <th><%= date.strftime("%m/%d") %></th>
-      <% end %>
-    </tr>
-  <% j = 0 %>
-  <% for metric in user.metrics %>
-    <tr>
-      <td><%= link_to metric.name, user_metric_path(current_user, metric) %></td>
-      <td><%= metric.target %> <%= metric.unit %></td>
-      <td><%= metric.start_date %></td>
-      <% week = 0 %>
-      <% for weekly_count in @group_rows[i][j] %>
-        <% if (@group_dates[i][week]+6)<metric.start_date %>
-          <td class="metric-table__prior"><%= weekly_count %></td>
-        <% elsif metric.good %>
-          <td class=<%= weekly_count >= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= weekly_count %></td>
-        <% else %>
-          <td class=<%= weekly_count <= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= weekly_count %></td>
+  <% if user.metrics.length > 0 %>
+    <p>Week of <%= Date.today.beginning_of_week(:sunday) %></p>
+    <%= column_chart @group_week_data[i], colors: ["#4caf50", "#999"]  %>
+    <p>Recent Weeks</p>
+    <table class="metric-table">
+      <tr>
+        <th>Metric</th>
+        <th>Weekly Goal</th>
+        <th>Start Date</th>
+        <% for date in @group_dates[i] %>
+          <th><%= date.strftime("%m/%d") %></th>
         <% end %>
-        <% week += 1 %>
-      <% end %>
-    </tr>
-    <% j+=1 %>
+      </tr>
+    <% j = 0 %>
+    <% for metric in user.metrics %>
+      <tr>
+        <td><%= link_to metric.name, user_metric_path(current_user, metric) %></td>
+        <td><%= metric.target %> <%= metric.unit %></td>
+        <td><%= metric.start_date %></td>
+        <% week = 0 %>
+        <% for weekly_count in @group_rows[i][j] %>
+          <% if (@group_dates[i][week]+6)<metric.start_date %>
+            <td class="metric-table__prior"><%= weekly_count %></td>
+          <% elsif metric.good %>
+            <td class=<%= weekly_count >= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= weekly_count %></td>
+          <% else %>
+            <td class=<%= weekly_count <= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= weekly_count %></td>
+          <% end %>
+          <% week += 1 %>
+        <% end %>
+      </tr>
+      <% j+=1 %>
+    <% end %>
+    </table>
+    <br>
+  <% else %>
+    <p><%= user.first_name %> has no metrics, yet</p>
   <% end %>
-  </table>
-  <br>
   <% i+=1 %>
 <% end %>
+<br>
 <div class="links">
   <%= link_to "Invite new members", new_user_group_invitation_path(current_user, @group) %>
   <%= link_to "Leave group", leave_group_path(current_user, @group), method: :delete %>

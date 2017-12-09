@@ -6,7 +6,7 @@ class MetricsController < ApplicationController
 
 
   def all
-    if user_signed_in?
+    if current_user
       redirect_to user_metrics_path(current_user)
     else
       flash[:notice] = "You need to sign in or sign up before continuing."
@@ -19,12 +19,14 @@ class MetricsController < ApplicationController
     @user = User.find(params[:user_id])
     @performances = @user.performances
     @metrics = @user.metrics
-    @day_streaks = calculate_day_streak(@metrics)
-    @all_data = create_data_for_line_graph(@metrics)
-    @week_data = create_data_for_current_week_graph(@metrics)
-    @dates = create_array_of_weeks(@metrics)
-    @rows = create_table_of_weekly_performances(@metrics, @dates)
-    @week_streaks = calculate_week_streak(@metrics, @rows)
+    if @metrics.length > 0
+      @day_streaks = calculate_day_streak(@metrics)
+      @all_data = create_data_for_line_graph(@metrics)
+      @week_data = create_data_for_current_week_graph(@metrics)
+      @dates = create_array_of_weeks(@metrics)
+      @rows = create_table_of_weekly_performances(@metrics, @dates)
+      @week_streaks = calculate_week_streak(@metrics, @rows)
+    end
   end
 
   def new
