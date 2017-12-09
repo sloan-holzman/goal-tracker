@@ -26,9 +26,9 @@ class GroupsController < ApplicationController
   end
 
   def show
-    if !Group.find_by_id(params[:id])
+    if !Group.find_by_id(params[:id]) || current_user != User.find(params[:user_id])
       flash[:notice] = "Sorry, no such group exists"
-      redirect_to root_path()
+      redirect_back fallback_location: root_path
     else
       @user = User.find(params[:user_id])
       @group = Group.find(params[:id])
