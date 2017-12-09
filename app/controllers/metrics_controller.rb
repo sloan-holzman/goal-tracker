@@ -1,9 +1,10 @@
 class MetricsController < ApplicationController
-  before_action :authenticate_user!
   include GraphMaker
+  include CheckUser
+
+  before_action :authenticate_user!
+  before_action :check_user, except: [:all]
   # load_and_authorize_resource
-
-
 
   def all
     if current_user

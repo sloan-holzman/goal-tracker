@@ -1,6 +1,11 @@
 class GroupsController < ApplicationController
-  before_action :authenticate_user!
   include GraphMaker
+  include CheckUser
+
+  before_action :authenticate_user!
+  before_action :check_user, except: [:all]
+
+
 
   def index
     @user = User.find(params[:user_id])
@@ -21,25 +26,30 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:user_id])
-    @group = Group.find(params[:id])
-    @group_week_data = []
-    @group_dates = []
-    @group_rows = []
-    @members = member_list(@group.users)
-    for user in @group.users
-      if user.metrics.length > 0
-        week_data = create_data_for_current_week_graph(user.metrics)
-        @group_week_data.push(week_data)
-        dates = create_array_of_weeks(user.metrics)
-        @group_dates.push(dates)
-        rows = create_table_of_weekly_performances(user.metrics, dates)
-      else
-        rows=[]
+    if !Group.find_by_id(params[:id])
+      flash[:notice] = "Sorry, no such group exists"
+      redirect_to root_path()
+    else
+      @user = User.find(params[:user_id])
+      @group = Group.find(params[:id])
+      @group_week_data = []
+      @group_dates = []
+      @group_rows = []
+      @members = member_list(@group.users)
+      for user in @group.users
+        if user.metrics.length > 0
+          week_data = create_data_for_current_week_graph(user.metrics)
+          @group_week_data.push(week_data)
+          dates = create_array_of_weeks(user.metrics)
+          @group_dates.push(dates)
+          rows = create_table_of_weekly_performances(user.metrics, dates)
+        else
+          rows=[]
+        end
+        @group_rows.push(rows)
       end
-      @group_rows.push(rows)
+      @membership = Membership.find_by(group: @group, user: @user)
     end
-    @membership = Membership.find_by(group: @group, user: @user)
   end
 
   def all
@@ -47,6 +57,7 @@ class GroupsController < ApplicationController
   end
 
   def new
+    @user = User.find(params[:user_id])
     @group = Group.new
   end
 
@@ -68,6 +79,7 @@ class GroupsController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:user_id])
     @group = Group.find(params[:id])
   end
 

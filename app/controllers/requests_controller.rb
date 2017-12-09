@@ -1,6 +1,7 @@
 class RequestsController < ApplicationController
+  include CheckUser
   before_action :authenticate_user!
-
+  before_action :check_user, except: [:all]
 
   def all
     @admin_memberships = current_user.memberships.where(admin: true)

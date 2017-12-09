@@ -1,6 +1,6 @@
 class MembershipsController < ApplicationController
-  before_action :authenticate_user!
-
+  include CheckUser
+  before_action :authenticate_user!, :check_user
 
   def destroy
     @user = User.find(params[:user_id])

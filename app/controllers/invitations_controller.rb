@@ -1,7 +1,9 @@
 class InvitationsController < ApplicationController
-  before_action :authenticate_user!
+  include CheckUser
+  before_action :authenticate_user!, :check_user
 
   def new
+    @user = User.find(params[:user_id])
     @invitation = Invitation.new
     @group = Group.find(params[:group_id])
   end

@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
+  include CheckUser
   before_action :authenticate_user!
-
 
   def show
     @user = current_user

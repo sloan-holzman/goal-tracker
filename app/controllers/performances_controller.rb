@@ -1,7 +1,8 @@
 class PerformancesController < ApplicationController
+  include CheckUser
+
   before_action :authenticate_user!
-  # , :except => [:show, :index]
-  # load_and_authorize_resource
+  before_action :check_user, except: [:edit_all, :update_all, :edit_day, :select_day, :update_day]
 
 
   def show
