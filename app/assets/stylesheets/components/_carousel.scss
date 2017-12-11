@@ -1,0 +1,22 @@
+/*below is for the bootstrap carousel
+it was modified from https://www.w3schools.com/bootstrap/bootstrap_carousel.asp */
+
+.carousel-inner {
+  text-align: center;
+  font-size: 30px;
+  width: 60vw;
+}
+
+.carousel-caption {
+  text-align: left;
+  top: 0;
+  color: black;
+}
+
+.item {
+  border-top: solid;
+  border-bottom: solid;
+  border-width: 3px;
+  border-color: #f3f3f4;
+  height: 250px;
+}

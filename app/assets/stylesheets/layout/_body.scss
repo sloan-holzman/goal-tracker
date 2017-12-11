@@ -1,0 +1,13 @@
+html,
+body {
+  height: 100%; /* needed for proper layout */
+}
+
+body {
+  overflow: hidden; /*makes the body non-scrollable (we will add scrolling to the sidebar and main content containers)*/
+  display: flex; /*enables flex content for its children*/
+  // box-sizing: border-box;
+  flex-direction: column;
+  // font-family: "Nunito Sans", sans-serif !important;
+  justify-content: space-between;
+}

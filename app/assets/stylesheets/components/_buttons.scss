@@ -1,0 +1,60 @@
+/*below is for the dropdown button
+dropdown styles modified from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown*/
+
+.button {
+  background-color: #4caf50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover,
+.button:focus {
+  background-color: #3e8e41;
+}
+
+.dropdown {
+  display: inline-block;
+  margin: 0;
+}
+
+.dropdown__dropbtn__content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown__dropbtn__content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {
+  background-color: #f1f1f1;
+}
+
+.show {
+  display: block;
+}
+
+/* for form buttons */
+.wide {
+  width: 150px;
+}
+
+.widest {
+  width: 300px;
+}
+
+.short {
+  height: 30px;
+  padding: 0px !important;
+}

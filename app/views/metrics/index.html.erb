@@ -6,7 +6,7 @@
   <%= column_chart @week_data, colors: ["#4caf50", "#999"] %>
   <h2>Recent Weeks</h2>
   <% for streak in @week_streaks %>
-    <p><%= streak[0].name%>: You've metric-table__hit your weekly goal the previous <%= streak[1] %> weeks.  Keep it up!</p>
+    <p><%= streak[0].name%>: You've hit your weekly goal the previous <%= streak[1] %> weeks.  Keep it up!</p>
   <% end %>
   <br>
   <br>

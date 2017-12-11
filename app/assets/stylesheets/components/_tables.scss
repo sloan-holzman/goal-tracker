@@ -1,0 +1,67 @@
+// table styles modified from from https://www.w3schools.com/css/tryit.asp?filename=trycss_table_fancy */
+
+table {
+  text-align: center;
+}
+
+.metric-table {
+  width: 90%;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.metric-table td,
+.metric-table th {
+  padding: 8px;
+}
+
+.metric-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.metric-table tr:first-child {
+  opacity: 1;
+}
+
+.metric-table tr {
+  background-color: #ddd;
+  opacity: 0.8;
+}
+
+.metric-table tr:hover {
+  background-color: #ddd;
+  opacity: 1;
+}
+
+.metric-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #4caf50;
+  color: white;
+  opacity: 1;
+}
+
+.metric-table td {
+  color: #999;
+}
+
+.metric-table__hit {
+  background: #4caf50;
+  color: white !important;
+}
+
+.metric-table__missed {
+  background: red;
+  color: white !important;
+}
+
+
+.metric-table a {
+  color: #4c4e46 !important;
+  font-weight: 999;
+}
+
+.metric-table a:hover {
+  color: #3e8e41 !important;
+}

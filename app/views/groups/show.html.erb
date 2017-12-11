@@ -20,7 +20,7 @@
     <% j = 0 %>
     <% for metric in user.metrics %>
       <tr>
-        <td><%= link_to metric.name, user_metric_path(current_user, metric) %></td>
+        <td><%= metric.name %></td>
         <td><%= metric.target %> <%= metric.unit %></td>
         <td><%= metric.start_date %></td>
         <% week = 0 %>
