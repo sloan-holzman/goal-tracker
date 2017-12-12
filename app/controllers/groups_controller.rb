@@ -11,18 +11,8 @@ class GroupsController < ApplicationController
     @user = User.find(params[:user_id])
     @groups = @user.groups
     @your_requests = @user.requests
-    @admin_memberships = @user.memberships.where(admin: true)
     @your_invitations = Invitation.where(email: @user.email)
-    groups = []
-    for membership in @admin_memberships
-      groups.push(membership.group)
-    end
-    @approval_requests = []
-    for group in groups
-      for request in group.requests
-        @approval_requests.push(request)
-      end
-    end
+    @approval_requests = @user.find_approval_requests
   end
 
   def show

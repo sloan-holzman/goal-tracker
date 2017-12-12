@@ -20,4 +20,20 @@ class User < ApplicationRecord
     user.first_name = user.first_name.downcase.titleize
   end
 
+  def find_approval_requests
+    admin_memberships = self.memberships.where(admin: true)
+    groups = []
+    for membership in admin_memberships
+      groups.push(membership.group)
+    end
+    approval_requests = []
+    for group in groups
+      for request in group.requests
+        approval_requests.push(request)
+      end
+    end
+    return approval_requests
+  end
+
+
 end

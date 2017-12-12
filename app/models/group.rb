@@ -10,5 +10,5 @@ class Group < ApplicationRecord
   before_save do |group|
     group.name = group.name.downcase.titleize
   end
-
+  
 end

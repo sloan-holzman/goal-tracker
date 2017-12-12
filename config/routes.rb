@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   put 'performances/:date' => 'performances#update_day', :as => :update_day
   get 'request/all' => 'requests#all'
   get 'groups/all' => 'groups#all'
-  post 'users/:user_id/groups/:group_id/requests/:id/approve' => 'requests#approve'
-  delete 'users/:user_id/groups/:group_id/requests/:id/reject' => 'requests#reject'
+  post 'requests/:id/approve' => 'requests#approve'
+  delete 'requests/:id/reject' => 'requests#reject'
   post 'users/:user_id/groups/:group_id/invitations/:id/accept' => 'invitations#accept'
   delete 'users/:user_id/groups/:group_id/invitations/:id/reject' => 'invitations#reject'
   delete 'users/:user_id/groups/:group_id/memberships/destroy' => 'memberships#destroy', :as => :leave_group

@@ -1,25 +1,11 @@
 class RequestsController < ApplicationController
   include CheckUser
   before_action :authenticate_user!
-  before_action :check_user, except: [:all]
+  before_action :check_user, except: [:all, :approve, :reject]
 
   def all
-    @admin_memberships = current_user.memberships.where(admin: true)
-    groups = []
-    for membership in @admin_memberships
-      groups.push(membership.group)
-    end
-    approval_requests = []
-    for group in groups
-      for request in group.requests
-        approval_requests.push(request)
-      end
-    end
-    if approval_requests.length > 0
-      @approval_requests = approval_requests
-    else
-      @approval_requests = []
-    end
+    @user = current_user
+    @approval_requests = @user.find_approval_requests
   end
 
   def create
