@@ -19,13 +19,13 @@
           <% end %>
         </div>
         <div class="nav__container__links">
-          <a class="nav__container__link" href="/metrics/all">PAST PERFORMANCE</a>
-          <a class="nav__container__link" href="/performances/all/edit">ENTER DAILY PERFORMANCE</a>
+          <a class="nav__container__link" href="/metrics/all">TRACK YOUR METRICS</a>
           <% if !current_user %>
-            <a class="nav__container__link" href="/groups/all">ACCOUNTABILITY GROUPS</a>
+            <a class="nav__container__link" href="/groups/all">TRACK YOUR GROUPS</a>
           <% else %>
-            <a class="nav__container__link" href="/users/<%= current_user.id %>/groups">ACCOUNTABILITY GROUPS</a>
+            <a class="nav__container__link" href="/users/<%= current_user.id %>/groups">TRACK YOUR GROUPS</a>
           <% end %>
+          <a class="nav__container__link" href="/performances/all/edit">ENTER DAILY PERFORMANCE</a>
           <div class="dropdown">
             <% if !current_user %>
             <a href="/users/sign_in"><button class="button dropdown__dropbtn">SIGN IN</button></a>

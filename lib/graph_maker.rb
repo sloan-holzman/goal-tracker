@@ -34,27 +34,42 @@ module GraphMaker
     return [{name: "Weekly Goal",data: target_data},{name: "Count so far",data: actual_data}]
   end
 
+  #
+  # calculate_day_streak(metrics: Hash)
+  #
+  # lorem ipsum ...
   def calculate_day_streak(metrics)
     day_streaks = []
+
     for metric in metrics
+
       if metric.start_date <= Date.today
         duration = Date.today - metric.start_date + 1
         streak = 0
+
         (1..duration).each do |i|
+
           if metric.performances.find_by(date: (Date.today - i)) == nil
             break
           end
+
           if (metric.good && metric.performances.find_by(date: (Date.today - i)).count > 0) || (metric.good == false && metric.performances.find_by(date: (Date.today - i)).count == 0)
             streak += 1
           else
             break
           end
+
         end
+
         if streak >= 2
           day_streaks.push([metric, streak])
         end
+
       end
+
     end
+
+
     return day_streaks
   end
 
