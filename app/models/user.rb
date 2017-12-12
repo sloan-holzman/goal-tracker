@@ -14,11 +14,9 @@ class User < ApplicationRecord
 
   before_save do |user|
     user.last_name = user.last_name.downcase.titleize
-  end
-
-  before_save do |user|
     user.first_name = user.first_name.downcase.titleize
   end
+
 
   def find_approval_requests
     admin_memberships = self.memberships.where(admin: true)

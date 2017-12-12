@@ -3,11 +3,9 @@ class Competition < ApplicationRecord
 
   before_save do |competition|
     competition.metric_name = competition.metric_name.downcase.titleize
-  end
-
-  before_save do |competition|
     competition.metric_unit = competition.metric_unit.downcase.titleize
   end
+
 
   def create_user_metrics
     for user in self.group.users

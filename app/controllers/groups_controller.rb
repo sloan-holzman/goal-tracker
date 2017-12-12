@@ -5,8 +5,6 @@ class GroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_user, except: [:all]
 
-
-
   def index
     @user = User.find(params[:user_id])
     @groups = @user.groups
