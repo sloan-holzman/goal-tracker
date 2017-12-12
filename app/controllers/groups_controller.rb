@@ -41,7 +41,7 @@ class GroupsController < ApplicationController
   end
 
   def all
-    @groups = Group.all.where(private: false)
+    @groups = Group.all.where(private: false) - current_user.groups
   end
 
   def new

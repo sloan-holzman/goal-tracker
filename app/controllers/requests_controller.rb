@@ -11,7 +11,7 @@ class RequestsController < ApplicationController
   def create
     @user = User.find(params[:user_id])
     @group = Group.find(params[:group_id])
-    Request.create(user: @user, group: @group)
+    Request.find_or_create_by!(user: @user, group: @group)
     flash[:notice] = "Your request to join group #{@group.name} has been sent"
     redirect_to request_all_path
   end

@@ -32,7 +32,7 @@
 <% end %>
 <div class="links">
   <%= link_to "Create new group", new_user_group_path(current_user) %>
-  <%= link_to "See all groups", groups_all_path %>
+  <%= link_to "Request to join other groups", groups_all_path %>
   <% if @approval_requests.length > 0 %>
     <%= link_to "Approve outstanding requests", request_all_path %>
   <% end %>

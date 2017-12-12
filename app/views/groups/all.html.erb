@@ -6,7 +6,13 @@
     <h3><%= group.name %></h3>
     <p>Members: <%= group.users.length  %></p>
     <div class="links">
-      <%= link_to "Request to join", user_group_requests_path(current_user, group), method: :post %>
+      <% if group.requests.where(user: current_user).length > 0 %>
+        <p>(Your request to join this group is awaiting approval)</p>
+      <% elsif group.invitations.where(email: current_user.email).length > 0 %>
+        <p>(You have an outstanding invitation to join this group)</p>
+      <% else %>
+        <%= link_to "Request to join", user_group_requests_path(current_user, group), method: :post %>
+      <% end %>
     </div>
   <% end %>
 <% end %>
