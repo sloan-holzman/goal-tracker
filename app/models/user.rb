@@ -34,4 +34,15 @@ class User < ApplicationRecord
   end
 
 
+  def find_reminder_frequency
+    if !self.reminder
+      reminder_frequency_message = "Off"
+    elsif self.reminder_frequency == "Weekly"
+      reminder_frequency_message = "Every #{self.reminder_day}"
+    else self.reminder
+      reminder_frequency_message = "Daily"
+    end
+    return reminder_frequency_message
+  end
+
 end

@@ -1,7 +1,7 @@
 <h2>Your profile</h2>
 <p>Name: <%= @user.first_name %> <% @user.last_name %></p>
 <p>Email: <%= @user.email %></p>
-<p>Reminder emails: <%= @user.reminder ? @message : "Off" %></p>
+<p>Reminder emails: <%= @reminder_frequency_message %></p>
 <p>Member since: <%= @user.created_at %></p>
 <br>
 <div class="links">
