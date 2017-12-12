@@ -4,7 +4,6 @@ class MetricsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :check_user, except: [:all]
-  # load_and_authorize_resource
 
   def all
     if current_user
@@ -46,12 +45,7 @@ class MetricsController < ApplicationController
   def create
     @user = User.find(params[:user_id])
     @metric = @user.metrics.create!(metric_params)
-    # automatically create performances for every day since the start date
-    if Date.today > @metric.start_date
-      (@metric.start_date..Date.today).each do |date|
-        @metric.performances.create!(count: 0, date: date, entered: false)
-      end
-    end
+    @metric.create_old_performances
     flash[:notice] = "Goal #{@metric.name} created successfully"
     redirect_to user_metric_path(@user,@metric)
   end
@@ -65,20 +59,8 @@ class MetricsController < ApplicationController
     @user = User.find(params[:user_id])
     @metric = @user.metrics.find(params[:id])
     @metric.update(metric_params)
-    # automatically create performances for every day since the start date
-    if Date.today > @metric.start_date
-      (@metric.start_date..Date.today).each do |date|
-        if !@metric.performances.exists?(date: date)
-          @metric.performances.create!(count: 0, date: date, entered: false)
-        end
-      end
-    end
-    # if there are old, unentered performances from before the start date, just delete them
-    for performance in @metric.performances
-      if performance.date < @metric.start_date && performance.entered == false
-        performance.destroy!
-      end
-    end
+    @metric.create_old_performances
+    @metric.delete_prestart_unentered_performances
     flash[:notice] = "Goal #{@metric.name} updated successfully"
     redirect_to user_metric_path(@user,@metric)
   end

@@ -11,4 +11,24 @@ class Metric < ApplicationRecord
     metric.unit = metric.unit.downcase.titleize
   end
 
+  def create_old_performances
+    if Date.today > self.start_date
+      (self.start_date..Date.today).each do |date|
+        if !self.performances.exists?(date: date)
+          self.performances.create!(count: 0, date: date, entered: false)
+        end
+      end
+    end
+  end
+
+  def delete_prestart_unentered_performances
+    for performance in self.performances
+      if performance.date < self.start_date && performance.entered == false
+        performance.destroy!
+      end
+    end
+  end
+
+
+
 end
