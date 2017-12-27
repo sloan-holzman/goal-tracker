@@ -11,33 +11,52 @@ module GraphMaker
     return all_data
   end
 
+
+  #
+  # create_data_for_current_week_graph(metrics: array of hashes)
+  #
+  # target data is the goal/target for each metric (e.g. run 15 miles) and then actual data is how much we have done this week (e.g. only ran 10)
+  # These are then put into an array which is used to create a bar graph
+  # unfortunately, have to use a nested loop because the data must be organized in a very specific fashion for the chartkick graphing gem to work
   def create_data_for_current_week_graph(metrics)
-    # target data is the goal/target for each metric and then actual data is how much we have done this week.
-    # These are then put into an array called @week_data which can be fed into a graph
+
+    # array containing the weekly goal/target for each metric
     target_data = []
     for metric in metrics
       array = [metric.name, metric.target]
       target_data.push(array)
     end
+
+    # array containing the current week's total for each metric
     actual_data = []
     for metric in metrics
-      weekly_count = 0
-      for performance in metric.performances
-        if performance.date >= Date.today.beginning_of_week(:sunday) && performance.date < (Date.today.beginning_of_week(:sunday)+7)
-          weekly_count += performance.count
-        end
-      end
+      weekly_count = calculate_current_week_total(metric)
       array = [metric.name, weekly_count]
       actual_data.push(array)
-      weekly_count = 0
     end
+
+    # data organized in a manner that the chartkick gem can handle to produce bar charts for each metric's weekly total against the weekly goal
     return [{name: "Weekly Goal",data: target_data},{name: "Count so far",data: actual_data}]
   end
 
   #
-  # calculate_day_streak(metrics: Hash)
+  # calculate_current_week_total(metric: hash)
   #
-  # lorem ipsum ...
+  # for an invidividual metric (e.g. Running), total how much the user has done in the current week so far (e.g. 10 miles)
+  def calculate_current_week_total(metric)
+    weekly_count = 0
+    for performance in metric.performances
+      if performance.date >= Date.today.beginning_of_week(:sunday) && performance.date < (Date.today.beginning_of_week(:sunday)+7)
+        weekly_count += performance.count
+      end
+    end
+    return weekly_count
+  end
+
+  #
+  # calculate_day_streak(metrics: array of hashes)
+  #
+  # returns an array of all the metrics and the streak total where the user has performed more than two days in a row
   def calculate_day_streak(metrics)
     day_streaks = []
 
@@ -73,43 +92,9 @@ module GraphMaker
     return day_streaks
   end
 
-  def calculate_week_streak(metrics, rows)
-    week_streaks = []
-    metric_index = 0
-    for metric in metrics
-      week_streak = 0
-      weeks = rows[metric_index].length - 1
-      (1..weeks).each do |weeks_back|
-        if (metric.good && rows[metric_index][weeks - weeks_back].to_i >= metric.target) || (metric.good == false && rows[metric_index][weeks - weeks_back].to_i <= metric.target)
-          week_streak += 1
-        else
-          break
-        end
-      end
-      if week_streak >= 2
-        week_streaks.push([metric, week_streak])
-      end
-      metric_index += 1
-    end
-    return week_streaks
-  end
-
-  def create_array_of_weeks(metrics)
-    start_dates = []
-    for metric in metrics
-      start_dates.push(metric.start_date)
-    end
-    start = [start_dates.min.beginning_of_week(:sunday),(Date.today - 63).beginning_of_week(:sunday)].max
-    last = Date.today.end_of_week(:saturday)
-    dates = []
-    day = start
-    while day <= last
-      dates.push(day)
-      day +=7
-    end
-    return dates
-  end
-
+  #
+  # create_table_of_weekly_performances(metrics: array of hashes, dates: array of dates)
+  #
   def create_table_of_weekly_performances(metrics, dates)
     rows = []
     for metric in metrics
@@ -134,4 +119,52 @@ module GraphMaker
     end
     return rows
   end
+
+  #
+  # calculate_week_streak(metrics: array of hashes, rows: an array of the weekly totals for each metric)
+  #
+  # loops through the weekly totals for each metric and checks if it's greater than the weekly goal
+  # returns an array of all the metrics and the streak total where the user has exceeded the goal for more than two weeks in a row
+  def calculate_week_streak(metrics, rows)
+    week_streaks = []
+    metric_index = 0
+    for metric in metrics
+      week_streak = 0
+      weeks = rows[metric_index].length - 1
+      (1..weeks).each do |weeks_back|
+        if (metric.good && rows[metric_index][weeks - weeks_back].to_i >= metric.target) || (metric.good == false && rows[metric_index][weeks - weeks_back].to_i <= metric.target)
+          week_streak += 1
+        else
+          break
+        end
+      end
+      if week_streak >= 2
+        week_streaks.push([metric, week_streak])
+      end
+      metric_index += 1
+    end
+    return week_streaks
+  end
+
+  #
+  # create_array_of_weeks(metrics: array of hashes)
+  #
+  # returns an array of the first sunday of the month for up to the last ten weeks (or dating back to the earliest start date for any of the metrics)
+  def create_array_of_weeks(metrics)
+    start_dates = []
+    for metric in metrics
+      start_dates.push(metric.start_date)
+    end
+    start = [start_dates.min.beginning_of_week(:sunday),(Date.today - 63).beginning_of_week(:sunday)].max
+    last = Date.today.end_of_week(:saturday)
+    dates = []
+    day = start
+    while day <= last
+      dates.push(day)
+      day +=7
+    end
+    return dates
+  end
+
+
 end
