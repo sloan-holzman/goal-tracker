@@ -12,10 +12,15 @@ end
 task create_daily_performances: :environment do
   for metric in Metric.all
     if metric.performances.exists?(date: Date.today) || metric.start_date > Date.today
-      puts "DIDN'T CREATE: Metric name: #{metric.name}, Metric start date: #{metric.start_date}"
     else
       metric.performances.create!(date: Date.today, count: 0, entered: false)
-      puts "CREATED: Metric name: #{metric.name}, Metric start date: #{metric.start_date}"
     end
+  end
+end
+
+
+task create_new_weekly_totals: :environment do
+  for metric in Metric.all
+    metric.create_new_weekly_totals
   end
 end

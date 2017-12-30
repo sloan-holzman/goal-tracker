@@ -1,6 +1,7 @@
 class Metric < ApplicationRecord
   belongs_to :user
   has_many :performances, dependent: :destroy
+  has_many :weeks, dependent: :destroy
   validates :name, :unit, :target, :duration, {presence: true}
 
   before_save do |metric|
@@ -40,6 +41,12 @@ class Metric < ApplicationRecord
         end
       end
     end
+  end
+
+
+
+  def create_new_weekly_totals
+    self.weeks.create(date: Date.today, total: 0)
   end
 
 
