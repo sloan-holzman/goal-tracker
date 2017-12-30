@@ -26,4 +26,21 @@ class Metric < ApplicationRecord
     end
   end
 
+
+  def find_last_day_undone
+    if self.last_day_undone - self.start_date >= 0
+      if self.good && self.performances.find_by(date: self.last_day_undone.to_date).count > 0 || !self.good && self.performances.find_by(date: self.last_day_undone.to_date).count == 0
+        duration = (self.last_day_undone - self.metric.start_date).to_i
+        (1..duration).each do |i|
+          if (self.good && self.performances.find_by(date: (self.last_day_undone - i)).count == 0) || (self.good == false && self.performances.find_by(date: (self.last_day_undone - i)).count > 0)
+            self.update(last_day_undone: (self.last_day_undone - i))
+            break
+          end
+        self.update(last_day_undone: (self.start_date - 1))
+        end
+      end
+    end
+  end
+
+
 end

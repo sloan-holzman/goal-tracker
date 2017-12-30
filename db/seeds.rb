@@ -23,11 +23,11 @@ bob.save!
 billy = User.new(email: 'billy@gmail.com', password: 'password', first_name: 'billy', last_name: 'johnson', reminder_day: "Monday")
 billy.skip_confirmation!
 billy.save!
-running = sloan.metrics.create(name: 'Running', unit: 'miles', target: 15, good: true, duration: 'week', start_date: (Date.today-21))
-meditation = sloan.metrics.create(name: 'Meditation', unit: 'sessions', target: 6, good: true, duration: 'week', start_date: (Date.today-21))
-skipping = sloan.metrics.create(name: 'Skipping', unit: 'skips', target: 100, good: true, duration: 'week', start_date: (Date.today-2))
-smoking = sloan.metrics.create(name: 'Smoking', unit: 'cigarettes', target: 10, good: false, duration: 'week', start_date: (Date.today-10))
-running2 = bob.metrics.create(name: 'Running', unit: 'miles', target: 10, good: true, duration: 'week', start_date: (Date.today-8))
+running = sloan.metrics.create(name: 'Running', unit: 'miles', target: 15, good: true, duration: 'week', start_date: (Date.today-21), last_day_undone: (Date.today-22))
+meditation = sloan.metrics.create(name: 'Meditation', unit: 'sessions', target: 6, good: true, duration: 'week', start_date: (Date.today-21), last_day_undone: (Date.today-22))
+skipping = sloan.metrics.create(name: 'Skipping', unit: 'skips', target: 100, good: true, duration: 'week', start_date: (Date.today-2), last_day_undone: (Date.today-3))
+smoking = sloan.metrics.create(name: 'Smoking', unit: 'cigarettes', target: 10, good: false, duration: 'week', start_date: (Date.today-10), last_day_undone: (Date.today-11))
+running2 = bob.metrics.create(name: 'Running', unit: 'miles', target: 10, good: true, duration: 'week', start_date: (Date.today-8), last_day_undone: (Date.today-9))
 
 
 group = Group.create(name: 'sloanbob')

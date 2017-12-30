@@ -20,7 +20,6 @@ class MetricsController < ApplicationController
     @performances = @user.performances
     @metrics = @user.metrics
     if @metrics.length > 0
-      @day_streaks = calculate_day_streak(@metrics)
       @all_data = create_data_for_line_graph(@metrics)
       @week_data = create_data_for_current_week_graph(@metrics)
       @dates = create_array_of_weeks(@metrics)
@@ -44,7 +43,7 @@ class MetricsController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
-    @metric = @user.metrics.create!(metric_params)
+    @metric = @user.metrics.create!(metric_params.merge(last_day_undone: (metric_params[:start_date].to_date - 1), last_week_undone: metric_params[:start_date].to_date.beginning_of_week(:sunday)))
     @metric.create_old_performances
     flash[:notice] = "Goal #{@metric.name} created successfully"
     redirect_to user_metric_path(@user,@metric)
@@ -60,6 +59,7 @@ class MetricsController < ApplicationController
     @metric = @user.metrics.find(params[:id])
     @metric.update(metric_params)
     @metric.create_old_performances
+    @metric.find_last_day_undone
     @metric.delete_prestart_unentered_performances
     flash[:notice] = "Goal #{@metric.name} updated successfully"
     redirect_to user_metric_path(@user,@metric)

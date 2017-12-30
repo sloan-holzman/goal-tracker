@@ -4,13 +4,10 @@
 <p>(It's a <%= @metric.good ? 'good' : 'bad' %> thing i.e. you are trying to <%= @metric.good ? 'more' : 'less' %> of it)</p>
 <br>
 <br>
-<h4>Daily performance</h4>
 <% if @metric.start_date <= Date.today %>
+  <h4>Daily performance</h4>
   <%= line_chart @daily_data, colors: ["#4caf50"] %>
-<% end %>
-
-<h4>Weekly performance</h4>
-<% if @metric.start_date <= Date.today %>
+  <h4>Weekly performance</h4>
   <%= line_chart @weekly_data, colors: ["#4caf50"] %>
 <% end %>
 

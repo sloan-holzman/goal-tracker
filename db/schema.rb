@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171129013002) do
+ActiveRecord::Schema.define(version: 20171227221002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,8 @@ ActiveRecord::Schema.define(version: 20171129013002) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.date "start_date", default: "2017-11-28"
+    t.date "last_day_undone", default: "2017-12-27"
+    t.date "last_week_undone", default: "2017-12-27"
     t.index ["user_id"], name: "index_metrics_on_user_id"
   end
 
