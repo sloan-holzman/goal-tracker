@@ -3,8 +3,8 @@ module GraphMaker
     all_data = []
     for metric in metrics
       if Date.today >= metric.start_date
-        performances = metric.performances
-        set = {name: metric.name,data: performances.where("date >= ?",metric.start_date).group_by_day(:date).sum(:count)}
+        # performances = metric.performances
+        set = {name: metric.name,data: metric.performances.where("date >= ?",metric.start_date).group_by_day(:date).sum(:count)}
         all_data.push(set)
       end
     end

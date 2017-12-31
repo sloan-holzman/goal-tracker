@@ -42,6 +42,46 @@
     <% i+=1 %>
   <% end %>
   </table>
+
+  <table class="metric-table">
+    <tr>
+      <th>Metric</th>
+      <th>Weekly Goal</th>
+      <th>Start Date</th>
+      <% for date in @dates %>
+        <th><%= date.strftime("%m/%d") %></th>
+        <% puts date %>
+      <% end %>
+    </tr>
+  <% for metric in @metrics %>
+    <tr>
+      <td><%= link_to metric.name, user_metric_path(current_user, metric) %></td>
+      <td><%= metric.target %> <%= metric.unit %></td>
+      <td><%= metric.start_date %></td>
+      <% ordered_weeks = metric.weeks.order("date")%>
+      <% if (@dates[0] - ordered_weeks[0]["date"].beginning_of_week(:sunday)).to_i > 0 %>
+        <% week_index = 0 %>
+        <% for week in ordered_weeks%>
+          <% if week.date - @dates[0] == 0 %>
+            <% break %>
+          <% else %>
+            <% week_index += 1 %>
+          <% end %>
+        <% end %>
+        <% week_count = 0 %>
+        <% until week_count >= (@dates.length+week_index) do %>
+          <% if week_count >= week_index %>
+            <td><%= ordered_weeks[week_count]["total"] %></td>
+          <% end %>
+          <% week_count +=1 %>
+        <% end %>
+      <% else %>
+        <% puts "false" %>
+      <% end  %>
+    </tr>
+  <% end %>
+  </table>
+
   <h2>All time</h2>
   <%= line_chart @all_data, colors: ["#4CAF50", "#FF0000", "#CA9CE1", "#F4E04D", "#1C3144", "#58B09C"] %>
 <% else %>
