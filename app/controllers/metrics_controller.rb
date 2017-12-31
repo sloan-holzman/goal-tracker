@@ -45,6 +45,7 @@ class MetricsController < ApplicationController
     @user = User.find(params[:user_id])
     @metric = @user.metrics.create!(metric_params.merge(last_day_undone: (metric_params[:start_date].to_date - 1), last_week_undone: metric_params[:start_date].to_date.beginning_of_week(:sunday)))
     @metric.create_old_performances
+    @metric.create_past_weekly_totals
     flash[:notice] = "Goal #{@metric.name} created successfully"
     redirect_to user_metric_path(@user,@metric)
   end
@@ -57,8 +58,10 @@ class MetricsController < ApplicationController
   def update
     @user = User.find(params[:user_id])
     @metric = @user.metrics.find(params[:id])
+    original_start_date = @metric.start_date
     @metric.update(metric_params)
     @metric.create_old_performances
+    @metric.update_weekly_totals(original_start_date)
     @metric.find_last_day_undone
     @metric.delete_prestart_unentered_performances
     flash[:notice] = "Goal #{@metric.name} updated successfully"

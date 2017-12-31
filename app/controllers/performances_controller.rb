@@ -64,9 +64,11 @@ class PerformancesController < ApplicationController
   def update_all
     params['performance'].keys.each do |id|
       @performance = Performance.find(id.to_i)
+      old_count = @performance.count
       @performance.update_attributes!(performances_params(id))
       @performance.update(entered: true)
       @performance.find_last_day_undone
+      @performance.update_weekly_total(old_count)
     end
     flash[:notice] = "Performances updated successfully"
     redirect_to(user_metrics_path(current_user))
@@ -93,8 +95,10 @@ class PerformancesController < ApplicationController
   def update_day
     params['performance'].keys.each do |id|
       @performance = Performance.find(id.to_i)
+      old_count = @performance.count
       @performance.update_attributes!(performances_params(id))
       @performance.update(entered: true)
+      @performance.update_weekly_total(old_count)
       @performance.find_last_day_undone
     end
     flash[:notice] = "Performances updated successfully"

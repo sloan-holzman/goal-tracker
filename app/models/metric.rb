@@ -44,8 +44,39 @@ class Metric < ApplicationRecord
   end
 
 
+  def create_past_weekly_totals
+    if self.start_date <= Date.today
+      date = self.start_date.beginning_of_week(:sunday)
+      while date <=Date.today
+        self.weeks.create(date: date, total: 0)
+        date += 7
+      end
+    end
+  end
 
-  def create_new_weekly_totals
+  def update_weekly_totals(original_start_date)
+    if self.start_date < original_start_date
+      week = self.start_date.beginning_of_week(:sunday)
+      while week < original_start_date.beginning_of_week(:sunday)
+        self.weeks.create(date: week, total: 0)
+        week += 7
+      end
+    end
+    if original_start_date.to_date.beginning_of_week(:sunday) > self.start_date.beginning_of_week(:sunday)
+      original_start_week = self.weeks.find_by(date: original_start_date.beginning_of_week(:sunday).to_date)
+      if original_start_week
+        original_start_week_total = self.performances.where("date >= ? and date < ?", original_start_date.beginning_of_week(:sunday), (original_start_date.beginning_of_week(:sunday)+7)).sum(:count)
+        original_start_week.update(total: original_start_week_total)
+      end
+    end
+    if self.start_date.beginning_of_week(:sunday).to_date <= Date.today
+      start_week = self.weeks.find_by(date: self.start_date.beginning_of_week(:sunday).to_date)
+      start_week_total = self.performances.where("date >= ? and date < ?", self.start_date, (self.start_date.beginning_of_week(:sunday)+7)).sum(:count)
+      start_week.update(total: start_week_total)
+    end
+  end
+
+  def create_new_weekly_total
     self.weeks.create(date: Date.today, total: 0)
   end
 

@@ -10,6 +10,10 @@
   <%= line_chart @weekly_data, colors: ["#4caf50"] %>
 <% end %>
 
+<% for weeks in @metric.weeks %>
+  <p><%= weeks.date %> <%= weeks.total %></p>
+<% end %>
+
 <div class="links">
   <%= link_to "Edit Metric", edit_user_metric_path(current_user, @metric) %>
   <%= link_to "Delete Metric", user_metric_path(current_user, @metric), method: :delete, data: {confirm: "Are you sure you want to delete this metric?"} %>
