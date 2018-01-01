@@ -56,10 +56,11 @@ class User < ApplicationRecord
     for metric in self.metrics
       date = Date.today.beginning_of_week(:sunday)
       puts metric.name
+      puts date
       while true
-        if (date - metric.start_date).to_i >= 0
+        if (date - metric.start_date.beginning_of_week(:sunday)).to_i >= 0
           if !metric.weeks.exists?(date: date)
-            weekly_total = metric.performances.where("date > ? and date <= ?", date, (date+6)).sum(:count)
+            weekly_total = metric.performances.where("date >= ? and date <= ?", date, (date+6)).sum(:count)
             puts weekly_total
             metric.weeks.create(date: date, total: weekly_total)
           end

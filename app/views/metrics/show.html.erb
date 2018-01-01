@@ -11,7 +11,7 @@
 <% end %>
 
 <% for week in @metric.weeks %>
-  <p><%= week.date %></p>
+  <p><%= week.date %> <%= week.total %></p>
 <% end %>
 
 <div class="links">
