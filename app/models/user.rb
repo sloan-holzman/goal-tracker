@@ -46,4 +46,30 @@ class User < ApplicationRecord
     return reminder_frequency_message
   end
 
+  def create_missing_days
+
+  end
+
+
+
+  def create_missing_weeks
+    for metric in self.metrics
+      date = Date.today.beginning_of_week(:sunday)
+      puts metric.name
+      while true
+        if (date - metric.start_date).to_i >= 0
+          if !metric.weeks.exists?(date: date)
+            weekly_total = metric.performances.where("date > ? and date <= ?", date, (date+6)).sum(:count)
+            puts weekly_total
+            metric.weeks.create(date: date, total: weekly_total)
+          end
+          date -= 7
+          puts date
+        else
+          break
+        end
+      end
+    end
+  end
+
 end

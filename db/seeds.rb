@@ -12,6 +12,7 @@ Membership.destroy_all
 Invitation.destroy_all
 Group.destroy_all
 User.destroy_all
+Week.destroy_all
 
 
 sloan = User.new(email: 'sloan.holzman@gmail.com', password: 'password', first_name: 'sloan', last_name: 'holzman', reminder_frequency: "Daily")
@@ -109,3 +110,7 @@ running2.performances.create(date: (Date.today-5), count: 1, entered: true)
 running2.performances.create(date: (Date.today-6), count: 0, entered: true)
 running2.performances.create(date: (Date.today-7), count: 0, entered: true)
 running2.performances.create(date: (Date.today-8), count: 2, entered: true)
+
+sloan.create_missing_weeks
+bob.create_missing_weeks
+billy.create_missing_weeks
