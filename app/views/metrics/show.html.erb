@@ -1,6 +1,7 @@
 <h2><%= @metric.name %></h2>
 <h4>Goal: <%= @metric.good ? '' : 'Less than ' %><%= @metric.target %><%= @metric.good ? '+' : '' %> <%= @metric.unit %> per <%= @metric.duration %></h4>
 <p>Start date: <%= @metric.start_date %></p>
+<p>Last week undone: <%= @metric.last_week_undone %></p>
 <br>
 <br>
 <% if @metric.start_date <= Date.today %>
@@ -8,10 +9,6 @@
   <%= line_chart @daily_data, colors: ["#4caf50"] %>
   <h4>Weekly performance</h4>
   <%= line_chart @weekly_data, colors: ["#4caf50"] %>
-<% end %>
-
-<% for weeks in @metric.weeks %>
-  <p><%= weeks.date %> <%= weeks.total %></p>
 <% end %>
 
 <div class="links">

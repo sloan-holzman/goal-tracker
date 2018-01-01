@@ -151,19 +151,18 @@ module GraphMaker
   #
   # returns an array of the first sunday of the month for up to the last ten weeks (or dating back to the earliest start date for any of the metrics)
   def create_array_of_weeks(metrics)
-    start_dates = []
-    for metric in metrics
-      start_dates.push(metric.start_date)
+    start_dates = metrics.map do |metric|
+      metric.start_date
     end
     start = [start_dates.min.beginning_of_week(:sunday),(Date.today - 63).beginning_of_week(:sunday)].max
     last = Date.today.end_of_week(:saturday)
-    dates = []
-    day = start
-    while day <= last
-      dates.push(day)
-      day +=7
+    weeks = []
+    week = start
+    while week <= last
+      weeks.push(week)
+      week +=7
     end
-    return dates
+    return weeks
   end
 
 
