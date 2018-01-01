@@ -18,6 +18,27 @@ module GraphMaker
   # target data is the goal/target for each metric (e.g. run 15 miles) and then actual data is how much we have done this week (e.g. only ran 10)
   # These are then put into an array which is used to create a bar graph
   # unfortunately, have to use a nested loop because the data must be organized in a very specific fashion for the chartkick graphing gem to work
+  # def create_data_for_current_week_graph(metrics)
+  #
+  #   # array containing the weekly goal/target for each metric
+  #   target_data = []
+  #   for metric in metrics
+  #     array = [metric.name, metric.target]
+  #     target_data.push(array)
+  #   end
+  #
+  #   # array containing the current week's total for each metric
+  #   actual_data = []
+  #   for metric in metrics
+  #     weekly_count = calculate_current_week_total(metric)
+  #     array = [metric.name, weekly_count]
+  #     actual_data.push(array)
+  #   end
+  #
+  #   # data organized in a manner that the chartkick gem can handle to produce bar charts for each metric's weekly total against the weekly goal
+  #   return [{name: "Weekly Goal",data: target_data},{name: "Count so far",data: actual_data}]
+  # end
+
   def create_data_for_current_week_graph(metrics)
 
     # array containing the weekly goal/target for each metric
@@ -28,16 +49,16 @@ module GraphMaker
     end
 
     # array containing the current week's total for each metric
-    actual_data = []
-    for metric in metrics
-      weekly_count = calculate_current_week_total(metric)
-      array = [metric.name, weekly_count]
-      actual_data.push(array)
+    actual_data = metrics.map do |metric|
+      [metric.name, metric.weeks.first.total]
     end
 
     # data organized in a manner that the chartkick gem can handle to produce bar charts for each metric's weekly total against the weekly goal
     return [{name: "Weekly Goal",data: target_data},{name: "Count so far",data: actual_data}]
   end
+
+
+
 
   #
   # calculate_current_week_total(metric: hash)
