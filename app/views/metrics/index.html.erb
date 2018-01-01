@@ -50,7 +50,6 @@
       <th>Start Date</th>
       <% for date in @dates %>
         <th><%= date.strftime("%m/%d") %></th>
-        <% puts date %>
       <% end %>
     </tr>
   <% for metric in @metrics %>
@@ -59,7 +58,7 @@
       <td><%= metric.target %> <%= metric.unit %></td>
       <td><%= metric.start_date %></td>
       <% ordered_weeks = metric.weeks.order("date")%>
-      <% if (@dates[0] - ordered_weeks[0]["date"].beginning_of_week(:sunday)).to_i > 0 %>
+      <% if (@dates[0] - ordered_weeks[0]["date"].beginning_of_week(:sunday)).to_i >= 0 %>
         <% week_index = 0 %>
         <% for week in ordered_weeks%>
           <% if week.date - @dates[0] == 0 %>
@@ -71,12 +70,30 @@
         <% week_count = 0 %>
         <% until week_count >= (@dates.length+week_index) do %>
           <% if week_count >= week_index %>
-            <td><%= ordered_weeks[week_count]["total"] %></td>
+            <% if metric.good %>
+              <td class=<%= ordered_weeks[week_count]["total"] >= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= ordered_weeks[week_count]["total"] %></td>
+            <% else %>
+              <td class=<%= ordered_weeks[week_count]["total"] <= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= ordered_weeks[week_count]["total"] %></td>
+            <% end %>
           <% end %>
           <% week_count +=1 %>
         <% end %>
       <% else %>
-        <% puts "false" %>
+        <% week_count = 0 %>
+        <% date_count = 0 %>
+        <% until date_count >= (@dates.length) do %>
+          <% if (ordered_weeks[week_count]["date"] - @dates[date_count]).to_i <= 0 %>
+              <% if metric.good %>
+                <td class=<%= ordered_weeks[week_count]["total"] >= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= ordered_weeks[week_count]["total"] %></td>
+              <% else %>
+                <td class=<%= ordered_weeks[week_count]["total"] <= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= ordered_weeks[week_count]["total"] %></td>
+              <% end %>
+              <% week_count += 1 %>
+          <% else %>
+            <td class="metric-table__prior"></td>
+          <% end %>
+          <% date_count += 1 %>
+        <% end %>
       <% end  %>
     </tr>
   <% end %>

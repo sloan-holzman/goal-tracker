@@ -3,11 +3,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
-  has_many :metrics, dependent: :destroy
+  has_many :metrics, -> { order(:start_date) }, dependent: :destroy
   has_many :performances, through: :metrics
   has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships
   has_many :requests, dependent: :destroy
+  has_many :weeks, through: :metrics
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true
