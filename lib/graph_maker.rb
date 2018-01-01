@@ -125,18 +125,41 @@ module GraphMaker
   #
   # loops through the weekly totals for each metric and checks if it's greater than the weekly goal
   # returns an array of all the metrics and the streak total where the user has exceeded the goal for more than two weeks in a row
-  def calculate_week_streak(metrics, rows)
+  # def calculate_week_streak(metrics, rows)
+  #   week_streaks = []
+  #   metric_index = 0
+  #   for metric in metrics
+  #     week_streak = 0
+  #     weeks = rows[metric_index].length - 1
+  #     (1..weeks).each do |weeks_back|
+  #       if (metric.good && rows[metric_index][weeks - weeks_back].to_i >= metric.target) || (metric.good == false && rows[metric_index][weeks - weeks_back].to_i <= metric.target)
+  #         week_streak += 1
+  #       else
+  #         break
+  #       end
+  #     end
+  #     if week_streak >= 2
+  #       week_streaks.push([metric, week_streak])
+  #     end
+  #     metric_index += 1
+  #   end
+  #   return week_streaks
+  # end
+
+  def calculate_week_streak(metrics)
     week_streaks = []
     metric_index = 0
     for metric in metrics
       week_streak = 0
-      weeks = rows[metric_index].length - 1
-      (1..weeks).each do |weeks_back|
-        if (metric.good && rows[metric_index][weeks - weeks_back].to_i >= metric.target) || (metric.good == false && rows[metric_index][weeks - weeks_back].to_i <= metric.target)
+      week_count = 0
+      for week in metric.weeks
+        if week_count == 0
+        elsif metric.good && week.total >= metric.target || !metric.good && week.total <= metric.target
           week_streak += 1
         else
           break
         end
+        week_count+=1
       end
       if week_streak >= 2
         week_streaks.push([metric, week_streak])
@@ -144,7 +167,9 @@ module GraphMaker
       metric_index += 1
     end
     return week_streaks
+
   end
+
 
   #
   # create_array_of_weeks(metrics: array of hashes)
