@@ -15,6 +15,8 @@ gem 'figaro'
 
 gem 'cancancan', '~> 1.10'
 
+ruby '2.4.1'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use postgresql as the database for Active Record
