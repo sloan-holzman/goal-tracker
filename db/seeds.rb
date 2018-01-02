@@ -6,14 +6,21 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 Performance.destroy_all
+puts "deleted performances"
 Metric.destroy_all
+puts "deleted metrics"
 Request.destroy_all
+puts "deleted requests"
 Membership.destroy_all
+puts "deleted memberships"
 Invitation.destroy_all
+puts "deleted invitations"
 Group.destroy_all
+puts "deleted groups"
 User.destroy_all
+puts "deleted users"
 Week.destroy_all
-
+puts "deleted weeks"
 
 sloan = User.new(email: 'sloan.holzman@gmail.com', password: 'password', first_name: 'sloan', last_name: 'holzman', reminder_frequency: "Daily")
 sloan.skip_confirmation!
