@@ -19,8 +19,8 @@ Group.destroy_all
 puts "deleted groups"
 User.destroy_all
 puts "deleted users"
-Week.destroy_all
-puts "deleted weeks"
+# Week.destroy_all
+# puts "deleted weeks"
 
 sloan = User.new(email: 'sloan.holzman@gmail.com', password: 'password', first_name: 'sloan', last_name: 'holzman', reminder_frequency: "Daily")
 sloan.skip_confirmation!
