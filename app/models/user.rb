@@ -52,12 +52,14 @@ class User < ApplicationRecord
       date = Date.today.beginning_of_week(:sunday)
       while true
         if (date - metric.start_date.beginning_of_week(:sunday)).to_i >= 0
+
           if !metric.weeks.exists?(date: date)
             weekly_total = metric.performances.where("date >= ? and date <= ?", date, (date+6)).sum(:count)
             puts "date: #{date}"
             puts "weekly_total: #{weekly_total}"
             metric.weeks.create(date: date, total: weekly_total)
           end
+
           date -= 7
         else
           break
@@ -82,6 +84,117 @@ class User < ApplicationRecord
       end
     end
   end
+
+  def create_array_of_weeks
+    start_dates = self.metrics.map do |metric|
+      metric.start_date
+    end
+    start = [start_dates.min.beginning_of_week(:sunday),(Date.today - 63).beginning_of_week(:sunday)].max
+    last = Date.today.end_of_week(:saturday)
+    weeks = []
+    week = start
+    while week <= last
+      weeks.push(week)
+      week +=7
+    end
+    return weeks
+  end
+
+
+
+  def create_metric_table
+    table_array = []
+    table_array[0] = {column1: "Metric", column2: "Weekly Goal", column3: "Start Date", values: self.create_array_of_weeks}
+
+
+    self.metrics.each do |metric|
+
+
+
+
+      return {column1: `#{metric.name}`, column2: `#{metric.target} #{metric.unit}`, column3: `#{metric.start_date}`, values: weekly_total_array}
+
+
+
+
+
+    end
+
+
+    <% for metric in @metrics %>
+        <% ordered_weeks = metric.weeks.where("date >= ?", metric.start_date.beginning_of_week(:sunday))%> <%#this would a goodp place to use an AR scope %>
+        <% if ordered_weeks.length > 0 %>
+          <% if (@dates[0] - ordered_weeks[0]["date"].beginning_of_week(:sunday)).to_i >= 0 %>
+            <% week_index = 0 %>
+            <% for week in ordered_weeks%>
+              <% if week.date - @dates[0] == 0 %>
+                <% break %>
+              <% else %>
+                <% week_index += 1 %>
+              <% end %>
+            <% end %>
+            <% week_count = 0 %>
+            <% until week_count >= (@dates.length+week_index) do %>
+              <% if week_count >= week_index %>
+                <% if metric.good %>
+                  <td class=<%= ordered_weeks[week_count]["total"] >= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= ordered_weeks[week_count]["total"] %></td>
+                <% else %>
+                  <td class=<%= ordered_weeks[week_count]["total"] <= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= ordered_weeks[week_count]["total"] %></td>
+                <% end %>
+              <% end %>
+              <% week_count +=1 %>
+            <% end %>
+          <% else %>
+            <% week_count = 0 %>
+            <% date_count = 0 %>
+            <% until date_count >= (@dates.length) do %>
+              <% if (ordered_weeks[week_count]["date"] - @dates[date_count]).to_i <= 0 %>
+                  <% if metric.good %>
+                    <td class=<%= ordered_weeks[week_count]["total"] >= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= ordered_weeks[week_count]["total"] %></td>
+                  <% else %>
+                    <td class=<%= ordered_weeks[week_count]["total"] <= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= ordered_weeks[week_count]["total"] %></td>
+                  <% end %>
+                  <% week_count += 1 %>
+              <% else %>
+                <td class="metric-table__prior"></td>
+              <% end %>
+              <% date_count += 1 %>
+            <% end %>
+          <% end  %>
+        <% else %>
+          <% date_count = 0 %>
+          <% until date_count >= (@dates.length) do %>
+              <td class="metric-table__prior"></td>
+              <% date_count += 1 %>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+    </table>
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 end

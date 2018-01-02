@@ -47,7 +47,7 @@ class Metric < ApplicationRecord
   def create_past_weekly_totals
     if self.start_date <= Date.today
       date = self.start_date.beginning_of_week(:sunday)
-      while date <=Date.today
+      while date <= Date.today
         if !metric.weeks.exists?(date: date)
           self.weeks.create(date: date, total: 0)
         end

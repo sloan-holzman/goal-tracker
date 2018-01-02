@@ -57,7 +57,7 @@
       <td><%= link_to metric.name, user_metric_path(current_user, metric) %></td>
       <td><%= metric.target %> <%= metric.unit %></td>
       <td><%= metric.start_date %></td>
-      <% ordered_weeks = metric.weeks.where("date >= ?", metric.start_date.beginning_of_week(:sunday))%>
+      <% ordered_weeks = metric.weeks.where("date >= ?", metric.start_date.beginning_of_week(:sunday))%> <%#this would a goodp place to use an AR scope %>
       <% if ordered_weeks.length > 0 %>
         <% if (@dates[0] - ordered_weeks[0]["date"].beginning_of_week(:sunday)).to_i >= 0 %>
           <% week_index = 0 %>
