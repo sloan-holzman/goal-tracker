@@ -22,7 +22,7 @@
         <td><%= metric.name %></td>
         <td><%= metric.target %> <%= metric.unit %></td>
         <td><%= metric.start_date %></td>
-        <% ordered_weeks = metric.weeks.reverse_order%>
+        <% ordered_weeks = metric.weeks.order(:date)%>
         <% puts metric.name %>
         <% if (@group_dates[i][0] - ordered_weeks[0]["date"].beginning_of_week(:sunday)).to_i >= 0 %>
           <% puts "if" %>

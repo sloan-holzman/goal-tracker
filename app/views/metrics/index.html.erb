@@ -57,7 +57,7 @@
       <td><%= link_to metric.name, user_metric_path(current_user, metric) %></td>
       <td><%= metric.target %> <%= metric.unit %></td>
       <td><%= metric.start_date %></td>
-      <% ordered_weeks = metric.weeks.reverse_order%>
+      <% ordered_weeks = metric.weeks.order(:date)%>
       <% if (@dates[0] - ordered_weeks[0]["date"].beginning_of_week(:sunday)).to_i >= 0 %>
         <% week_index = 0 %>
         <% for week in ordered_weeks%>
