@@ -1,7 +1,7 @@
 class Metric < ApplicationRecord
   belongs_to :user
   has_many :performances, dependent: :destroy
-  has_many :weeks, -> { order(date: :desc) }
+  has_many :weeks, -> { order(date: :desc) }, dependent: :destroy
   validates :name, :unit, :target, :duration, {presence: true}
 
   before_save do |metric|
