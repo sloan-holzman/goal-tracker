@@ -48,7 +48,9 @@ class Metric < ApplicationRecord
     if self.start_date <= Date.today
       date = self.start_date.beginning_of_week(:sunday)
       while date <=Date.today
-        self.weeks.create(date: date, total: 0)
+        if !metric.weeks.exists?(date: date)
+          self.weeks.create(date: date, total: 0)
+        end
         date += 7
       end
     end
@@ -58,7 +60,9 @@ class Metric < ApplicationRecord
     if self.start_date < original_start_date
       week = self.start_date.beginning_of_week(:sunday)
       while week < original_start_date.beginning_of_week(:sunday)
-        self.weeks.create(date: week, total: 0)
+        if !self.weeks.exists?(date: week)
+          self.weeks.create(date: week, total: 0)
+        end
         week += 7
       end
     end

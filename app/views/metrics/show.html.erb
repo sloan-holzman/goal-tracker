@@ -10,9 +10,6 @@
   <%= line_chart @weekly_data, colors: ["#4caf50"] %>
 <% end %>
 
-<% for week in @metric.weeks %>
-  <p><%= week.date %> <%= week.total %></p>
-<% end %>
 
 <div class="links">
   <%= link_to "Edit Metric", edit_user_metric_path(current_user, @metric) %>
