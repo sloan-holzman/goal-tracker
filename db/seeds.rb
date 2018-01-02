@@ -5,6 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Week.destroy_all
+puts "deleted weeks"
 Performance.destroy_all
 puts "deleted performances"
 Metric.destroy_all
@@ -19,8 +21,6 @@ Group.destroy_all
 puts "deleted groups"
 User.destroy_all
 puts "deleted users"
-# Week.destroy_all
-# puts "deleted weeks"
 
 sloan = User.new(email: 'sloan.holzman@gmail.com', password: 'password', first_name: 'sloan', last_name: 'holzman', reminder_frequency: "Daily")
 sloan.skip_confirmation!
