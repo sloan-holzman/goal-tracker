@@ -111,6 +111,10 @@ running2.performances.create(date: (Date.today-6), count: 0, entered: true)
 running2.performances.create(date: (Date.today-7), count: 0, entered: true)
 running2.performances.create(date: (Date.today-8), count: 2, entered: true)
 
+sloan.create_missing_performances
+bob.create_missing_performances
+billy.create_missing_performances
+
 sloan.create_missing_weeks
 bob.create_missing_weeks
 billy.create_missing_weeks

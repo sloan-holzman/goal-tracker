@@ -79,6 +79,24 @@ class Metric < ApplicationRecord
   def create_new_weekly_total
     self.weeks.create(date: Date.today, total: 0)
   end
-
+  
+  def create_missing_performances
+    for metric in self.metrics
+      date = Date.today
+      puts metric.name
+      puts date
+      while true
+        if (date - metric.start_date).to_i >= 0
+          if !metric.performances.exists?(date: date)
+            metric.performances.create(date: date, count: 0, entered: false)
+          end
+          date -= 1
+          puts date
+        else
+          break
+        end
+      end
+    end
+  end
 
 end

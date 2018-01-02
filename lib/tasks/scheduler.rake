@@ -1,4 +1,5 @@
 desc "This task is called by the Heroku scheduler add-on"
+
 task send_weekly_reminders: :environment do
   for user in User.all
     if user.reminder
