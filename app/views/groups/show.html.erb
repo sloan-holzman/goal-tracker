@@ -22,8 +22,10 @@
         <td><%= metric.name %></td>
         <td><%= metric.target %> <%= metric.unit %></td>
         <td><%= metric.start_date %></td>
-        <% ordered_weeks = metric.weeks.order("date")%>
+        <% ordered_weeks = metric.weeks.reverse_order%>
+        <% puts metric.name %>
         <% if (@group_dates[i][0] - ordered_weeks[0]["date"].beginning_of_week(:sunday)).to_i >= 0 %>
+          <% puts "if" %>
           <% week_index = 0 %>
           <% for week in ordered_weeks%>
             <% if week.date - @group_dates[i][0] == 0 %>
@@ -44,9 +46,12 @@
             <% week_count +=1 %>
           <% end %>
         <% else %>
+          <% puts "else" %>
           <% week_count = 0 %>
           <% date_count = 0 %>
           <% until date_count >= (@group_dates[i].length) do %>
+            <% puts @group_dates[i][date_count] %>
+            <% puts i %>
             <% if (ordered_weeks[week_count]["date"] - @group_dates[i][date_count]).to_i <= 0 %>
                 <% if metric.good %>
                   <td class=<%= ordered_weeks[week_count]["total"] >= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= ordered_weeks[week_count]["total"] %></td>
