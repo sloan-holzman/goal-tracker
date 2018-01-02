@@ -69,9 +69,7 @@ class User < ApplicationRecord
       date = Date.today
       while true
         if (date - metric.start_date).to_i >= 0
-          puts date
           if !metric.performances.exists?(date: date)
-            puts "Create new"
             metric.performances.create(date: date, count: 0, entered: false)
           end
           date -= 1

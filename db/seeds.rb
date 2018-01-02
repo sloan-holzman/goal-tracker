@@ -31,7 +31,7 @@ smoking = sloan.metrics.create(name: 'Smoking', unit: 'cigarettes', target: 10, 
 running2 = bob.metrics.create(name: 'Running', unit: 'miles', target: 10, good: true, duration: 'week', start_date: (Date.today-8), last_day_undone: (Date.today-9))
 
 
-group = Group.create(name: 'sloanbob')
+group = Group.create(name: "Sloan's Group")
 Membership.create(user: sloan, group: group, admin: true)
 Membership.create(user: bob, group: group, admin: false)
 Membership.create(user: billy, group: group, admin: false)
