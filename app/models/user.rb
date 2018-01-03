@@ -49,7 +49,7 @@ class User < ApplicationRecord
 
   def create_missing_weeks
     for metric in self.metrics
-      date = Date.today.beginning_of_week(:sunday)
+      date = Time.current.to_date.beginning_of_week(:sunday)
       while true
         if (date - metric.start_date.beginning_of_week(:sunday)).to_i >= 0
 
@@ -70,7 +70,7 @@ class User < ApplicationRecord
 
   def create_missing_performances
     for metric in self.metrics
-      date = Date.today
+      date = Time.current.to_date
       while true
         if (date - metric.start_date).to_i >= 0
           if !metric.performances.exists?(date: date)
@@ -89,8 +89,8 @@ class User < ApplicationRecord
     start_dates = self.metrics.map do |metric|
       metric.start_date
     end
-    start = [start_dates.min.beginning_of_week(:sunday),(Date.today - 63).beginning_of_week(:sunday)].max
-    last = Date.today.end_of_week(:saturday)
+    start = [start_dates.min.beginning_of_week(:sunday),(Time.current.to_date - 63).beginning_of_week(:sunday)].max
+    last = Time.current.to_date.end_of_week(:saturday)
     weeks = []
     week = start
     while week <= last

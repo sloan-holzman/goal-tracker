@@ -27,11 +27,11 @@ class GoalMailer < ActionMailer::Base
       @number_unentered = @unentered_performances.length
       @unentered_dates = []
       @weekly_totals = []
-      @days_remaining = ((Date.today.beginning_of_week(:sunday)+7) - Date.today).to_i
+      @days_remaining = ((Time.current.to_date.beginning_of_week(:sunday)+7) - Time.current.to_date).to_i
       for metric in @metrics
         weekly_count = 0
         for performance in metric.performances
-          if performance.date >= Date.today.beginning_of_week(:sunday) && performance.date < (Date.today.beginning_of_week(:sunday)+7)
+          if performance.date >= Time.current.to_date.beginning_of_week(:sunday) && performance.date < (Time.current.to_date.beginning_of_week(:sunday)+7)
             weekly_count += performance.count
           end
         end

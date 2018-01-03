@@ -10,8 +10,8 @@ class Metric < ApplicationRecord
   end
 
   def create_old_performances
-    if Date.today > self.start_date
-      (self.start_date..Date.today).each do |date|
+    if Time.current.to_date > self.start_date
+      (self.start_date..Time.current.to_date).each do |date|
         if !self.performances.exists?(date: date)
           self.performances.create!(count: 0, date: date, entered: false)
         end
@@ -45,9 +45,9 @@ class Metric < ApplicationRecord
 
 
   def create_past_weekly_totals
-    if self.start_date <= Date.today
+    if self.start_date <= Time.current.to_date
       date = self.start_date.beginning_of_week(:sunday)
-      while date <= Date.today
+      while date <= Time.current.to_date
         if !metric.weeks.exists?(date: date)
           self.weeks.create(date: date, total: 0)
         end
@@ -73,7 +73,7 @@ class Metric < ApplicationRecord
         original_start_week.update(total: original_start_week_total)
       end
     end
-    if self.start_date.beginning_of_week(:sunday).to_date <= Date.today
+    if self.start_date.beginning_of_week(:sunday).to_date <= Time.current.to_date
       start_week = self.weeks.find_by(date: self.start_date.beginning_of_week(:sunday).to_date)
       start_week_total = self.performances.where("date >= ? and date < ?", self.start_date, (self.start_date.beginning_of_week(:sunday)+7)).sum(:count)
       start_week.update(total: start_week_total)
@@ -81,12 +81,12 @@ class Metric < ApplicationRecord
   end
 
   def create_new_weekly_total
-    self.weeks.create(date: Date.today, total: 0)
+    self.weeks.create(date: Time.current.to_date, total: 0)
   end
 
   def create_missing_performances
     for metric in self.metrics
-      date = Date.today
+      date = Time.current.to_date
       puts metric.name
       puts date
       while true

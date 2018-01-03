@@ -1,8 +1,8 @@
 <% if @metrics.length > 0 %>
-  <h2>Week of <%= Date.today.beginning_of_week(:sunday) %></h2>
+  <h2>Week of <%= Time.current.to_date.beginning_of_week(:sunday) %></h2>
   <% for metric in @metrics %>
-    <% if (Date.today - metric.last_day_undone).to_i > 1 %>
-    <p><%= metric.name%>: You've <%= metric.good ? "" : "not" %> done it <%= (Date.today - metric.last_day_undone).to_i %> days in a row.  Keep it up!</p>
+    <% if (Time.current.to_date - metric.last_day_undone).to_i > 1 %>
+    <p><%= metric.name%>: You've <%= metric.good ? "" : "not" %> done it <%= (Time.current.to_date - metric.last_day_undone).to_i %> days in a row.  Keep it up!</p>
     <% end %>
   <% end %>
   <%= column_chart @week_data, colors: ["#4caf50", "#999"] %>

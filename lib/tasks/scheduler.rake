@@ -12,9 +12,9 @@ end
 
 task create_daily_performances: :environment do
   for metric in Metric.all
-    if metric.performances.exists?(date: Date.today) || metric.start_date > Date.today
+    if metric.performances.exists?(date: Time.current.to_date) || metric.start_date > Time.current.to_date
     else
-      metric.performances.create!(date: Date.today, count: 0, entered: false)
+      metric.performances.create!(date: Time.current.to_date, count: 0, entered: false)
     end
   end
 end
@@ -22,7 +22,7 @@ end
 
 task create_new_weekly_total: :environment do
   for metric in Metric.all
-    if metric.weeks.exists?(date: Date.today) || metric.start_date > Date.today
+    if metric.weeks.exists?(date: Time.current.to_date) || metric.start_date > Time.current.to_date
     else
       metric.create_new_weekly_total
     end

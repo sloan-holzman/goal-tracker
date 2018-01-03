@@ -5,7 +5,7 @@
 <% for user in @group.users %>
   <h3>Member <%= i+1 %>: <%= user.first_name %> <%= user.last_name %></h3>
   <% if user.metrics.length > 0 %>
-    <p>Week of <%= Date.today.beginning_of_week(:sunday) %></p>
+    <p>Week of <%= Time.current.to_date.beginning_of_week(:sunday) %></p>
     <%= column_chart @group_week_data[user.id], colors: ["#4caf50", "#999"]  %>
     <p>Recent Weeks</p>
     <table class="metric-table">

@@ -3,7 +3,7 @@
 <p>Start date: <%= @metric.start_date %></p>
 <br>
 <br>
-<% if @metric.start_date <= Date.today %>
+<% if @metric.start_date <= Time.current.to_date %>
   <h4>Daily performance</h4>
   <%= line_chart @daily_data, colors: ["#4caf50"] %>
   <h4>Weekly performance</h4>

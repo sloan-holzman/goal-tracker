@@ -2,7 +2,7 @@ module GraphMaker
   def create_data_for_line_graph(metrics)
     all_data = []
     for metric in metrics
-      if Date.today >= metric.start_date
+      if Time.current.to_date >= metric.start_date
         # performances = metric.performances
         set = {name: metric.name,data: metric.performances.where("date >= ?",metric.start_date).group_by_day(:date).sum(:count)}
         all_data.push(set)
@@ -50,7 +50,7 @@ module GraphMaker
 
     # array containing the current week's total for each metric
     actual_data = metrics.map do |metric|
-      [metric.name, metric.weeks.find_by(date: Date.today.beginning_of_week(:sunday)).total]
+      [metric.name, metric.weeks.find_by(date: Time.current.to_date.beginning_of_week(:sunday)).total]
     end
 
     # data organized in a manner that the chartkick gem can handle to produce bar charts for each metric's weekly total against the weekly goal
@@ -67,7 +67,7 @@ module GraphMaker
   def calculate_current_week_total(metric)
     weekly_count = 0
     for performance in metric.performances
-      if performance.date >= Date.today.beginning_of_week(:sunday) && performance.date < (Date.today.beginning_of_week(:sunday)+7)
+      if performance.date >= Time.current.to_date.beginning_of_week(:sunday) && performance.date < (Time.current.to_date.beginning_of_week(:sunday)+7)
         weekly_count += performance.count
       end
     end
@@ -83,17 +83,17 @@ module GraphMaker
 
     for metric in metrics
 
-      if metric.start_date <= Date.today
-        duration = Date.today - metric.start_date + 1
+      if metric.start_date <= Time.current.to_date
+        duration = Time.current.to_date - metric.start_date + 1
         streak = 0
 
         (1..duration).each do |i|
 
-          if metric.performances.find_by(date: (Date.today - i)) == nil
+          if metric.performances.find_by(date: (Time.current.to_date - i)) == nil
             break
           end
 
-          if (metric.good && metric.performances.find_by(date: (Date.today - i)).count > 0) || (metric.good == false && metric.performances.find_by(date: (Date.today - i)).count == 0)
+          if (metric.good && metric.performances.find_by(date: (Time.current.to_date - i)).count > 0) || (metric.good == false && metric.performances.find_by(date: (Time.current.to_date - i)).count == 0)
             streak += 1
           else
             break
@@ -200,8 +200,8 @@ module GraphMaker
     start_dates = metrics.map do |metric|
       metric.start_date
     end
-    start = [start_dates.min.beginning_of_week(:sunday),(Date.today - 63).beginning_of_week(:sunday)].max
-    last = Date.today.end_of_week(:saturday)
+    start = [start_dates.min.beginning_of_week(:sunday),(Time.current.to_date - 63).beginning_of_week(:sunday)].max
+    last = Time.current.to_date.end_of_week(:saturday)
     weeks = []
     week = start
     while week <= last
