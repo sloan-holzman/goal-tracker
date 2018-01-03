@@ -104,97 +104,54 @@ class User < ApplicationRecord
 
   def create_metric_table
     table_array = []
-    table_array[0] = {column1: "Metric", column2: "Weekly Goal", column3: "Start Date", values: self.create_array_of_weeks}
-
+    table_array[0] = {column1: "Metric", column2: "Weekly Goal", column3: "Start Date", dates: self.create_array_of_weeks}
+    dates = self.create_array_of_weeks
 
     self.metrics.each do |metric|
-
-
-
-
-      return {column1: `#{metric.name}`, column2: `#{metric.target} #{metric.unit}`, column3: `#{metric.start_date}`, values: weekly_total_array}
-
-
-
-
-
+      weekly_total_array = []
+      ordered_weeks = metric.weeks.where("date >= ?", metric.start_date.beginning_of_week(:sunday))
+      if ordered_weeks.length > 0
+        if (dates[0] - ordered_weeks[0]["date"].beginning_of_week(:sunday)).to_i >= 0
+          week_index = 0
+          for week in ordered_weeks
+            if week.date - dates[0] == 0
+              break
+            else
+              week_index += 1
+            end
+          end
+          week_count = 0
+          until week_count >= (dates.length+week_index) do
+            if week_count >= week_index
+                weekly_total_array.push(ordered_weeks[week_count]["total"])
+            end
+            week_count +=1
+          end
+        else
+          week_count = 0
+          date_count = 0
+          until date_count >= (dates.length) do
+            if (ordered_weeks[week_count]["date"] - dates[date_count]).to_i <= 0
+                weekly_total_array.push(ordered_weeks[week_count]["total"])
+                week_count += 1
+            else
+              weekly_total_array.push("prior")
+            end
+            date_count += 1
+          end
+        end
+      else
+        date_count = 0
+        until date_count >= (dates.length) do
+            weekly_total_array.push("prior")
+            date_count += 1
+        end
+      end
+      table_array.push({metric: metric, values: weekly_total_array})
     end
-
-
-    <% for metric in @metrics %>
-        <% ordered_weeks = metric.weeks.where("date >= ?", metric.start_date.beginning_of_week(:sunday))%> <%#this would a goodp place to use an AR scope %>
-        <% if ordered_weeks.length > 0 %>
-          <% if (@dates[0] - ordered_weeks[0]["date"].beginning_of_week(:sunday)).to_i >= 0 %>
-            <% week_index = 0 %>
-            <% for week in ordered_weeks%>
-              <% if week.date - @dates[0] == 0 %>
-                <% break %>
-              <% else %>
-                <% week_index += 1 %>
-              <% end %>
-            <% end %>
-            <% week_count = 0 %>
-            <% until week_count >= (@dates.length+week_index) do %>
-              <% if week_count >= week_index %>
-                <% if metric.good %>
-                  <td class=<%= ordered_weeks[week_count]["total"] >= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= ordered_weeks[week_count]["total"] %></td>
-                <% else %>
-                  <td class=<%= ordered_weeks[week_count]["total"] <= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= ordered_weeks[week_count]["total"] %></td>
-                <% end %>
-              <% end %>
-              <% week_count +=1 %>
-            <% end %>
-          <% else %>
-            <% week_count = 0 %>
-            <% date_count = 0 %>
-            <% until date_count >= (@dates.length) do %>
-              <% if (ordered_weeks[week_count]["date"] - @dates[date_count]).to_i <= 0 %>
-                  <% if metric.good %>
-                    <td class=<%= ordered_weeks[week_count]["total"] >= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= ordered_weeks[week_count]["total"] %></td>
-                  <% else %>
-                    <td class=<%= ordered_weeks[week_count]["total"] <= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= ordered_weeks[week_count]["total"] %></td>
-                  <% end %>
-                  <% week_count += 1 %>
-              <% else %>
-                <td class="metric-table__prior"></td>
-              <% end %>
-              <% date_count += 1 %>
-            <% end %>
-          <% end  %>
-        <% else %>
-          <% date_count = 0 %>
-          <% until date_count >= (@dates.length) do %>
-              <td class="metric-table__prior"></td>
-              <% date_count += 1 %>
-          <% end %>
-        <% end %>
-      </tr>
-    <% end %>
-    </table>
+    puts table_array
+    return table_array
   end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 end
