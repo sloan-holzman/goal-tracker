@@ -21,7 +21,7 @@
           </tr>
         <% else %>
           <tr>
-            <td><%= link_to row[:metric][:name], user_metric_path(current_user, row[:metric]) %></td>
+            <td><%= row[:metric][:name] %></td>
             <td><%= row[:metric][:target] %> <%= row[:metric][:unit] %></td>
             <td><%= row[:metric][:start_date] %></td>
             <% for value in row[:values] %>
