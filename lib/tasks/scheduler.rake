@@ -21,10 +21,11 @@ end
 
 
 task create_new_weekly_total: :environment do
-  for metric in Metric.all
-    if metric.weeks.exists?(date: Date.today) || metric.start_date > Date.today
-    else
-      metric.create_new_weekly_total
+  if Time.now.strftime("%A") == "Sunday"
+    for metric in Metric.all
+      if !metric.weeks.exists?(date: Date.today) || metric.start_date > Date.today
+        metric.create_new_weekly_total
+      end
     end
   end
 end
