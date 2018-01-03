@@ -20,21 +20,15 @@ class GroupsController < ApplicationController
     else
       @user = User.find(params[:user_id])
       @group = Group.find(params[:id])
-      @group_week_data = []
-      @group_dates = []
-      @group_rows = []
-      @members = member_list(@group.users)
-      for user in @group.users
+      @members = @group.users.map {|member| "#{member.first_name} #{member.last_name}"}
+      @group_week_data = {}
+      @group_dates = {}
+      @table_array = {}
+      @group.users.each do |user|
         if user.metrics.length > 0
-          week_data = create_data_for_current_week_graph(user.metrics)
-          @group_week_data.push(week_data)
-          dates = create_array_of_weeks(user.metrics)
-          @group_dates.push(dates)
-          rows = create_table_of_weekly_performances(user.metrics, dates)
-        else
-          rows=[]
+          @group_week_data[user.id] = create_data_for_current_week_graph(user.metrics)
+          @table_array[user.id] = user.create_metric_table
         end
-        @group_rows.push(rows)
       end
       @membership = Membership.find_by(group: @group, user: @user)
     end
@@ -84,12 +78,5 @@ class GroupsController < ApplicationController
     params.require(:group).permit(:name, :private)
   end
 
-  def member_list(members)
-    member_list = []
-    for member in members
-      member_list.push("#{member.first_name} #{member.last_name}")
-    end
-    return member_list
-  end
 
 end

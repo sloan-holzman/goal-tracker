@@ -52,12 +52,14 @@ class User < ApplicationRecord
       date = Date.today.beginning_of_week(:sunday)
       while true
         if (date - metric.start_date.beginning_of_week(:sunday)).to_i >= 0
+
           if !metric.weeks.exists?(date: date)
             weekly_total = metric.performances.where("date >= ? and date <= ?", date, (date+6)).sum(:count)
             puts "date: #{date}"
             puts "weekly_total: #{weekly_total}"
             metric.weeks.create(date: date, total: weekly_total)
           end
+
           date -= 7
         else
           break
@@ -81,6 +83,74 @@ class User < ApplicationRecord
         end
       end
     end
+  end
+
+  def create_array_of_weeks
+    start_dates = self.metrics.map do |metric|
+      metric.start_date
+    end
+    start = [start_dates.min.beginning_of_week(:sunday),(Date.today - 63).beginning_of_week(:sunday)].max
+    last = Date.today.end_of_week(:saturday)
+    weeks = []
+    week = start
+    while week <= last
+      weeks.push(week)
+      week +=7
+    end
+    return weeks
+  end
+
+
+
+  def create_metric_table
+    table_array = []
+    table_array[0] = {column1: "Metric", column2: "Weekly Goal", column3: "Start Date", dates: self.create_array_of_weeks}
+    dates = self.create_array_of_weeks
+
+    self.metrics.each do |metric|
+      weekly_total_array = []
+      ordered_weeks = metric.weeks.where("date >= ?", metric.start_date.beginning_of_week(:sunday))
+      if ordered_weeks.length > 0
+        if (dates[0] - ordered_weeks[0]["date"].beginning_of_week(:sunday)).to_i >= 0
+          week_index = 0
+          for week in ordered_weeks
+            if week.date - dates[0] == 0
+              break
+            else
+              week_index += 1
+            end
+          end
+          week_count = 0
+          until week_count >= (dates.length+week_index) do
+            if week_count >= week_index
+                weekly_total_array.push(ordered_weeks[week_count]["total"])
+            end
+            week_count +=1
+          end
+        else
+          week_count = 0
+          date_count = 0
+          until date_count >= (dates.length) do
+            if (ordered_weeks[week_count]["date"] - dates[date_count]).to_i <= 0
+                weekly_total_array.push(ordered_weeks[week_count]["total"])
+                week_count += 1
+            else
+              weekly_total_array.push("prior")
+            end
+            date_count += 1
+          end
+        end
+      else
+        date_count = 0
+        until date_count >= (dates.length) do
+            weekly_total_array.push("prior")
+            date_count += 1
+        end
+      end
+      table_array.push({metric: metric, values: weekly_total_array})
+    end
+    puts table_array
+    return table_array
   end
 
 

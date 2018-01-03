@@ -44,6 +44,37 @@
   </table> -->
 
   <table class="metric-table">
+    <% @table_array.each_with_index do |row, index| %>
+      <% if (index == 0) %>
+        <tr>
+          <th><%= row[:column1] %></th>
+          <th><%= row[:column2] %></th>
+          <th><%= row[:column3] %></th>
+          <% for date in row[:dates] %>
+            <th><%= date.strftime("%m/%d") %></th>
+          <% end %>
+        </tr>
+      <% else %>
+        <tr>
+          <td><%= link_to row[:metric][:name], user_metric_path(current_user, row[:metric]) %></td>
+          <td><%= row[:metric][:target] %> <%= row[:metric][:unit] %></td>
+          <td><%= row[:metric][:start_date] %></td>
+          <% for value in row[:values] %>
+            <% if value == "prior" %>
+              <td class="metric-table__prior"></td>
+            <% elsif row[:metric][:good] %>
+              <td class=<%= value.to_i >= row[:metric][:target] ? "metric-table__hit" : "metric-table__missed" %>><%= value %></td>
+            <% else %>
+            <td class=<%= value.to_i <= row[:metric][:target] ? "metric-table__hit" : "metric-table__missed" %>><%= value %></td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+<!--
+
+  <table class="metric-table">
     <tr>
       <th>Metric</th>
       <th>Weekly Goal</th>
@@ -57,7 +88,7 @@
       <td><%= link_to metric.name, user_metric_path(current_user, metric) %></td>
       <td><%= metric.target %> <%= metric.unit %></td>
       <td><%= metric.start_date %></td>
-      <% ordered_weeks = metric.weeks.order(:date).where("date >= ?", metric.start_date.beginning_of_week(:sunday))%>
+      <% ordered_weeks = metric.weeks.where("date >= ?", metric.start_date.beginning_of_week(:sunday))%> <%#this would a goodp place to use an AR scope %>
       <% if ordered_weeks.length > 0 %>
         <% if (@dates[0] - ordered_weeks[0]["date"].beginning_of_week(:sunday)).to_i >= 0 %>
           <% week_index = 0 %>
@@ -105,7 +136,7 @@
       <% end %>
     </tr>
   <% end %>
-  </table>
+  </table> -->
 
   <h2>All time</h2>
   <%= line_chart @all_data, colors: ["#4CAF50", "#FF0000", "#CA9CE1", "#F4E04D", "#1C3144", "#58B09C"] %>
@@ -113,6 +144,7 @@
    <h2>You have no metrics, yet.</h2>
    <p>Please create some by clicking "Create New Metric" below</p>
 <% end %>
+<br>
 <br>
 <div class="links">
   <%= link_to "Create New Metric", new_user_metric_path(current_user)%>
