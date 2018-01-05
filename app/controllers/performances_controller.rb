@@ -50,13 +50,7 @@ class PerformancesController < ApplicationController
 # learned edit_all and update_all from http://anthonylewis.com/2011/04/15/editing-multiple-records-in-rails/
 
   def edit_all
-    performances = []
-    for performance in current_user.performances
-      if !performance.entered
-        performances.push(performance)
-      end
-    end
-    @performances = performances
+    @performances = current_user.performances.select{ |performance| performance.entered == false }
   end
 
 # overrode authentication error by checking stackoverflow here: https://stackoverflow.com/questions/20156664/saving-multiple-records-with-params-require-in-ruby
@@ -80,14 +74,8 @@ class PerformancesController < ApplicationController
 
   def edit_day
     @metrics = current_user.metrics
-    performances = []
-    for performance in current_user.performances
-      if performance.date == params[:date].to_date
-        performances.push(performance)
-      end
-    end
-    @performances = performances
     @date = params[:date].to_date
+    @performances = current_user.performances.select{ |performance| performance.date == @date }
   end
 
   # overrode authentication error by checking stackoverflow here: https://stackoverflow.com/questions/20156664/saving-multiple-records-with-params-require-in-ruby
