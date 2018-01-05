@@ -63,6 +63,7 @@ class PerformancesController < ApplicationController
       @performance.update(entered: true)
       @performance.find_last_day_undone
       @performance.update_weekly_total(old_count)
+      current_user.update_last_date_entered(@performance)
     end
     flash[:notice] = "Performances updated successfully"
     redirect_to(user_metrics_path(current_user))
@@ -88,6 +89,7 @@ class PerformancesController < ApplicationController
       @performance.update(entered: true)
       @performance.update_weekly_total(old_count)
       @performance.find_last_day_undone
+      current_user.update_last_date_entered(@performance)
     end
     flash[:notice] = "Performances updated successfully"
     redirect_to(user_metrics_path(current_user))

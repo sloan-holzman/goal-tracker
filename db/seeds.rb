@@ -22,7 +22,7 @@ puts "deleted groups"
 User.destroy_all
 puts "deleted users"
 
-sloan = User.new(reminder: true, email: 'sloan.holzman@gmail.com', password: 'password', first_name: 'sloan', last_name: 'holzman', reminder_frequency: "Daily", last_date_created: Date.today, last_date_entered: Date.today)
+sloan = User.new(reminder: true, email: 'sloan.holzman@gmail.com', password: 'password', first_name: 'sloan', last_name: 'holzman', reminder_frequency: "Daily", last_date_created: Date.today, last_date_entered: (Date.today - 2))
 sloan.skip_confirmation!
 sloan.save!
 bob = User.new(reminder: false, email: 'bob@gmail.com', password: 'password', first_name: 'bob', last_name: 'johnson', last_date_created: Date.today, last_date_entered: Date.today)

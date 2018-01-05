@@ -18,6 +18,12 @@ class User < ApplicationRecord
     user.first_name = user.first_name.downcase.titleize
   end
 
+  def update_last_date_entered(performance)
+    if (performance.date - self.last_date_entered).to_i > 0
+      self.update(last_date_entered: performance.date)
+    end
+
+  end
 
   def find_approval_requests
     admin_memberships = self.memberships.where(admin: true)
