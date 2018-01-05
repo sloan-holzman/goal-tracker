@@ -22,13 +22,13 @@ puts "deleted groups"
 User.destroy_all
 puts "deleted users"
 
-sloan = User.new(email: 'sloan.holzman@gmail.com', password: 'password', first_name: 'sloan', last_name: 'holzman', reminder_frequency: "Daily")
+sloan = User.new(reminder: true, email: 'sloan.holzman@gmail.com', password: 'password', first_name: 'sloan', last_name: 'holzman', reminder_frequency: "Daily", last_date_created: Date.today, last_date_entered: Date.today)
 sloan.skip_confirmation!
 sloan.save!
-bob = User.new(email: 'bob@gmail.com', password: 'password', first_name: 'bob', last_name: 'johnson')
+bob = User.new(reminder: false, email: 'bob@gmail.com', password: 'password', first_name: 'bob', last_name: 'johnson', last_date_created: Date.today, last_date_entered: Date.today)
 bob.skip_confirmation!
 bob.save!
-billy = User.new(email: 'billy@gmail.com', password: 'password', first_name: 'billy', last_name: 'johnson', reminder_day: "Monday")
+billy = User.new(reminder: false, email: 'billy@gmail.com', password: 'password', first_name: 'billy', last_name: 'johnson', reminder_day: "Monday", last_date_created: Date.today, last_date_entered: Date.today)
 billy.skip_confirmation!
 billy.save!
 running = sloan.metrics.create(name: 'Running', unit: 'miles', target: 15, good: true, duration: 'week', start_date: (Date.today-21), last_day_undone: (Date.today-22))

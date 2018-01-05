@@ -42,6 +42,8 @@
       <td><%= f.password_field :password_confirmation, autocomplete: "off" %>
     </tr>
   </table>
+  <%= f.hidden_field :last_date_created, value: Date.today.strftime("%Y/%m/%d") %>
+  <%= f.hidden_field :last_date_entered, value: Date.today.strftime("%Y/%m/%d") %>
   <br>
   <div class="">
     <%= f.submit "Sign up", class: "button wide short" %>
