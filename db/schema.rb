@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180103142727) do
+ActiveRecord::Schema.define(version: 20180114182440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20180103142727) do
 
   create_table "performances", force: :cascade do |t|
     t.date "date"
-    t.integer "count"
+    t.integer "count", default: 0
     t.boolean "entered", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 20180103142727) do
 
   create_table "weeks", force: :cascade do |t|
     t.date "date"
-    t.integer "total"
+    t.integer "total", default: 0
     t.bigint "metric_id"
     t.index ["metric_id"], name: "index_weeks_on_metric_id"
   end

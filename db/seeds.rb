@@ -25,10 +25,10 @@ puts "deleted users"
 sloan = User.new(reminder: true, email: 'sloan.holzman@gmail.com', password: 'password', first_name: 'sloan', last_name: 'holzman', reminder_frequency: "Daily", last_date_created: Date.today, last_date_entered: (Date.today - 2))
 sloan.skip_confirmation!
 sloan.save!
-bob = User.new(reminder: false, email: 'bob@gmail.com', password: 'password', first_name: 'bob', last_name: 'johnson', last_date_created: Date.today, last_date_entered: Date.today)
+bob = User.new(reminder: false, email: 'sholzman@mba2015.hbs.edu', password: 'password', first_name: 'bob', last_name: 'johnson', last_date_created: Date.today, last_date_entered: Date.today)
 bob.skip_confirmation!
 bob.save!
-billy = User.new(reminder: false, email: 'billy@gmail.com', password: 'password', first_name: 'billy', last_name: 'johnson', reminder_day: "Monday", last_date_created: Date.today, last_date_entered: Date.today)
+billy = User.new(reminder: false, email: 'sbh2102@columbia.com', password: 'password', first_name: 'billy', last_name: 'johnson', reminder_day: "Monday", last_date_created: Date.today, last_date_entered: Date.today)
 billy.skip_confirmation!
 billy.save!
 running = sloan.metrics.create(name: 'Running', unit: 'miles', target: 15, good: true, duration: 'week', start_date: (Date.today-21), last_day_undone: (Date.today-22))
@@ -112,10 +112,10 @@ running2.performances.create(date: (Date.today-5), count: 1, entered: true)
 running2.performances.create(date: (Date.today-7), count: 0, entered: true)
 running2.performances.create(date: (Date.today-8), count: 2, entered: true)
 
-sloan.create_missing_performances
-bob.create_missing_performances
-billy.create_missing_performances
+sloan.seed_create_missing_performances
+bob.seed_create_missing_performances
+billy.seed_create_missing_performances
 
-sloan.create_missing_weeks
-bob.create_missing_weeks
-billy.create_missing_weeks
+sloan.seed_create_missing_weeks
+bob.seed_create_missing_weeks
+billy.seed_create_missing_weeks

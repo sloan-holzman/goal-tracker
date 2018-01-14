@@ -22,7 +22,6 @@ class User < ApplicationRecord
     if (performance.date - self.last_date_entered).to_i > 0
       self.update(last_date_entered: performance.date)
     end
-
   end
 
   def find_approval_requests
@@ -46,50 +45,52 @@ class User < ApplicationRecord
       reminder_frequency_message = "Off"
     elsif self.reminder_frequency == "Weekly"
       reminder_frequency_message = "Every #{self.reminder_day}"
-    else self.reminder
+    else
       reminder_frequency_message = "Daily"
     end
     return reminder_frequency_message
   end
 
 
-  def create_missing_weeks
+  def seed_create_missing_weeks
     for metric in self.metrics
       date = Date.today.beginning_of_week(:sunday)
-      while true
-        if (date - metric.start_date.beginning_of_week(:sunday)).to_i >= 0
-
-          if !metric.weeks.exists?(date: date)
-            weekly_total = metric.performances.where("date >= ? and date <= ?", date, (date+6)).sum(:count)
-            puts "date: #{date}"
-            puts "weekly_total: #{weekly_total}"
-            metric.weeks.create(date: date, total: weekly_total)
-          end
-
-          date -= 7
-        else
-          break
+      while (date - metric.start_date.beginning_of_week(:sunday)).to_i >= 0
+        if !metric.weeks.exists?(date: date)
+          weekly_total = metric.performances.where("date >= ? and date <= ?", date, (date+6)).sum(:count)
+          puts "date: #{date}"
+          puts "weekly_total: #{weekly_total}"
+          metric.weeks.create(date: date, total: weekly_total)
         end
+        date -= 7
       end
     end
   end
 
-  def create_missing_performances
+  def seed_create_missing_performances
     for metric in self.metrics
       date = Date.today
-      while true
-        if (date - metric.start_date).to_i >= 0
-          if !metric.performances.exists?(date: date)
-            puts "performance - date: #{date} metric: #{metric.name}"
-            metric.performances.create(date: date, count: 0, entered: false)
-          end
-          date -= 1
-        else
-          break
+      while date > metric.start_date
+      # while (date - metric.start_date).to_i >= 0
+        if !metric.performances.exists?(date: date)
+          puts "performance - date: #{date} metric: #{metric.name}"
+          metric.performances.create(date: date, count: 0, entered: false)
         end
+        date -= 1
       end
     end
   end
+
+  def create_missing_weeks
+    date = Date.today.beginning_of_week(:sunday)
+    while self.last_date_created < date
+      for metric in self.metrics
+        metric.weeks.find_or_create_by(date: date)
+      end
+      date -= 7
+    end
+  end
+
 
   def create_array_of_weeks
     start_dates = self.metrics.map do |metric|
@@ -112,7 +113,7 @@ class User < ApplicationRecord
     table_array = []
     table_array[0] = {column1: "Metric", column2: "Weekly Goal", column3: "Start Date", dates: self.create_array_of_weeks}
     dates = self.create_array_of_weeks
-
+    self.create_missing_weeks
     self.metrics.each do |metric|
       weekly_total_array = []
       ordered_weeks = metric.weeks.where("date >= ?", metric.start_date.beginning_of_week(:sunday))

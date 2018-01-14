@@ -12,37 +12,6 @@
   <% end %>
   <br>
   <br>
-  <!-- <table class="metric-table">
-    <tr>
-      <th>Metric</th>
-      <th>Weekly Goal</th>
-      <th>Start Date</th>
-      <% for date in @dates %>
-        <th><%= date.strftime("%m/%d") %></th>
-      <% end %>
-    </tr>
-  <% i = 0 %>
-  <% for metric in @metrics %>
-    <tr>
-      <td><%= link_to metric.name, user_metric_path(current_user, metric) %></td>
-      <td><%= metric.target %> <%= metric.unit %></td>
-      <td><%= metric.start_date %></td>
-      <% week = 0 %>
-      <% for weekly_count in @rows[i] %>
-        <% if (@dates[week]+6)<metric.start_date %>
-          <td class="metric-table__prior"><%= weekly_count %></td>
-        <% elsif metric.good %>
-          <td class=<%= weekly_count >= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= weekly_count %></td>
-        <% else %>
-          <td class=<%= weekly_count <= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= weekly_count %></td>
-        <% end %>
-        <% week += 1 %>
-      <% end %>
-    </tr>
-    <% i+=1 %>
-  <% end %>
-  </table> -->
-
   <table class="metric-table">
     <% @table_array.each_with_index do |row, index| %>
       <% if (index == 0) %>
@@ -72,72 +41,6 @@
       <% end %>
     <% end %>
   </table>
-<!--
-
-  <table class="metric-table">
-    <tr>
-      <th>Metric</th>
-      <th>Weekly Goal</th>
-      <th>Start Date</th>
-      <% for date in @dates %>
-        <th><%= date.strftime("%m/%d") %></th>
-      <% end %>
-    </tr>
-  <% for metric in @metrics %>
-    <tr>
-      <td><%= link_to metric.name, user_metric_path(current_user, metric) %></td>
-      <td><%= metric.target %> <%= metric.unit %></td>
-      <td><%= metric.start_date %></td>
-      <% ordered_weeks = metric.weeks.where("date >= ?", metric.start_date.beginning_of_week(:sunday))%> <%#this would a goodp place to use an AR scope %>
-      <% if ordered_weeks.length > 0 %>
-        <% if (@dates[0] - ordered_weeks[0]["date"].beginning_of_week(:sunday)).to_i >= 0 %>
-          <% week_index = 0 %>
-          <% for week in ordered_weeks%>
-            <% if week.date - @dates[0] == 0 %>
-              <% break %>
-            <% else %>
-              <% week_index += 1 %>
-            <% end %>
-          <% end %>
-          <% week_count = 0 %>
-          <% until week_count >= (@dates.length+week_index) do %>
-            <% if week_count >= week_index %>
-              <% if metric.good %>
-                <td class=<%= ordered_weeks[week_count]["total"] >= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= ordered_weeks[week_count]["total"] %></td>
-              <% else %>
-                <td class=<%= ordered_weeks[week_count]["total"] <= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= ordered_weeks[week_count]["total"] %></td>
-              <% end %>
-            <% end %>
-            <% week_count +=1 %>
-          <% end %>
-        <% else %>
-          <% week_count = 0 %>
-          <% date_count = 0 %>
-          <% until date_count >= (@dates.length) do %>
-            <% if (ordered_weeks[week_count]["date"] - @dates[date_count]).to_i <= 0 %>
-                <% if metric.good %>
-                  <td class=<%= ordered_weeks[week_count]["total"] >= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= ordered_weeks[week_count]["total"] %></td>
-                <% else %>
-                  <td class=<%= ordered_weeks[week_count]["total"] <= metric.target ? "metric-table__hit" : "metric-table__missed" %>><%= ordered_weeks[week_count]["total"] %></td>
-                <% end %>
-                <% week_count += 1 %>
-            <% else %>
-              <td class="metric-table__prior"></td>
-            <% end %>
-            <% date_count += 1 %>
-          <% end %>
-        <% end  %>
-      <% else %>
-        <% date_count = 0 %>
-        <% until date_count >= (@dates.length) do %>
-            <td class="metric-table__prior"></td>
-            <% date_count += 1 %>
-        <% end %>
-      <% end %>
-    </tr>
-  <% end %>
-  </table> -->
-
   <h2>All time</h2>
   <%= line_chart @all_data, colors: ["#4CAF50", "#FF0000", "#CA9CE1", "#F4E04D", "#1C3144", "#58B09C"] %>
 <% else %>

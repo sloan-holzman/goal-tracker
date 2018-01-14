@@ -1,9 +1,12 @@
 class GroupsController < ApplicationController
   include GraphMaker
   include CheckUser
+  include CreatePerformances
 
   before_action :authenticate_user!
   before_action :check_user, except: [:all]
+  before_action :create_old_performances, except: [:index, :all, :new, :create, :edit, :update, :destroy]
+
 
   def index
     @user = User.find(params[:user_id])

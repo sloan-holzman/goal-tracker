@@ -1,8 +1,10 @@
 class PerformancesController < ApplicationController
   include CheckUser
+  include CreatePerformances
 
   before_action :authenticate_user!
   before_action :check_user, except: [:edit_all, :update_all, :edit_day, :select_day, :update_day]
+  before_action :create_old_performances
 
 
   def show
@@ -35,6 +37,7 @@ class PerformancesController < ApplicationController
     @user = User.find(params[:user_id])
     @metric = @user.metrics.find(params[:metric_id])
     @performance = @metric.performances.update(performance_params.merge(entered: true))
+    @user.update_last_date_entered(@performance)
     flash[:notice] = "Metric #{@metric.name} updated successfully"
     redirect_to user_metric_performance_path(@user,@metric, @performance)
   end

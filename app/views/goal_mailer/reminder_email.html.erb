@@ -8,16 +8,13 @@
     <p>Click <%= link_to "here", "https://goaltracker2000.herokuapp.com/users/#{@user.id}/metrics/new" %> to start setting goals</p>
     <% else %>
       <% if @number_unentered > 0 %>
-        <h2>You have <%= @number_unentered %> performance(s) to enter!</h2>
-        <p>You must enter information for the dates <%= @unentered_dates.join(", ") %></p>
+        <h2>You must enter information for the dates <%= @unentered_dates.join(", ") %></h2>
         <p>Click <%= link_to "here", "https://goaltracker2000.herokuapp.com/performances/all/edit" %> to enter your info</p>
       <% end %>
-      <% i = 0 %>
       <% for metric in @metrics %>
         <h2><%= metric.name %></h2>
         <p>Goal: <%= metric.target %> <%= metric.unit %> per <%= metric.duration %></p>
-        <p>Weekly total: <%= @weekly_totals[i] %> <%= metric.unit %> so far</p>
-        <% i+= 1 %>
+        <p>Weekly total: <%= metric.weeks.find_by(date: Date.today.beginning_of_week(:sunday)).total %> <%= metric.unit %> so far</p>
       <% end %>
       <p>Remember...you have just <%= @days_remaining %> days left to hit your goals!  Keep it up!</p>
     <% end %>

@@ -50,7 +50,7 @@ module GraphMaker
 
     # array containing the current week's total for each metric
     actual_data = metrics.map do |metric|
-      [metric.name, metric.weeks.find_by(date: Date.today.beginning_of_week(:sunday)).total]
+      [metric.name, metric.weeks.find_or_create_by(date: Date.today.beginning_of_week(:sunday)).total]
     end
 
     # data organized in a manner that the chartkick gem can handle to produce bar charts for each metric's weekly total against the weekly goal
