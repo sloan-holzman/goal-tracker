@@ -22,7 +22,7 @@ puts "deleted groups"
 User.destroy_all
 puts "deleted users"
 
-sloan = User.new(reminder: true, email: 'sloan.holzman@gmail.com', password: 'password', first_name: 'sloan', last_name: 'holzman', reminder_frequency: "Daily", last_date_created: Date.today, last_date_entered: (Date.today - 2))
+sloan = User.new(reminder: true, email: 'sloan.holzman@gmail.com', password: 'password', first_name: 'sloan', last_name: 'holzman', reminder_frequency: "Daily", last_date_created: (Date.today - 8), last_date_entered: (Date.today - 8))
 sloan.skip_confirmation!
 sloan.save!
 bob = User.new(reminder: false, email: 'sholzman@mba2015.hbs.edu', password: 'password', first_name: 'bob', last_name: 'johnson', last_date_created: Date.today, last_date_entered: Date.today)
@@ -46,28 +46,11 @@ Request.create(user: billy, group: group)
 group2 = Group.create(name: 'private', private: true)
 group3 = Group.create(name: 'public')
 
-skipping.performances.create(date: (Date.today-2), count: 1, entered: true)
-skipping.performances.create(date: (Date.today-1), count: 10, entered: true)
-
-smoking.performances.create(date: (Date.today), count: 1, entered: true)
-smoking.performances.create(date: (Date.today-1), count: 1, entered: true)
-smoking.performances.create(date: (Date.today-3), count: 1, entered: true)
-smoking.performances.create(date: (Date.today-4), count: 0, entered: true)
-smoking.performances.create(date: (Date.today-5), count: 5, entered: true)
-smoking.performances.create(date: (Date.today-6), count: 0, entered: true)
-smoking.performances.create(date: (Date.today-7), count: 2, entered: true)
 smoking.performances.create(date: (Date.today-8), count: 3, entered: true)
 smoking.performances.create(date: (Date.today-9), count: 1, entered: true)
 smoking.performances.create(date: (Date.today-10), count: 4, entered: true)
 
-running.performances.create(date: (Date.today), count: 0, entered: false)
-running.performances.create(date: (Date.today-1), count: 0, entered: false)
-running.performances.create(date: (Date.today-2), count: 2, entered: true)
-running.performances.create(date: (Date.today-3), count: 1, entered: true)
-running.performances.create(date: (Date.today-4), count: 4, entered: true)
-running.performances.create(date: (Date.today-5), count: 1, entered: true)
-running.performances.create(date: (Date.today-6), count: 0, entered: true)
-running.performances.create(date: (Date.today-7), count: 2, entered: true)
+
 running.performances.create(date: (Date.today-8), count: 3, entered: true)
 running.performances.create(date: (Date.today-9), count: 1, entered: true)
 running.performances.create(date: (Date.today-10), count: 4, entered: true)
@@ -82,14 +65,7 @@ running.performances.create(date: (Date.today-19), count: 0, entered: true)
 running.performances.create(date: (Date.today-20), count: 0, entered: true)
 running.performances.create(date: (Date.today-21), count: 5, entered: true)
 
-meditation.performances.create(date: (Date.today), count: 1, entered: false)
-meditation.performances.create(date: (Date.today-1), count: 1, entered: true)
-meditation.performances.create(date: (Date.today-2), count: 0, entered: true)
-meditation.performances.create(date: (Date.today-3), count: 1, entered: true)
-meditation.performances.create(date: (Date.today-4), count: 1, entered: true)
-meditation.performances.create(date: (Date.today-5), count: 1, entered: true)
-meditation.performances.create(date: (Date.today-6), count: 1, entered: true)
-meditation.performances.create(date: (Date.today-7), count: 1, entered: true)
+meditation.performances.create(date: (Date.today-8), count: 1, entered: true)
 meditation.performances.create(date: (Date.today-9), count: 1, entered: true)
 meditation.performances.create(date: (Date.today-10), count: 1, entered: true)
 meditation.performances.create(date: (Date.today-11), count: 1, entered: true)
@@ -104,7 +80,6 @@ meditation.performances.create(date: (Date.today-19), count: 1, entered: true)
 meditation.performances.create(date: (Date.today-20), count: 1, entered: true)
 meditation.performances.create(date: (Date.today-21), count: 1, entered: true)
 
-running2.performances.create(date: (Date.today), count: 0, entered: false)
 running2.performances.create(date: (Date.today-2), count: 3, entered: true)
 running2.performances.create(date: (Date.today-3), count: 4, entered: true)
 running2.performances.create(date: (Date.today-4), count: 1, entered: true)
@@ -112,7 +87,7 @@ running2.performances.create(date: (Date.today-5), count: 1, entered: true)
 running2.performances.create(date: (Date.today-7), count: 0, entered: true)
 running2.performances.create(date: (Date.today-8), count: 2, entered: true)
 
-sloan.seed_create_missing_performances
+# sloan.seed_create_missing_performances
 bob.seed_create_missing_performances
 billy.seed_create_missing_performances
 

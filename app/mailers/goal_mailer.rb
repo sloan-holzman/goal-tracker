@@ -61,7 +61,7 @@ class GoalMailer < ActionMailer::Base
     if @metrics.length == 0
       mail(to: @user.email, subject: "You haven't set any goals yet.  Follow link to start")
     else
-      @number_unentered = Date.today - @user.last_date_entered
+      @number_unentered = (Date.today - @user.last_date_entered).to_i
       if @number_unentered > 0
         @unentered_dates = []
         date = Date.today
