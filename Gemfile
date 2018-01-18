@@ -12,6 +12,8 @@ gem 'groupdate'
 gem 'whenever', :require => false
 gem 'devise'
 gem 'figaro'
+gem 'newrelic_rpm'
+
 
 gem 'cancancan', '~> 1.10'
 
