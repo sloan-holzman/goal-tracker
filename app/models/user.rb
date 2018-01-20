@@ -97,7 +97,7 @@ class User < ApplicationRecord
       metric.start_date
     end
     start = [start_dates.min.beginning_of_week(:sunday),(Date.today - 63).beginning_of_week(:sunday)].max
-    last = Date.today.end_of_week(:saturday)
+    last = Date.today.saturday? ? Date.today : Date.today.end_of_week(:saturday)
     weeks = []
     week = start
     while week <= last
@@ -116,7 +116,7 @@ class User < ApplicationRecord
     self.create_missing_weeks
     self.metrics.each do |metric|
       weekly_total_array = []
-      ordered_weeks = metric.weeks.where("date >= ?", metric.start_date.beginning_of_week(:sunday))
+      ordered_weeks = metric.weeks.where("date >= ? and date<=?", metric.start_date.beginning_of_week(:sunday),Date.today.end_of_week(:saturday))
       if ordered_weeks.length > 0
         if (dates[0] - ordered_weeks[0]["date"].beginning_of_week(:sunday)).to_i >= 0
           week_index = 0
