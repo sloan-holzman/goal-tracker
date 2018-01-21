@@ -28,7 +28,7 @@ sloan.save!
 bob = User.new(reminder: false, email: 'sholzman@mba2015.hbs.edu', password: 'password', first_name: 'bob', last_name: 'johnson', last_date_created: Date.today, last_date_entered: Date.today)
 bob.skip_confirmation!
 bob.save!
-billy = User.new(reminder: false, email: 'sbh2102@columbia.com', password: 'password', first_name: 'billy', last_name: 'johnson', reminder_day: "Monday", last_date_created: Date.today, last_date_entered: Date.today)
+billy = User.new(reminder: false, email: 'sbh2102@columbia.edu', password: 'password', first_name: 'billy', last_name: 'johnson', reminder_day: "Monday", last_date_created: Date.today, last_date_entered: Date.today)
 billy.skip_confirmation!
 billy.save!
 running = sloan.metrics.create(name: 'Running', unit: 'miles', target: 15, good: true, duration: 'week', start_date: (Date.today-21), last_day_undone: (Date.today-22))
@@ -41,10 +41,12 @@ running2 = bob.metrics.create(name: 'Running', unit: 'miles', target: 10, good: 
 group = Group.create(name: "Sloan's Group")
 Membership.create(user: sloan, group: group, admin: true)
 Membership.create(user: bob, group: group, admin: false)
-Membership.create(user: billy, group: group, admin: false)
 Request.create(user: billy, group: group)
 group2 = Group.create(name: 'private', private: true)
 group3 = Group.create(name: 'public')
+Membership.create(user: bob, group: group3, admin: true)
+
+
 
 smoking.performances.create(date: (Date.today-8), count: 3, entered: true)
 smoking.performances.create(date: (Date.today-9), count: 1, entered: true)
