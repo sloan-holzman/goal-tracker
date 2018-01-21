@@ -12,16 +12,23 @@ form {
   min-width: 50vw;
 }
 
-.field {
-  text-align: center;
-  width: 50%;
+input:focus {
+  outline-color: #4caf50;
 }
 
-.date {
+.date, input, select, .field {
+  width: 50%;
+  text-align: center;
   min-width: 150px;
 }
 
 /* below is adapted from https://stackoverflow.com/questions/19388011/how-to-change-colour-of-blue-highlight-on-select-box-dropdown */
+
+select {
+   background-color: white;   /* add custom arrow */
+   text-align-last: center;
+}
+
 
 select,
 select:active,
@@ -32,4 +39,5 @@ select:hover {
 select option,
 select option:hover {
   box-shadow: inset 20px 20px #4caf50;
+  background-color: #4caf50;
 }

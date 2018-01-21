@@ -1,7 +1,6 @@
 <!-- # learned how to update multiple instances at once from from http://anthonylewis.com/2011/04/15/editing-multiple-records-in-rails/ -->
-
+<h1>Enter Performances</h1>
 <section class="form-section">
-  <h1>Enter Performances</h1>
   <% if @performances.length > 0 %>
     <h3>You have not told how you did on the following days:</h3>
     <br>
@@ -33,6 +32,7 @@
   <% end %>
 </section>
 <section class="form-section">
+  <br>
   <h3>Choose a date to update old performances:</h3>
   <br>
   <%= form_tag '/performances/day/select', method: :get do %>

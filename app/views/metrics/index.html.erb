@@ -1,5 +1,5 @@
+<h1>Past Performance</h1>
 <% if @metrics.length > 0 %>
-  <h1>Past Performance</h1>
   <h3>Week of <%= Date.today.beginning_of_week(:sunday).strftime("%B %d, %Y") %></h3>
   <% for metric in @metrics %>
     <% if (Date.today - metric.last_day_undone).to_i > 1 %>

@@ -4,11 +4,13 @@ dropdown styles modified from https://www.w3schools.com/howto/tryit.asp?filename
 .button {
   background-color: #4caf50;
   color: white;
-  padding: 16px;
+  padding: 20px;
   font-size: 16px;
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  font-weight: bold;
+  min-width: 150px;
 }
 
 .button:hover,

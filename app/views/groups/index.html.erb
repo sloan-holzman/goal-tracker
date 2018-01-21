@@ -3,35 +3,37 @@
   <h3>You are not currently in any groups</h3>
 <% else %>
   <% for group in @groups %>
-  <div class="links">
     <h3><%= link_to group.name, user_group_path(current_user, group) %></h3>
     <p>Members: <%= group.users.count %></p>
-  </div>
   <% end %>
 <% end %>
+<div class="links">
+  <%= link_to "Create new group", new_user_group_path(current_user) %>
+</div>
 <% if @your_invitations.length > 0 %>
-  <h2>Your invitations:</h2>
+  <h1>Your invitations:</h1>
   <% for invitation in @your_invitations %>
-    <p>Group name: <%= invitation.group.name %></p>
+    <h3>Group name: <%= invitation.group.name %></h3>
     <p>Group members: <%= invitation.group.users.count %></p>
       <ul>
         <% for user in invitation.group.users %>
           <li><%= user.email %></li>
         <% end %>
       </ul>
+  <div class="links">
     <p><%= link_to "Accept invitation", "/users/#{current_user.id}/groups/#{invitation.group.id}/invitations/#{invitation.id}/accept", method: :post %></p>
     <p><%= link_to "Reject invitation", "/users/#{current_user.id}/groups/#{invitation.group.id}/invitations/#{invitation.id}/reject", method: :delete, data: {confirm: "Are you sure you want to reject this invitation?"} %></p>
+  </div>
   <% end %>
 <% end %>
 <% if @your_requests.length > 0 %>
-  <h2>Your outstanding requests:</h2>
+  <h1>Your outstanding requests:</h1>
   <% for request in @your_requests %>
-    <p>Group name: <%= request.group.name %></p>
-    <p>Request sent: <%= request.created_at.strftime("%a, %b %d") %></p>
+    <h3><%= request.group.name %></h3>
+    <p>Sent: <%= request.created_at.strftime("%a, %b %d") %></p>
   <% end %>
 <% end %>
 <div class="links">
-  <%= link_to "Create new group", new_user_group_path(current_user) %>
   <%= link_to "Request to join other groups", groups_all_path %>
   <% if @approval_requests.length > 0 %>
     <%= link_to "Approve outstanding requests", request_all_path %>

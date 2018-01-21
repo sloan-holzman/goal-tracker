@@ -1,8 +1,7 @@
 <!-- # learned how to update multiple instances at once from from http://anthonylewis.com/2011/04/15/editing-multiple-records-in-rails/ -->
+<h1>Update performance count on <%= @date.strftime("%a, %b %d") %></h1>
 <section>
-
 <% if @performances.length > 0 %>
-  <h1>Update performance count on <%= @date.strftime("%a, %b %d") %></h1>
   <%= form_for :performance, :url => update_day_path, :html => { :method => :put } do %>
     <table class="metric-table">
       <tr>
