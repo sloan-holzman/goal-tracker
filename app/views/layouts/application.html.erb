@@ -15,22 +15,23 @@
       <div class="nav__container">
         <div class="nav__logo">
           <%= link_to root_path do %>
-            <%= image_tag 'Logo.png' %>
+            <%= image_tag 'Logo2.png' %>
           <% end %>
+          <a href="/"><button class="button title">GOAL TRACKER</button></a>
         </div>
         <div class="nav__container__links">
-          <a class="nav__container__link" href="/metrics/all">VIEW PAST</a>
-          <a class="nav__container__link" href="/performances/all/edit">ENTER DAILY</a>
+          <a href="/metrics/all"><button class="button">VIEW PAST</button></a>
+          <a href="/performances/all/edit"><button class="button">ENTER DAILY</button></a>
           <% if !current_user %>
-            <a class="nav__container__link" href="/groups/all">TRACK GROUPS</a>
+            <a href="/groups/all"><button class="button">TRACK GROUPS</button></a>
           <% else %>
-            <a class="nav__container__link" href="/users/<%= current_user.id %>/groups">TRACK GROUPS</a>
+            <a href="/users/<%= current_user.id %>/groups"><button class="button">TRACK GROUPS</button></a>
           <% end %>
           <div class="dropdown">
             <% if !current_user %>
             <a href="/users/sign_in"><button class="button dropdown__dropbtn">SIGN IN</button></a>
             <% else %>
-            <button onclick="myFunction()" class="button dropdown__dropbtn">Hi, <%= current_user.first_name %></button>
+            <button onclick="myFunction()" class="button dropdown__dropbtn">ACCOUNT</button>
             <% end %>
               <div id="myDropdown" class="dropdown__dropbtn__content">
                 <a href="/profiles/show">PROFILE</a>

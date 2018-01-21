@@ -4,9 +4,24 @@ main {
   align-items: center;
   flex-grow: 1;
   overflow-y: auto;
-  justify-content: space-between;
-  padding: 0 15% 0% 15%;
+  justify-content: flex-start;
+  margin: 0 15% 0% 15%;
+  padding: 0 0 5% 0%;
   height: 100%;
   text-align: center;
   background-color: white;
+  opacity: 1 !important;
+  box-shadow: 0 1px 0 rgba(12,13,14,0.1), 0 1px 3px rgba(12,13,14,0.1), 0 4px 20px rgba(12,13,14,0.035), 0 1px 1px rgba(12,13,14,0.025);
+}
+
+h1 {
+  margin: 5% 0 2% 0;
+  display: inline-block;
+  padding: 0 50px;
+  border-bottom: 3px solid DarkGray;
+  line-height: 70px;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 700;
 }

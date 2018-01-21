@@ -1,10 +1,10 @@
 <!-- # learned how to update multiple instances at once from from http://anthonylewis.com/2011/04/15/editing-multiple-records-in-rails/ -->
 
 <section class="form-section">
-
+  <h1>Enter Performances</h1>
   <% if @performances.length > 0 %>
-    <h2>You have not told how you did on the following days:</h2>
-
+    <h3>You have not told how you did on the following days:</h3>
+    <br>
     <%= form_for :performance, :url => update_all_path, :html => { :method => :put} do %>
       <table class="metric-table">
         <tr>
@@ -16,7 +16,7 @@
           <%= fields_for "performance[]", performance do |performance_fields| %>
         <tr>
           <td><%= performance.metric.name %></td>
-          <td><%= performance.date %></td>
+          <td><%= performance.date.strftime("%a, %b %d") %></td>
           <td><%= performance_fields.number_field :count, class: "field", min: "0" %></td>
         </tr>
           <% end %>
@@ -24,16 +24,17 @@
       </table>
       <br>
       <div class="">
-        <%= submit_tag("Save", :class => "button wide short" ) %>
+        <%= submit_tag("Enter", :class => "button wide short" ) %>
       </div>
     <% end %>
   <% else %>
-    <h2>Unentered performances:</h2>
-    <h3>You are all up to date!</h3>
+    <h3>Unentered performances:</h3>
+    <h4>You are all up to date!</h4>
   <% end %>
 </section>
 <section class="form-section">
-  <h2>Choose a date to update old performances:</h2>
+  <h3>Choose a date to update old performances:</h3>
+  <br>
   <%= form_tag '/performances/day/select', method: :get do %>
     <%= date_field_tag "date", "default info" %>
     <br>

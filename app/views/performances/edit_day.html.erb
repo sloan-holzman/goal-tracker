@@ -2,7 +2,7 @@
 <section>
 
 <% if @performances.length > 0 %>
-  <h2>Update performance count on <%= @date %></h2>
+  <h1>Update performance count on <%= @date.strftime("%a, %b %d") %></h1>
   <%= form_for :performance, :url => update_day_path, :html => { :method => :put } do %>
     <table class="metric-table">
       <tr>

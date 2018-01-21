@@ -1,4 +1,4 @@
-<h2>Your groups:</h2>
+<h1>Your groups:</h1>
 <% if @groups.length == 0 %>
   <h3>You are not currently in any groups</h3>
 <% else %>
@@ -26,8 +26,8 @@
 <% if @your_requests.length > 0 %>
   <h2>Your outstanding requests:</h2>
   <% for request in @your_requests %>
-    <p><%= request.group.name %></p>
-    <p><%= request.created_at %></p>
+    <p>Group name: <%= request.group.name %></p>
+    <p>Request sent: <%= request.created_at.strftime("%a, %b %d") %></p>
   <% end %>
 <% end %>
 <div class="links">

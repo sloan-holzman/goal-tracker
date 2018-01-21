@@ -1,4 +1,4 @@
-<h2>Requests to approve:</h2>
+<h1>Requests to approve:</h1>
 <% if @approval_requests.length > 0 %>
   <% for request in @approval_requests %>
     <p>Requester's name: <%= request.user.first_name %> <%= request.user.last_name %></p>

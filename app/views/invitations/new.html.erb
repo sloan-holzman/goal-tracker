@@ -1,9 +1,8 @@
-<h2>New Invitation for <%= @group.name %></h2>
+<h1>New Invitation for <%= @group.name %></h1>
 
 <%= form_for [current_user,@group, @invitation] do |f|  %>
   <%= f.label :email %>
   <%= f.text_field :email %>
   <br>
   <%= f.submit "Invite", class: "button wide short" %>
-
 <% end %>
