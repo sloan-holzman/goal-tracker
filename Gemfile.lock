@@ -66,6 +66,9 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.3)
+    date_validator (0.9.0)
+      activemodel
+      activesupport
     devise (4.4.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -106,7 +109,6 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.0)
     multi_json (1.12.2)
-    newrelic_rpm (4.7.1.340)
     nio4r (2.2.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
@@ -214,6 +216,7 @@ DEPENDENCIES
   capybara (~> 2.13)
   chartkick
   coffee-rails (~> 4.2)
+  date_validator
   devise
   figaro
   groupdate
@@ -221,7 +224,6 @@ DEPENDENCIES
   jquery-rails
   jquery-slick-rails
   listen (>= 3.0.5, < 3.2)
-  newrelic_rpm
   pg (~> 0.18)
   puma (~> 3.7)
   rails (~> 5.1.4)

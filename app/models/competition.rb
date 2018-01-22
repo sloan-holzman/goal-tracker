@@ -1,5 +1,7 @@
 class Competition < ApplicationRecord
   belongs_to :group
+  validates :end_date, presence: true, date: { after_or_equal_to:  :start_date}
+
 
   before_save do |competition|
     competition.metric_name = competition.metric_name.downcase.titleize

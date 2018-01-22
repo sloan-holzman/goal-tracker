@@ -12,8 +12,12 @@ class CompetitionsController < ApplicationController
     @user = User.find(params[:user_id])
     @group = Group.find(params[:group_id])
     @competition = Competition.create(competition_params.merge(group: @group))
-    @competition.create_user_metrics
-    flash[:notice] = "Competition for #{@competition.metric_name} created successfully"
+    if @competition.valid?
+      @competition.create_user_metrics
+      flash[:notice] = "Competition for #{@competition.metric_name} created successfully"
+    else
+      flash[:notice] = "Woops, something went wrong"
+    end
     redirect_to user_group_path(@user, @group)
   end
 
