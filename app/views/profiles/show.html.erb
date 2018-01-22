@@ -2,8 +2,8 @@
 <p>Name: <%= @user.first_name %> <% @user.last_name %></p>
 <p>Email: <%= @user.email %></p>
 <p>Reminder emails: <%= @reminder_frequency_message %></p>
-<p>Member since: <%= @user.created_at %></p>
+<p>Member since: <%= @user.created_at.strftime("%b %d, %Y") %></p>
 <br>
-<div class="links foot">
+<div class="links">
   <%= link_to "Edit profile", edit_user_registration_path %>
 </div>

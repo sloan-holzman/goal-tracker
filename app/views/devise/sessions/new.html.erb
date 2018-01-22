@@ -11,16 +11,17 @@
     <td><%= f.password_field :password, autocomplete: "off" %></td>
   </tr>
 </table>
-
+<div class="row">
   <% if devise_mapping.rememberable? -%>
     <%= f.check_box :remember_me %>
     <%= f.label :remember_me %>
   <% end -%>
+</div>
 <br>
     <%= f.submit "Log in", class: "button wide short" %>
 <% end %>
 <br>
 </section>
-<div class="links foot">
+<div class="foot fixed">
   <%= render "devise/shared/links" %>
 </div>

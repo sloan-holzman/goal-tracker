@@ -43,6 +43,18 @@
   <% end %>
   <% i+=1 %>
 <% end %>
+<h2>Competitions:</h2>
+<% if @group.competitions.length > 0 %>
+  <% for competition in @group.competitions %>
+    <h3><%= link_to competition.metric_name, user_group_competition_path(current_user, @group, competition) %></h3>
+  <% end %>
+<% else %>
+  <h4>You do not have any competitions set up, yet</h4>
+  <br>
+<% end %>
+<div class="links">
+  <%= link_to "Create new competition", new_user_group_competition_path(current_user, @group)%>
+</div>
 <br>
 <div class="links foot">
   <%= link_to "Invite new members", new_user_group_invitation_path(current_user, @group) %>
@@ -53,16 +65,4 @@
   <% if @membership.admin %>
     <%= link_to "Delete group", "/users/#{current_user.id}/groups/#{@group.id}", method: :delete, data: {confirm: "Are you sure you want to delete this group?"} %>
   <% end %>
-</div>
-<h2>Competitions:</h2>
-<% if @group.competitions.length > 0 %>
-  <% for competition in @group.competitions %>
-    <h3><%= link_to competition.metric_name, user_group_competition_path(current_user, @group, competition) %></h3>
-  <% end %>
-<% else %>
-  <h4>You do not have any competitions set up, yet</h4>
-  <br>
-<% end %>
-<div class="links foot">
-  <%= link_to "Create new competition", new_user_group_competition_path(current_user, @group)%>
 </div>

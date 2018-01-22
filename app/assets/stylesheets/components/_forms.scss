@@ -41,3 +41,13 @@ select option:hover {
   box-shadow: inset 20px 20px #4caf50;
   background-color: #4caf50;
 }
+
+.row {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.row label {
+  min-width: 150px;
+}

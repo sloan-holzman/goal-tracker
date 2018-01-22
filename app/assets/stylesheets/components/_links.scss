@@ -46,8 +46,13 @@ a:hover {
   padding: 20px 50px;
   border-top: 3px solid DarkGray;
   height: 100px;
-  width:100%;
+  // width:100%;
+  // position: absolute;
+  // left: 0;
+  // bottom: 0;
+}
+
+.fixed {
   position: absolute;
-  left: 0;
-  bottom: 0;
+  bottom: 0;  
 }

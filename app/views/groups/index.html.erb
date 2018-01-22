@@ -7,7 +7,7 @@
     <p>Members: <%= group.users.count %></p>
   <% end %>
 <% end %>
-<div class="links foot">
+<div class="links">
   <%= link_to "Create new group", new_user_group_path(current_user) %>
 </div>
 <% if @your_invitations.length > 0 %>
@@ -20,7 +20,7 @@
           <li><%= user.email %></li>
         <% end %>
       </ul>
-  <div class="links foot">
+  <div class="links">
     <p><%= link_to "Accept invitation", "/users/#{current_user.id}/groups/#{invitation.group.id}/invitations/#{invitation.id}/accept", method: :post %></p>
     <p><%= link_to "Reject invitation", "/users/#{current_user.id}/groups/#{invitation.group.id}/invitations/#{invitation.id}/reject", method: :delete, data: {confirm: "Are you sure you want to reject this invitation?"} %></p>
   </div>
@@ -33,7 +33,7 @@
     <p>Sent: <%= request.created_at.strftime("%a, %b %d") %></p>
   <% end %>
 <% end %>
-<div class="links foot">
+<div class="links">
   <%= link_to "Request to join other groups", groups_all_path %>
   <% if @approval_requests.length > 0 %>
     <%= link_to "Approve outstanding requests", request_all_path %>
