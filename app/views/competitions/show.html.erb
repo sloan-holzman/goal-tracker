@@ -23,7 +23,7 @@
 
 <% end %>
 <br>
-<div class="links">
+<div class="links foot">
   <%= link_to "Edit Competition", edit_user_group_competition_path(current_user, @group, @competition) %>
   <%= link_to "Delete Competition", user_group_competition_path(current_user, @group, @competition), method: :delete, data: {confirm: "Are you sure you want to delete this competition?"} %>
   <%= link_to "Back to Group", user_group_path(current_user, @group) %>

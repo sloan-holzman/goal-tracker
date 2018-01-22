@@ -4,7 +4,7 @@
     <p>Requester's name: <%= request.user.first_name %> <%= request.user.last_name %></p>
     <p>Requester's email: <%= request.user.email %></p>
     <p>Group name: <%= request.group.name %></p>
-    <div class="links">
+    <div class="links foot">
       <%= link_to "Approve request", "/requests/#{request.id}/approve", method: :post %>
       <%= link_to "Reject request", "/requests/#{request.id}/reject", method: :delete, data: {confirm: "Are you sure you want to reject this request?"}  %>
     </div>
@@ -14,7 +14,7 @@
 <% else %>
   <p>You have no requests to approve</p>
 <% end %>
-<div class="links">
+<div class="links foot">
   <%= link_to "Create new group", new_user_group_path(current_user) %>
   <%= link_to "See all groups", groups_all_path%>
 </div>
