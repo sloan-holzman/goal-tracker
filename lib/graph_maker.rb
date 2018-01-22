@@ -167,30 +167,6 @@ module GraphMaker
   #   return week_streaks
   # end
 
-  def calculate_week_streak(metrics)
-    week_streaks = []
-    metric_index = 0
-    for metric in metrics
-      week_streak = 0
-      week_count = 0
-      for week in metric.weeks
-        if week_count == 0
-        elsif metric.good && week.total >= metric.target || !metric.good && week.total <= metric.target
-          week_streak += 1
-        else
-          break
-        end
-        week_count+=1
-      end
-      if week_streak >= 2
-        week_streaks.push([metric, week_streak])
-      end
-      metric_index += 1
-    end
-    return week_streaks
-
-  end
-
 
   #
   # create_array_of_weeks(metrics: array of hashes)

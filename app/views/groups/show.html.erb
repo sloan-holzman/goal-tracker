@@ -52,10 +52,6 @@
   <h4>You do not have any competitions set up, yet</h4>
   <br>
 <% end %>
-<div class="links">
-  <%= link_to "Create new competition", new_user_group_competition_path(current_user, @group)%>
-</div>
-<br>
 <div class="links foot">
   <%= link_to "Invite new members", new_user_group_invitation_path(current_user, @group) %>
   <%= link_to "Leave group", leave_group_path(current_user, @group), method: :delete, data: {confirm: "Are you sure you want to leave this group?"} %>
@@ -65,4 +61,5 @@
   <% if @membership.admin %>
     <%= link_to "Delete group", "/users/#{current_user.id}/groups/#{@group.id}", method: :delete, data: {confirm: "Are you sure you want to delete this group?"} %>
   <% end %>
+  <%= link_to "Create new competition", new_user_group_competition_path(current_user, @group)%>
 </div>

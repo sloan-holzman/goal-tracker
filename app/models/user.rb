@@ -18,6 +18,41 @@ class User < ApplicationRecord
     user.first_name = user.first_name.downcase.titleize
   end
 
+  def day_streaks
+    streaks = []
+    for metric in self.metrics
+      streak = (Date.today - metric.last_day_undone).to_i
+      if streak > 1
+        streaks.push("#{metric.name} (#{streak} days)")
+      end
+    end
+    return streaks
+  end
+
+  def calculate_week_streak
+    week_streaks = []
+    metric_index = 0
+    for metric in self.metrics
+      week_streak = 0
+      week_count = 0
+      for week in metric.weeks
+        if week_count == 0
+        elsif metric.good && week.total >= metric.target || !metric.good && week.total <= metric.target
+          week_streak += 1
+        else
+          break
+        end
+        week_count+=1
+      end
+      if week_streak >= 2
+        week_streaks.push("#{metric.name} (#{week_streak} weeks)")
+      end
+      metric_index += 1
+    end
+    return week_streaks
+  end
+
+
   def update_last_date_entered(performance)
     if (performance.date - self.last_date_entered).to_i > 0
       self.update(last_date_entered: performance.date)

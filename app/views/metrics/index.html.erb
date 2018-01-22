@@ -1,17 +1,19 @@
 <h1>Past Performance</h1>
 <% if @metrics.length > 0 %>
   <h3>Week of <%= Date.today.beginning_of_week(:sunday).strftime("%B %d, %Y") %></h3>
-  <% for metric in @metrics %>
+  <!-- <% for metric in @metrics %>
     <% if (Date.today - metric.last_day_undone).to_i > 1 %>
     <p><%= metric.name%>: <%= (Date.today - metric.last_day_undone).to_i %> days in a row</p>
     <% end %>
+  <% end %> -->
+  <% if @day_streaks.length > 0 %>
+  <p>Active day streaks: <%= @day_streaks.to_sentence %>.  Keep it up!</p>
   <% end %>
   <%= column_chart @week_data, colors: ["#4caf50", "#999"] %>
   <h3>Recent Weeks</h3>
-  <% for streak in @week_streaks %>
-    <p><%= streak[0].name%>: You've hit your weekly goal the previous <%= streak[1] %> weeks.  Keep it up!</p>
-  <% end %>
-  <br>
+  <% if @week_streaks.length > 0 %>
+  <p>Active week streaks: <%= @week_streaks.to_sentence %>.  Keep it up!</p>
+  <% end %>  <br>
   <br>
   <table class="metric-table">
     <% @table_array.each_with_index do |row, index| %>

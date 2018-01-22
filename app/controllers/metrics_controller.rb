@@ -27,9 +27,8 @@ class MetricsController < ApplicationController
       @week_data = create_data_for_current_week_graph(@metrics)
       @table_array = @user.create_metric_table
       @dates = create_array_of_weeks(@metrics)
-      # @rows = create_table_of_weekly_performances(@metrics, @dates)
-      # @week_streaks = calculate_week_streak(@metrics, @rows)
-      @week_streaks = calculate_week_streak(@metrics)
+      @week_streaks = @user.calculate_week_streak
+      @day_streaks = @user.day_streaks
     end
   end
 
