@@ -16,11 +16,11 @@
   </tr>
   <tr>
     <td><%= f.label "Start Date" %></td>
-    <td><%= f.date_field :start_date %></td>
+    <td><%= f.date_field :start_date, :value => Date.today.strftime('%Y-%m-%d') %></td>
   </tr>
   <tr>
     <td><%= f.label "End Date" %></td>
-    <td><%= f.date_field :end_date %></td>
+    <td><%= f.date_field :end_date, :value => Date.today.strftime('%Y-%m-%d') %></td>
   </tr>
 </table>
 <br>

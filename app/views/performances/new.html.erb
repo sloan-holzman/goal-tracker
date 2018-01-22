@@ -5,7 +5,7 @@
   <%= f.text_field :count %>
 
   <%= f.label :date %>
-  <%= f.date_field :date, :default => Date.today%>
+  <%= f.date_field :date, :value => Date.today.strftime('%Y-%m-%d')%>
 
   <%= f.submit "Enter" %>
 

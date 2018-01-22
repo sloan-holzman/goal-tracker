@@ -18,7 +18,7 @@
 
     <tr>
       <td><%= f.label "Start Date" %></td>
-      <td><%= f.date_field :start_date, class: "field date"%></td>
+      <td><%= f.date_field :start_date, :value => Date.today.strftime('%Y-%m-%d'), class: "field date"%></td>
     </tr>
 
     <tr>
