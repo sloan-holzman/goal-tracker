@@ -1,5 +1,4 @@
 class GroupsController < ApplicationController
-  include GraphMaker
   include CheckUser
   include CreatePerformances
 
