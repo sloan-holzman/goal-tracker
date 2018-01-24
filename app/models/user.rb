@@ -61,10 +61,11 @@ class User < ApplicationRecord
 
   def find_approval_requests
     admin_memberships = self.memberships.where(admin: true)
-    groups = []
-    for membership in admin_memberships
-      groups.push(membership.group)
+    groups = admin_memberships.map do |membership|
+      membership.group
     end
+
+    # clean this up...use .map instead
     approval_requests = []
     for group in groups
       for request in group.requests
@@ -196,7 +197,6 @@ class User < ApplicationRecord
   end
 
   def create_data_for_line_graph
-    all_data = []
     all_data - self.metrics.map |metric|
       if Date.today >= metric.start_date
         set = {name: metric.name,data: metric.performances.where("date >= ?",metric.start_date).group_by_day(:date).sum(:count)}
