@@ -195,5 +195,17 @@ class User < ApplicationRecord
     return table_array
   end
 
+  def create_data_for_line_graph
+    all_data = []
+    for metric in self.metrics
+      if Date.today >= metric.start_date
+        # performances = metric.performances
+        set = {name: metric.name,data: metric.performances.where("date >= ?",metric.start_date).group_by_day(:date).sum(:count)}
+        all_data.push(set)
+      end
+    end
+    return all_data
+  end
+
 
 end

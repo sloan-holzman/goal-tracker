@@ -9,7 +9,7 @@ class Metric < ApplicationRecord
     metric.unit = metric.unit.downcase.titleize
   end
 
-  def create_old_performances
+  def metric_create_old_performances
     if Date.today > self.start_date
       (self.start_date..Date.today).each do |date|
         if !self.performances.exists?(date: date)
@@ -80,25 +80,14 @@ class Metric < ApplicationRecord
     end
   end
 
-  def create_new_weekly_total
-    self.weeks.create(date: Date.today, total: 0)
-  end
-
   def create_missing_performances
     for metric in self.metrics
       date = Date.today
-      puts metric.name
-      puts date
-      while true
-        if (date - metric.start_date).to_i >= 0
-          if !metric.performances.exists?(date: date)
-            metric.performances.create(date: date, count: 0, entered: false)
-          end
-          date -= 1
-          puts date
-        else
-          break
+      while (date - metric.start_date).to_i >= 0
+        if !metric.performances.exists?(date: date)
+          metric.performances.create(date: date, count: 0, entered: false)
         end
+        date -= 1
       end
     end
   end
