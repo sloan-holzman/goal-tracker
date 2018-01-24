@@ -197,15 +197,33 @@ class User < ApplicationRecord
 
   def create_data_for_line_graph
     all_data = []
-    for metric in self.metrics
+    all_data - self.metrics.map |metric|
       if Date.today >= metric.start_date
-        # performances = metric.performances
         set = {name: metric.name,data: metric.performances.where("date >= ?",metric.start_date).group_by_day(:date).sum(:count)}
-        all_data.push(set)
       end
     end
     return all_data
   end
+
+  def create_data_for_current_week_graph
+
+    # array containing the weekly goal/target for each metric
+    target_data = self.metrics.map do |metric|
+      [metric.name, metric.target]
+    end
+
+    # array containing the current week's total for each metric
+    actual_data = self.metrics.map do |metric|
+      [metric.name, metric.weeks.find_or_create_by(date: Date.today.beginning_of_week(:sunday)).total]
+    end
+
+    # data organized in a manner that the chartkick gem can handle to produce bar charts for each metric's weekly total against the weekly goal
+    return [{name: "Weekly Goal",data: target_data},{name: "Count so far",data: actual_data}]
+  end
+
+
+end
+
 
 
 end
