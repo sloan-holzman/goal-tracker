@@ -1,5 +1,4 @@
 class MetricsController < ApplicationController
-  include GraphMaker
   include CheckUser
   include CreatePerformances
 
@@ -24,7 +23,7 @@ class MetricsController < ApplicationController
     @metrics = @user.metrics
     if @metrics.length > 0
       @line_graph_data = @user.create_data_for_line_graph
-      @week_data = create_data_for_current_week_graph(@metrics)
+      @week_data = @user.create_data_for_current_week_graph
       @table_array = @user.create_metric_table
       @week_streaks = @user.calculate_week_streak
       @day_streaks = @user.day_streaks

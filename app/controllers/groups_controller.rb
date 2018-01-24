@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
       @table_array = {}
       @group.users.each do |user|
         if user.metrics.length > 0
-          @group_week_data[user.id] = create_data_for_current_week_graph(user.metrics)
+          @group_week_data[user.id] = user.create_data_for_current_week_graph
           @table_array[user.id] = user.create_metric_table
         end
       end
