@@ -52,7 +52,6 @@ class User < ApplicationRecord
     return week_streaks
   end
 
-
   def update_last_date_entered(performance)
     if (performance.date - self.last_date_entered).to_i > 0
       self.update(last_date_entered: performance.date)
@@ -75,7 +74,6 @@ class User < ApplicationRecord
     return approval_requests
   end
 
-
   def find_reminder_frequency
     if !self.reminder
       reminder_frequency_message = "Off"
@@ -86,7 +84,6 @@ class User < ApplicationRecord
     end
     return reminder_frequency_message
   end
-
 
   def seed_create_missing_weeks
     for metric in self.metrics
@@ -102,6 +99,7 @@ class User < ApplicationRecord
       end
     end
   end
+
 
   def seed_create_missing_performances
     for metric in self.metrics
@@ -127,7 +125,6 @@ class User < ApplicationRecord
     end
   end
 
-
   def create_array_of_weeks
     start_dates = self.metrics.map do |metric|
       metric.start_date
@@ -142,8 +139,6 @@ class User < ApplicationRecord
     end
     return weeks
   end
-
-
 
   def create_metric_table
     table_array = []
@@ -192,21 +187,21 @@ class User < ApplicationRecord
       end
       table_array.push({metric: metric, values: weekly_total_array})
     end
-    puts table_array
     return table_array
   end
 
   def create_data_for_line_graph
-    all_data - self.metrics.map |metric|
+    all_data = []
+    self.metrics.each {|metric|
       if Date.today >= metric.start_date
         set = {name: metric.name,data: metric.performances.where("date >= ?",metric.start_date).group_by_day(:date).sum(:count)}
+        all_data.push(set)
       end
-    end
+    }
     return all_data
   end
 
   def create_data_for_current_week_graph
-
     # array containing the weekly goal/target for each metric
     target_data = self.metrics.map do |metric|
       [metric.name, metric.target]
@@ -220,10 +215,5 @@ class User < ApplicationRecord
     # data organized in a manner that the chartkick gem can handle to produce bar charts for each metric's weekly total against the weekly goal
     return [{name: "Weekly Goal",data: target_data},{name: "Count so far",data: actual_data}]
   end
-
-
-end
-
-
 
 end

@@ -3,7 +3,7 @@ class PerformancesController < ApplicationController
   include CreatePerformances
 
   before_action :authenticate_user!
-  before_action :check_user, except: [:edit_all, :update_all, :edit_day, :select_day, :update_day]
+  before_action :check_user, except: [:edit_all, :update_all, :edit_day, :select_day, :update_day, :no_day]
   before_action :create_old_performances
 
 
@@ -80,6 +80,11 @@ class PerformancesController < ApplicationController
     @metrics = current_user.metrics
     @date = params[:date].to_date
     @performances = current_user.performances.select{ |performance| performance.date == @date }
+  end
+
+  def no_day
+    flash[:notice] = "You must select a day"
+    redirect_to "/performances/all/edit"
   end
 
   # overrode authentication error by checking stackoverflow here: https://stackoverflow.com/questions/20156664/saving-multiple-records-with-params-require-in-ruby

@@ -10,7 +10,7 @@ class Metric < ApplicationRecord
   end
 
   def metric_create_old_performances
-    if Date.today > self.start_date
+    if Date.today >= self.start_date
       (self.start_date..Date.today).each do |date|
         if !self.performances.exists?(date: date)
           self.performances.create!(count: 0, date: date, entered: false)
