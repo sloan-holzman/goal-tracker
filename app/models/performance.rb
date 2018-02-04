@@ -24,8 +24,12 @@ class Performance < ApplicationRecord
 
   def update_weekly_total(old_count)
     week = self.metric.weeks.find_by(date: self.date.beginning_of_week(:sunday).to_date)
-    new_total = week.total + (self.count - old_count)
-    week.update(total: new_total)
+    if week
+      new_total = week.total + (self.count - old_count)
+      week.update(total: new_total)
+    else
+      self.metric.weeks.create!(date: self.date.beginning_of_week(:sunday).to_date, total: self.count)
+    end
   end
 
 
