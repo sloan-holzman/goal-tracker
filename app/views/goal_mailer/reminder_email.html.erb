@@ -14,7 +14,8 @@
       <% for metric in @metrics %>
         <h2><%= metric.name %></h2>
         <p>Goal: <%= metric.target %> <%= metric.unit %> per <%= metric.duration %></p>
-        <% if  metric.weeks.find_by(date: Date.today.beginning_of_week(:sunday)) %>
+        <% weekly_total = metric.weeks.find_by(date: Date.today.beginning_of_week(:sunday)) %>
+        <% if weekly_total %>
           <p>Weekly total: <%= metric.weeks.find_by(date: Date.today.beginning_of_week(:sunday)).total %> <%= metric.unit %> so far</p>
         <% else %>
           <p>Weekly total: 0 <%= metric.unit %> so far</p>
